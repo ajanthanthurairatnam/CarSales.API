@@ -1,0 +1,50 @@
+﻿@model CarSales.API.Models.ViewPortSetting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ViewPortSetting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewPortID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewPortID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SettingCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SettingCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PageSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PageSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ViewPort.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ViewPort.Description)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
