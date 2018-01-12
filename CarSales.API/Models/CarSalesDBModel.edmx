@@ -29,8 +29,8 @@
             <PropertyRef Name="Reference_ID" />
           </Key>
           <Property Name="Reference_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Title" Type="varchar" MaxLength="50" />
-          <Property Name="Reference_No" Type="varchar" MaxLength="10" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reference_No" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="BodyType" Type="int" />
           <Property Name="EngineCapacity" Type="int" />
@@ -41,6 +41,8 @@
           <Property Name="Spects" Type="ntext" />
           <Property Name="Make" Type="int" />
           <Property Name="Model" Type="int" />
+          <Property Name="IsFeatured" Type="bit" Nullable="false" />
+          <Property Name="Transmission" Type="varchar" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleBody">
           <Key>
@@ -248,8 +250,8 @@
             <PropertyRef Name="Reference_ID" />
           </Key>
           <Property Name="Reference_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Reference_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Reference_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
           <Property Name="BodyType" Type="Int32" />
           <Property Name="EngineCapacity" Type="Int32" />
@@ -265,6 +267,8 @@
           <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleAdvertisement" ToRole="VehicleMake" />
           <NavigationProperty Name="VehicleModel" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleAdvertisement" ToRole="VehicleModel" />
           <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_VehicleAdvertisement" FromRole="VehicleAdvertisement" ToRole="VehicleSeller" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
+          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VehicleBody">
           <Key>
@@ -481,6 +485,8 @@
           <EntitySetMapping Name="VehicleAdvertisements">
             <EntityTypeMapping TypeName="CarSalesDBModel.VehicleAdvertisement">
               <MappingFragment StoreEntitySet="VehicleAdvertisement">
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Reference_ID" ColumnName="Reference_ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Reference_No" ColumnName="Reference_No" />

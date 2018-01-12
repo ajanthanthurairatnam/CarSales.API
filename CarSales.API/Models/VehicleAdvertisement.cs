@@ -33,6 +33,8 @@ namespace CarSales.API.Models
         public string Spects { get; set; }
         public Nullable<int> Make { get; set; }
         public Nullable<int> Model { get; set; }
+        public bool IsFeatured { get; set; }
+        public string Transmission { get; set; }
     
         public virtual VehicleBody VehicleBody { get; set; }
         public virtual VehicleFuel VehicleFuel { get; set; }

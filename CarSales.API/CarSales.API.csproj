@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -315,11 +316,6 @@
     <Content Include="Views\VehicleMakesMVC\Details.cshtml" />
     <Content Include="Views\VehicleMakesMVC\Edit.cshtml" />
     <Content Include="Views\VehicleMakesMVC\Index.cshtml" />
-    <Content Include="Views\VehicleModelsMVC\Create.cshtml" />
-    <Content Include="Views\VehicleModelsMVC\Delete.cshtml" />
-    <Content Include="Views\VehicleModelsMVC\Details.cshtml" />
-    <Content Include="Views\VehicleModelsMVC\Edit.cshtml" />
-    <Content Include="Views\VehicleModelsMVC\Index.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Create.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Delete.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Details.cshtml" />
