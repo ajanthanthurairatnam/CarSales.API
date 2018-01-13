@@ -18,6 +18,7 @@ namespace CarSales.API.Models
         public VehicleMake()
         {
             this.VehicleAdvertisements = new HashSet<VehicleAdvertisement>();
+            this.VehicleModels = new HashSet<VehicleModel>();
         }
     
         public int ID { get; set; }
@@ -25,5 +26,7 @@ namespace CarSales.API.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VehicleAdvertisement> VehicleAdvertisements { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VehicleModel> VehicleModels { get; set; }
     }
 }

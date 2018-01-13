@@ -22,8 +22,10 @@ namespace CarSales.API.Models
     
         public int ID { get; set; }
         public string VehicleModel1 { get; set; }
+        public Nullable<int> VehicleMakeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VehicleAdvertisement> VehicleAdvertisements { get; set; }
+        public virtual VehicleMake VehicleMake { get; set; }
     }
 }

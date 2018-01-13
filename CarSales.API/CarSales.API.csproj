@@ -184,51 +184,72 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarSalesDBModel.Context.cs">
+    <Compile Include="Models\Classes\CarSalesConfigSetting.cs" />
+    <Compile Include="Models\Classes\CarSalesSeller.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleAdvertisement.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleBody.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleFuel.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleMake.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleModel.cs" />
+    <Compile Include="Models\Classes\CarSalesVehicleSeller.cs" />
+    <Compile Include="Models\Classes\CarSalesViewPort.cs" />
+    <Compile Include="Models\Classes\CarSalesViewPortSetting.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesConfigSetting.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesSeller.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleAdvertisement.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleBody.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleFuel.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleMake.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleModel.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesVehicleSeller.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesViewPort.cs" />
+    <Compile Include="Models\Interfaces\ICarSalesViewPortSetting.cs" />
+    <Compile Include="Models\EF\CarSalesDBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CarSalesDBModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarSalesDBModel.cs">
+    <Compile Include="Models\EF\CarSalesDBModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\CarSalesDBModel.Designer.cs">
+    <Compile Include="Models\EF\CarSalesDBModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CarSalesDBModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\ConfigSetting.cs">
+    <Compile Include="Models\EF\ConfigSetting.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Seller.cs">
+    <Compile Include="Models\EF\Seller.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleAdvertisement.cs">
+    <Compile Include="Models\EF\VehicleAdvertisement.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleBody.cs">
+    <Compile Include="Models\EF\VehicleBody.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleFuel.cs">
+    <Compile Include="Models\EF\VehicleFuel.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleMake.cs">
+    <Compile Include="Models\EF\VehicleMake.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleModel.cs">
+    <Compile Include="Models\EF\VehicleModel.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VehicleSeller.cs">
+    <Compile Include="Models\EF\VehicleSeller.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewPort.cs">
+    <Compile Include="Models\EF\ViewPort.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ViewPortSetting.cs">
+    <Compile Include="Models\EF\ViewPortSetting.cs">
       <DependentUpon>CarSalesDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Interfaces\IVehicleMake.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -238,12 +259,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\CarSalesDBModel.Context.tt">
+    <Content Include="Models\EF\CarSalesDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>CarSalesDBModel.Context.cs</LastGenOutput>
       <DependentUpon>CarSalesDBModel.edmx</DependentUpon>
+      <LastGenOutput>CarSalesDBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\CarSalesDBModel.tt">
+    <Content Include="Models\EF\CarSalesDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CarSalesDBModel.edmx</DependentUpon>
       <LastGenOutput>CarSalesDBModel.cs</LastGenOutput>
@@ -253,11 +274,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\CarSalesDBModel.edmx">
+    <EntityDeploy Include="Models\EF\CarSalesDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CarSalesDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\CarSalesDBModel.edmx.diagram">
+    <Content Include="Models\EF\CarSalesDBModel.edmx.diagram">
       <DependentUpon>CarSalesDBModel.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
@@ -311,11 +332,6 @@
     <Content Include="Views\VehicleFuelsMVC\Details.cshtml" />
     <Content Include="Views\VehicleFuelsMVC\Edit.cshtml" />
     <Content Include="Views\VehicleFuelsMVC\Index.cshtml" />
-    <Content Include="Views\VehicleMakesMVC\Create.cshtml" />
-    <Content Include="Views\VehicleMakesMVC\Delete.cshtml" />
-    <Content Include="Views\VehicleMakesMVC\Details.cshtml" />
-    <Content Include="Views\VehicleMakesMVC\Edit.cshtml" />
-    <Content Include="Views\VehicleMakesMVC\Index.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Create.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Delete.cshtml" />
     <Content Include="Views\VehicleSellersMVC\Details.cshtml" />
@@ -331,9 +347,15 @@
     <Content Include="Views\ViewPortSettingsMVC\Details.cshtml" />
     <Content Include="Views\ViewPortSettingsMVC\Edit.cshtml" />
     <Content Include="Views\ViewPortSettingsMVC\Index.cshtml" />
+    <Content Include="Views\VehicleMakesMVC\Create.cshtml" />
+    <Content Include="Views\VehicleMakesMVC\Delete.cshtml" />
+    <Content Include="Views\VehicleMakesMVC\Details.cshtml" />
+    <Content Include="Views\VehicleMakesMVC\Edit.cshtml" />
+    <Content Include="Views\VehicleMakesMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

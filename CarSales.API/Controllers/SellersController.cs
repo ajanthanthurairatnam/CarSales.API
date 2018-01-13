@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
+using CarSales.API.Models.Interface;
+using CarSales.API.Models.Classes;
 
 namespace CarSales.API.Controllers
 {
@@ -17,13 +19,13 @@ namespace CarSales.API.Controllers
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
         // GET: api/Sellers
-        public IQueryable<Seller> GetSellers()
+        public IQueryable<CarSalesSeller> GetSellers()
         {
-            return db.Sellers;
+            return db.Sellers.Select(seller => new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress });
         }
 
         // GET: api/Sellers/5
-        [ResponseType(typeof(Seller))]
+        [ResponseType(typeof(CarSalesSeller))]
         public IHttpActionResult GetSeller(int id)
         {
             Seller seller = db.Sellers.Find(id);
@@ -32,22 +34,26 @@ namespace CarSales.API.Controllers
                 return NotFound();
             }
 
-            return Ok(seller);
+            return Ok(new CarSalesSeller() { ContactEMail =seller.ContactEMail,ContactMobile=seller.ContactMobile,ContactPhone=seller.ContactPhone,ID=seller.ID,Name=seller.Name,PickupAddress=seller.PickupAddress,PostCode=seller.PickupAddress});
         }
 
         // PUT: api/Sellers/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSeller(int id, Seller seller)
+        public IHttpActionResult PutSeller(int id, CarSalesSeller carSalesSeller)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != seller.ID)
+            if (id != carSalesSeller.ID)
             {
                 return BadRequest();
             }
+
+          Seller  seller= new Seller() { ContactEMail=carSalesSeller.ContactEMail, ContactMobile = carSalesSeller.ContactMobile, ContactPhone = carSalesSeller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Name, PickupAddress = carSalesSeller.PickupAddress, PostCode = carSalesSeller.PickupAddress };
+
+
 
             db.Entry(seller).State = EntityState.Modified;
 
@@ -71,22 +77,24 @@ namespace CarSales.API.Controllers
         }
 
         // POST: api/Sellers
-        [ResponseType(typeof(Seller))]
-        public IHttpActionResult PostSeller(Seller seller)
+        [ResponseType(typeof(CarSalesSeller))]
+        public IHttpActionResult PostSeller(CarSalesSeller carSalesSeller)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            Seller seller = new Seller() { ContactEMail = carSalesSeller.ContactEMail, ContactMobile = carSalesSeller.ContactMobile, ContactPhone = carSalesSeller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Name, PickupAddress = carSalesSeller.PickupAddress, PostCode = carSalesSeller.PickupAddress };
 
             db.Sellers.Add(seller);
             db.SaveChanges();
+            carSalesSeller.ID = seller.ID;
 
-            return CreatedAtRoute("DefaultApi", new { id = seller.ID }, seller);
+            return CreatedAtRoute("DefaultApi", new { id = seller.ID }, carSalesSeller);
         }
 
         // DELETE: api/Sellers/5
-        [ResponseType(typeof(Seller))]
+        [ResponseType(typeof(CarSalesSeller))]
         public IHttpActionResult DeleteSeller(int id)
         {
             Seller seller = db.Sellers.Find(id);
@@ -98,7 +106,10 @@ namespace CarSales.API.Controllers
             db.Sellers.Remove(seller);
             db.SaveChanges();
 
-            return Ok(seller);
+            CarSalesSeller carSalesSeller=   new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress };
+
+
+            return Ok(carSalesSeller);
         }
 
         protected override void Dispose(bool disposing)

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ConfigSetting">
           <Key>
             <PropertyRef Name="ID" />
@@ -72,6 +72,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VehicleModel" Type="varchar" MaxLength="50" />
+          <Property Name="VehicleMakeID" Type="int" />
         </EntityType>
         <EntityType Name="VehicleSeller">
           <Key>
@@ -145,6 +146,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VehicleModel_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleModel">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_VehicleSeller_Seller">
           <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
           <End Role="VehicleSeller" Type="Self.VehicleSeller" Multiplicity="*" />
@@ -208,6 +221,10 @@
             <End Role="VehicleModel" EntitySet="VehicleModel" />
             <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
           </AssociationSet>
+          <AssociationSet Name="FK_VehicleModel_VehicleMake" Association="Self.FK_VehicleModel_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="VehicleModel" EntitySet="VehicleModel" />
+          </AssociationSet>
           <AssociationSet Name="FK_VehicleSeller_Seller" Association="Self.FK_VehicleSeller_Seller">
             <End Role="Seller" EntitySet="Seller" />
             <End Role="VehicleSeller" EntitySet="VehicleSeller" />
@@ -221,7 +238,8 @@
             <End Role="ViewPortSetting" EntitySet="ViewPortSetting" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarSalesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -262,13 +280,13 @@
           <Property Name="Spects" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Make" Type="Int32" />
           <Property Name="Model" Type="Int32" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
+          <Property Name="Transmission" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="VehicleBody" Relationship="Self.FK_VehicleAdvertisement_VehicleBody" FromRole="VehicleAdvertisement" ToRole="VehicleBody" />
           <NavigationProperty Name="VehicleFuel" Relationship="Self.FK_VehicleAdvertisement_VehicleFuel" FromRole="VehicleAdvertisement" ToRole="VehicleFuel" />
           <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleAdvertisement" ToRole="VehicleMake" />
           <NavigationProperty Name="VehicleModel" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleAdvertisement" ToRole="VehicleModel" />
           <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_VehicleAdvertisement" FromRole="VehicleAdvertisement" ToRole="VehicleSeller" />
-          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
-          <Property Name="Transmission" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VehicleBody">
           <Key>
@@ -294,6 +312,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VehicleMake1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleMake" ToRole="VehicleAdvertisement" />
+          <NavigationProperty Name="VehicleModels" Relationship="Self.FK_VehicleModel_VehicleMake" FromRole="VehicleMake" ToRole="VehicleModel" />
         </EntityType>
         <EntityType Name="VehicleModel">
           <Key>
@@ -301,7 +320,9 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="VehicleModel1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleMakeID" Type="Int32" />
           <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleModel" ToRole="VehicleAdvertisement" />
+          <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleModel_VehicleMake" FromRole="VehicleModel" ToRole="VehicleMake" />
         </EntityType>
         <EntityType Name="VehicleSeller">
           <Key>
@@ -403,6 +424,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VehicleModel_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleModel">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ViewPortSetting_ViewPort">
           <End Role="ViewPort" Type="Self.ViewPort" Multiplicity="1" />
           <End Role="ViewPortSetting" Type="Self.ViewPortSetting" Multiplicity="0..1" />
@@ -450,6 +483,10 @@
             <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
             <End Role="VehicleSeller" EntitySet="VehicleSellers" />
           </AssociationSet>
+          <AssociationSet Name="FK_VehicleModel_VehicleMake" Association="Self.FK_VehicleModel_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="VehicleModel" EntitySet="VehicleModels" />
+          </AssociationSet>
           <AssociationSet Name="FK_ViewPortSetting_ViewPort" Association="Self.FK_ViewPortSetting_ViewPort">
             <End Role="ViewPort" EntitySet="ViewPorts" />
             <End Role="ViewPortSetting" EntitySet="ViewPortSettings" />
@@ -485,8 +522,6 @@
           <EntitySetMapping Name="VehicleAdvertisements">
             <EntityTypeMapping TypeName="CarSalesDBModel.VehicleAdvertisement">
               <MappingFragment StoreEntitySet="VehicleAdvertisement">
-                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
-                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
                 <ScalarProperty Name="Reference_ID" ColumnName="Reference_ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Reference_No" ColumnName="Reference_No" />
@@ -500,6 +535,8 @@
                 <ScalarProperty Name="Spects" ColumnName="Spects" />
                 <ScalarProperty Name="Make" ColumnName="Make" />
                 <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -533,6 +570,7 @@
               <MappingFragment StoreEntitySet="VehicleModel">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="VehicleModel1" ColumnName="VehicleModel" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

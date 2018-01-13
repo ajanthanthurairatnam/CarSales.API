@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
+using CarSales.API.Models.Classes;
 
 namespace CarSales.API.Controllers
 {
@@ -17,38 +18,57 @@ namespace CarSales.API.Controllers
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
         // GET: api/VehicleBodies
-        public IQueryable<VehicleBody> GetVehicleBodies()
+        public IQueryable<CarSalesVehicleBody> GetVehicleBodies()
         {
-            return db.VehicleBodies;
+            return db.VehicleBodies
+                .Select(e => 
+                new CarSalesVehicleBody()
+                    { ID = e.ID, BodyDescription = e.BodyDescription,ImageURL=e.ImageURL }
+                );
+
         }
 
         // GET: api/VehicleBodies/5
-        [ResponseType(typeof(VehicleBody))]
+        [ResponseType(typeof(CarSalesVehicleBody))]
         public IHttpActionResult GetVehicleBody(int id)
         {
-            VehicleBody vehicleBody = db.VehicleBodies.Find(id);
-            if (vehicleBody == null)
+            CarSalesVehicleBody carSalesVehicleBody = db.VehicleBodies.Where(e=>e.ID==id)
+                .Select(e =>
+                new CarSalesVehicleBody()
+                {
+                    ID = e.ID, BodyDescription = e.BodyDescription, ImageURL = e.ImageURL }
+                )
+                .FirstOrDefault();
+
+            if (carSalesVehicleBody == null)
             {
                 return NotFound();
             }
 
-            return Ok(vehicleBody);
+            return Ok(carSalesVehicleBody);
         }
 
         // PUT: api/VehicleBodies/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVehicleBody(int id, VehicleBody vehicleBody)
+        public IHttpActionResult PutVehicleBody(int id, CarSalesVehicleBody carSalesVehicleBody)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != vehicleBody.ID)
+            if (id != carSalesVehicleBody.ID)
             {
                 return BadRequest();
             }
 
+            VehicleBody vehicleBody=  new VehicleBody()
+            {
+                ID = carSalesVehicleBody.ID,
+                BodyDescription = carSalesVehicleBody.BodyDescription,
+                ImageURL = carSalesVehicleBody.ImageURL
+            };
+                
             db.Entry(vehicleBody).State = EntityState.Modified;
 
             try
@@ -71,22 +91,29 @@ namespace CarSales.API.Controllers
         }
 
         // POST: api/VehicleBodies
-        [ResponseType(typeof(VehicleBody))]
-        public IHttpActionResult PostVehicleBody(VehicleBody vehicleBody)
+        [ResponseType(typeof(CarSalesVehicleBody))]
+        public IHttpActionResult PostVehicleBody(CarSalesVehicleBody carSalesVehicleBody)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            VehicleBody vehicleBody = new VehicleBody()
+            {
+                ID = carSalesVehicleBody.ID,
+                BodyDescription = carSalesVehicleBody.BodyDescription,
+                ImageURL = carSalesVehicleBody.ImageURL
+            };
+            carSalesVehicleBody.ID = vehicleBody.ID;
 
             db.VehicleBodies.Add(vehicleBody);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = vehicleBody.ID }, vehicleBody);
+            return CreatedAtRoute("DefaultApi", new { id = carSalesVehicleBody.ID }, carSalesVehicleBody);
         }
 
         // DELETE: api/VehicleBodies/5
-        [ResponseType(typeof(VehicleBody))]
+        [ResponseType(typeof(CarSalesVehicleBody))]
         public IHttpActionResult DeleteVehicleBody(int id)
         {
             VehicleBody vehicleBody = db.VehicleBodies.Find(id);
@@ -95,10 +122,20 @@ namespace CarSales.API.Controllers
                 return NotFound();
             }
 
+            
+                
+
             db.VehicleBodies.Remove(vehicleBody);
             db.SaveChanges();
 
-            return Ok(vehicleBody);
+            CarSalesVehicleBody carSalesVehicleBody = new CarSalesVehicleBody()
+            {
+                ID = vehicleBody.ID,
+                BodyDescription = vehicleBody.BodyDescription,
+                ImageURL = vehicleBody.ImageURL
+            };
+
+            return Ok(carSalesVehicleBody);
         }
 
         protected override void Dispose(bool disposing)
