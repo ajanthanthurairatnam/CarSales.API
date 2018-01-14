@@ -169,6 +169,7 @@
     <Compile Include="Controllers\ConfigSettingsController.cs" />
     <Compile Include="Controllers\ConfigSettingsMVCController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PageSettingsController.cs" />
     <Compile Include="Controllers\SellersController.cs" />
     <Compile Include="Controllers\SellersMVCController.cs" />
     <Compile Include="Controllers\VehicleAdvertisementsController.cs" />
@@ -191,6 +192,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Classes\CarSalesConfigSetting.cs" />
+    <Compile Include="Models\Classes\CarSalesPageSettings.cs" />
     <Compile Include="Models\Classes\CarSalesSeller.cs" />
     <Compile Include="Models\Classes\CarSalesVehicleAdvertisement.cs" />
     <Compile Include="Models\Classes\CarSalesVehicleBody.cs" />
