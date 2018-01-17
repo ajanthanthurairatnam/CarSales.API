@@ -33,7 +33,8 @@ namespace CarSales.API.Controllers
         [ResponseType(typeof(CarSalesSeller))]
         public IHttpActionResult GetSeller(int id)
         {
-            Seller seller = db.Sellers.Find(id);
+           Seller seller = db.Sellers.Find(id);
+            //Seller seller = this.repoSellers.Get(id);
             if (seller == null)
             {
                 return NotFound();

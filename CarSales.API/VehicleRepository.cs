@@ -43,7 +43,7 @@ namespace CarSales.API
 
         public T Get(long Id)
         {
-            return entities.SingleOrDefault( );
+            return entities.SingleOrDefault<T>();
         }
 
         public IEnumerable<T> GetAll()
