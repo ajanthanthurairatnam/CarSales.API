@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
-using CarSales.API.Models.Interface;
 using CarSales.API.Models.Classes;
+using CarSales.API.Interfaces;
 
 namespace CarSales.API.Controllers
 {
@@ -18,10 +16,17 @@ namespace CarSales.API.Controllers
     {
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
-        // GET: api/Sellers
-        public IQueryable<CarSalesSeller> GetSellers()
+        private IVehicleRepository<Seller> repoSellers;
+
+        public SellersController( )
         {
-            return db.Sellers.Select(seller => new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress });
+            this.repoSellers = new VehicleRepository<Seller>(db);
+        }
+        // GET: api/Sellers
+        public IEnumerable<CarSalesSeller> GetSellers()
+        {
+           return this.repoSellers.GetAll().Select(seller => new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress }); 
+           // return db.Sellers.Select(seller => new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, Id = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress });
         }
 
         // GET: api/Sellers/5
@@ -34,7 +39,7 @@ namespace CarSales.API.Controllers
                 return NotFound();
             }
 
-            return Ok(new CarSalesSeller() { ContactEMail =seller.ContactEMail,ContactMobile=seller.ContactMobile,ContactPhone=seller.ContactPhone,ID=seller.ID,Name=seller.Name,PickupAddress=seller.PickupAddress,PostCode=seller.PickupAddress});
+            return Ok(new CarSalesSeller() { ContactEMail =seller.ContactEMail,ContactMobile=seller.ContactMobile,ContactPhone=seller.ContactPhone, ID = seller.ID,Name=seller.Name,PickupAddress=seller.PickupAddress,PostCode=seller.PickupAddress});
         }
 
         // PUT: api/Sellers/5

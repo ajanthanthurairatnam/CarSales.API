@@ -9,10 +9,11 @@
 
 namespace CarSales.API.Models
 {
+    using EF;
     using System;
     using System.Collections.Generic;
-    
-    public partial class Seller
+
+    public partial class Seller: BaseEntity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Seller()
