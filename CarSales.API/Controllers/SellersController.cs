@@ -44,79 +44,84 @@ namespace CarSales.API.Controllers
         }
 
         // PUT: api/Sellers/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutSeller(int id, VehicleSeller carSalesSeller)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutSeller(int id, VehicleSeller carSalesSeller)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //    if (id != carSalesSeller.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (id != carSalesSeller.ID)
+            {
+                return BadRequest();
+            }
+            
 
-        //    VehicleSeller seller = new VehicleSeller() { ContactEMail=carSalesSeller.ContactEMail, ContactMobile = carSalesSeller.ContactMobile, ContactPhone = carSalesSeller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Name, PickupAddress = carSalesSeller.PickupAddress, PostCode = carSalesSeller.PickupAddress };
+            Seller seller = new Seller() { ContactEMail = carSalesSeller.Seller.ContactEMail, ContactMobile = carSalesSeller.Seller.ContactMobile, ContactPhone = carSalesSeller.Seller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Seller.Name, PickupAddress = carSalesSeller.Seller.PickupAddress, PostCode = carSalesSeller.Seller.PickupAddress };
 
+            this.repoSellers.Edit(seller);
 
+         //   db.Entry(seller).State = EntityState.Modified;
 
-        //    db.Entry(seller).State = EntityState.Modified;
+            try
+            {
+                this.repoSellers.Edit(seller);
+                // db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SellerExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SellerExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
         //// POST: api/Sellers
-        //[ResponseType(typeof(CarSalesSeller))]
-        //public IHttpActionResult PostSeller(CarSalesSeller carSalesSeller)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    Seller seller = new Seller() { ContactEMail = carSalesSeller.ContactEMail, ContactMobile = carSalesSeller.ContactMobile, ContactPhone = carSalesSeller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Name, PickupAddress = carSalesSeller.PickupAddress, PostCode = carSalesSeller.PickupAddress };
+        [ResponseType(typeof(Seller))]
+        public IHttpActionResult PostSeller(Seller carSalesSeller)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            Seller seller = new Seller() { ContactEMail = carSalesSeller.ContactEMail, ContactMobile = carSalesSeller.ContactMobile, ContactPhone = carSalesSeller.ContactPhone, ID = carSalesSeller.ID, Name = carSalesSeller.Name, PickupAddress = carSalesSeller.PickupAddress, PostCode = carSalesSeller.PickupAddress };
 
-        //    db.Sellers.Add(seller);
-        //    db.SaveChanges();
-        //    carSalesSeller.ID = seller.ID;
+            this.repoSellers.Add(seller); 
+            //db.Sellers.Add(seller);
+            //db.SaveChanges();
+            //carSalesSeller.ID = seller.ID;
 
-        //    return CreatedAtRoute("DefaultApi", new { id = seller.ID }, carSalesSeller);
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = seller.ID }, carSalesSeller);
+        }
 
         //// DELETE: api/Sellers/5
-        //[ResponseType(typeof(CarSalesSeller))]
-        //public IHttpActionResult DeleteSeller(int id)
-        //{
-        //    Seller seller = db.Sellers.Find(id);
-        //    if (seller == null)
-        //    {
-        //        return NotFound();
-        //    }
+        [ResponseType(typeof(Seller))]
+        public IHttpActionResult DeleteSeller(int id)
+        {
+            Seller seller = db.Sellers.Find(id);
+            if (seller == null)
+            {
+                return NotFound();
+            }
 
-        //    db.Sellers.Remove(seller);
-        //    db.SaveChanges();
+            //db.Sellers.Remove(seller);
+            // db.SaveChanges();
 
-        //    CarSalesSeller carSalesSeller=   new CarSalesSeller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress };
+            this.repoSellers.Remove(seller); 
+
+            Seller carSalesSeller = new Seller() { ContactEMail = seller.ContactEMail, ContactMobile = seller.ContactMobile, ContactPhone = seller.ContactPhone, ID = seller.ID, Name = seller.Name, PickupAddress = seller.PickupAddress, PostCode = seller.PickupAddress };
 
 
-        //    return Ok(carSalesSeller);
-        //}
+            return Ok(carSalesSeller);
+        }
 
         protected override void Dispose(bool disposing)
         {
