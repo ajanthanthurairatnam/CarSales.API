@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using CarSales.API.Interfaces;
 using System.Data.Entity;
-using  CarSales.API.Models;
+using  CarSales.Model;
  
 
 namespace CarSales.API
 {
-    public class VehicleRepository<T> : IVehicleRepository<T> where T : Models.EF.BaseEntity
+    public class VehicleRepository<T> : IVehicleRepository<T> where T : BaseEntity
     {
         private readonly CarSalesDBEntities context;
         private DbSet<T> entities;
@@ -43,7 +43,7 @@ namespace CarSales.API
 
         public T Get(long Id)
         {
-            return entities.SingleOrDefault<T>();
+            return entities.SingleOrDefault<T>(x=>x.ID == Id);
         }
 
         public IEnumerable<T> GetAll()

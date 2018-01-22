@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
 using CarSales.API.Models.Classes;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {

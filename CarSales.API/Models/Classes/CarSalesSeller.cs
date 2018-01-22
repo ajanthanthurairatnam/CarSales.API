@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using CarSales.API.Models.Interface;
+ 
 
 namespace CarSales.API.Models.Classes
 {
-    public class CarSalesSeller : ICarSalesSeller
+    public class CarSalesSeller  
     {
         public int ID { get; set; }
         public string Name { get; set; }

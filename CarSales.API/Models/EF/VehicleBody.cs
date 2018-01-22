@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarSales.API.Models
+namespace CarSales.API.Models.EF
 {
     using System;
     using System.Collections.Generic;
