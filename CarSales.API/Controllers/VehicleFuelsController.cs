@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
+using CarSales.API.Models.Classes;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {
@@ -17,16 +19,26 @@ namespace CarSales.API.Controllers
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
         // GET: api/VehicleFuels
-        public IQueryable<VehicleFuel> GetVehicleFuels()
+        public IQueryable<CarSalesVehicleFuel> GetVehicleFuels()
         {
-            return db.VehicleFuels;
+            return db.VehicleFuels
+                .Select(carSalesVehicleFuel =>
+                new CarSalesVehicleFuel()
+                { ID = carSalesVehicleFuel.ID, FuelType = carSalesVehicleFuel.FuelType }
+                );
         }
 
         // GET: api/VehicleFuels/5
-        [ResponseType(typeof(VehicleFuel))]
+        [ResponseType(typeof(CarSalesVehicleFuel))]
         public IHttpActionResult GetVehicleFuel(int id)
         {
-            VehicleFuel vehicleFuel = db.VehicleFuels.Find(id);
+            CarSalesVehicleFuel vehicleFuel = db.VehicleFuels.Where(e=> e.ID==id).
+                Select(carSalesVehicleFuel =>
+               new CarSalesVehicleFuel()
+               {
+                   ID = carSalesVehicleFuel.ID, FuelType = carSalesVehicleFuel.FuelType }
+                )
+                .FirstOrDefault();
             if (vehicleFuel == null)
             {
                 return NotFound();
@@ -37,17 +49,24 @@ namespace CarSales.API.Controllers
 
         // PUT: api/VehicleFuels/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVehicleFuel(int id, VehicleFuel vehicleFuel)
+        public IHttpActionResult PutVehicleFuel(int id, CarSalesVehicleFuel carSalesVehicleFuel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != vehicleFuel.ID)
+            if (id != carSalesVehicleFuel.ID)
             {
                 return BadRequest();
             }
+
+            VehicleFuel vehicleFuel = new VehicleFuel()
+            {
+                ID = carSalesVehicleFuel.ID,
+                FuelType = carSalesVehicleFuel.FuelType
+            };
+                
 
             db.Entry(vehicleFuel).State = EntityState.Modified;
 
@@ -71,22 +90,29 @@ namespace CarSales.API.Controllers
         }
 
         // POST: api/VehicleFuels
-        [ResponseType(typeof(VehicleFuel))]
-        public IHttpActionResult PostVehicleFuel(VehicleFuel vehicleFuel)
+        [ResponseType(typeof(CarSalesVehicleFuel))]
+        public IHttpActionResult PostVehicleFuel(CarSalesVehicleFuel carSalesVehicleFuel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            VehicleFuel vehicleFuel = new VehicleFuel()
+            {
+                ID = carSalesVehicleFuel.ID,
+                FuelType = carSalesVehicleFuel.FuelType
+            };
+
 
             db.VehicleFuels.Add(vehicleFuel);
             db.SaveChanges();
+            carSalesVehicleFuel.ID = vehicleFuel.ID;
 
-            return CreatedAtRoute("DefaultApi", new { id = vehicleFuel.ID }, vehicleFuel);
+            return CreatedAtRoute("DefaultApi", new { id = vehicleFuel.ID }, carSalesVehicleFuel);
         }
 
         // DELETE: api/VehicleFuels/5
-        [ResponseType(typeof(VehicleFuel))]
+        [ResponseType(typeof(CarSalesVehicleFuel))]
         public IHttpActionResult DeleteVehicleFuel(int id)
         {
             VehicleFuel vehicleFuel = db.VehicleFuels.Find(id);
@@ -94,6 +120,12 @@ namespace CarSales.API.Controllers
             {
                 return NotFound();
             }
+
+            CarSalesVehicleFuel carSalesVehicleFuel = new CarSalesVehicleFuel()
+            {
+                ID = vehicleFuel.ID,
+                FuelType = vehicleFuel.FuelType
+            };
 
             db.VehicleFuels.Remove(vehicleFuel);
             db.SaveChanges();

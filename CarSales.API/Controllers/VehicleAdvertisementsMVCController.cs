@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CarSales.API.Models;
+using CarSales.API.Models.Classes;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {
@@ -20,6 +22,72 @@ namespace CarSales.API.Controllers
             var vehicleAdvertisements = db.VehicleAdvertisements.Include(v => v.VehicleBody).Include(v => v.VehicleFuel).Include(v => v.VehicleMake).Include(v => v.VehicleModel);
             return View(vehicleAdvertisements.ToList());
         }
+
+
+        public ActionResult GetAdvertisements(string SearchText="",int PageNos=10 ,int PageIndex=1 )
+        {
+            var vehicleAdvertisements = db.VehicleAdvertisements.Where(e => SearchText.Length>0?e.Title.Contains(SearchText.Trim()):true);
+            int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
+
+            int SkipCount = (PageIndex-1) * PageNos;
+            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            CarSaleSearch CarSaleSearch = new CarSaleSearch();
+            CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement() {
+                AudoMeter=e.AudoMeter,
+                BodyType=e.BodyType,
+                Description=e.Description,
+                EngineCapacity=e.EngineCapacity,
+                Feature=e.Feature,
+                Fuel=e.Fuel,
+                IsFeatured=e.IsFeatured,
+                Make=e.Make,
+                Model=e.Model,
+                Price=e.Price,
+                Reference_ID=e.Reference_ID,
+                Reference_No=e.Reference_No,
+                Spects=e.Spects,
+                Title=e.Title,
+                Transmission=e.Transmission
+            });
+            CarSaleSearch.PageIndex = PageIndex;
+            CarSaleSearch.PageNos = PageCount;
+            CarSaleSearch.SearchText = SearchText;
+            return View(CarSaleSearch);
+        }
+
+        [HttpPost]
+        public ActionResult GetAdvertisements(string SearchText = "", int PageNos = 10, int PageIndex = 1,int dum=0)
+        {
+            var vehicleAdvertisements = db.VehicleAdvertisements.Where(e => SearchText.Length > 0 ? e.Title.Contains(SearchText.Trim()) : true);
+            int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
+
+            int SkipCount = (PageIndex - 1) * PageNos;
+            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            CarSaleSearch CarSaleSearch = new CarSaleSearch();
+            CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement()
+            {
+                AudoMeter = e.AudoMeter,
+                BodyType = e.BodyType,
+                Description = e.Description,
+                EngineCapacity = e.EngineCapacity,
+                Feature = e.Feature,
+                Fuel = e.Fuel,
+                IsFeatured = e.IsFeatured,
+                Make = e.Make,
+                Model = e.Model,
+                Price = e.Price,
+                Reference_ID = e.Reference_ID,
+                Reference_No = e.Reference_No,
+                Spects = e.Spects,
+                Title = e.Title,
+                Transmission = e.Transmission
+            });
+            CarSaleSearch.PageIndex = PageIndex;
+            CarSaleSearch.PageNos = PageCount;
+            CarSaleSearch.SearchText = SearchText;
+            return View(CarSaleSearch);
+        }
+
 
         // GET: VehicleAdvertisementsMVC/Details/5
         public ActionResult Details(int? id)
@@ -51,7 +119,7 @@ namespace CarSales.API.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Reference_ID,Title,Reference_No,Price,BodyType,EngineCapacity,AudoMeter,Fuel,Description,Feature,Spects,Make,Model")] VehicleAdvertisement vehicleAdvertisement)
+        public ActionResult Create([Bind(Include = "Reference_ID,Title,Reference_No,Price,BodyType,EngineCapacity,AudoMeter,Fuel,Description,Feature,Spects,Make,Model,IsFeatured,Transmission")] VehicleAdvertisement vehicleAdvertisement)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +159,7 @@ namespace CarSales.API.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Reference_ID,Title,Reference_No,Price,BodyType,EngineCapacity,AudoMeter,Fuel,Description,Feature,Spects,Make,Model")] VehicleAdvertisement vehicleAdvertisement)
+        public ActionResult Edit([Bind(Include = "Reference_ID,Title,Reference_No,Price,BodyType,EngineCapacity,AudoMeter,Fuel,Description,Feature,Spects,Make,Model,IsFeatured,Transmission")] VehicleAdvertisement vehicleAdvertisement)
         {
             if (ModelState.IsValid)
             {

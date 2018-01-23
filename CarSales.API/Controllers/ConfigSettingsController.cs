@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
+ 
+using CarSales.API.Models.Classes;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {
@@ -17,37 +20,41 @@ namespace CarSales.API.Controllers
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
         // GET: api/ConfigSettings
-        public IQueryable<ConfigSetting> GetConfigSettings()
+        public IQueryable<CarSalesConfigSetting> GetConfigSettings()
         {
-            return db.ConfigSettings;
+            return db.ConfigSettings.Select(e=>new CarSalesConfigSetting() { ID=e.ID,VehicleAdvertisementNextRefNo=e.VehicleAdvertisementNextRefNo});
         }
 
         // GET: api/ConfigSettings/5
-        [ResponseType(typeof(ConfigSetting))]
+        [ResponseType(typeof(CarSalesConfigSetting))]
         public IHttpActionResult GetConfigSetting(int id)
         {
-            ConfigSetting configSetting = db.ConfigSettings.Find(id);
-            if (configSetting == null)
+            CarSalesConfigSetting carSalesConfigSetting = db.ConfigSettings.Where(e=>e.ID==id).Select(e => new CarSalesConfigSetting()
+                                { ID = e.ID, VehicleAdvertisementNextRefNo = e.VehicleAdvertisementNextRefNo }).FirstOrDefault();
+            if (carSalesConfigSetting == null)
             {
                 return NotFound();
             }
 
-            return Ok(configSetting);
+            return Ok(carSalesConfigSetting);
         }
 
         // PUT: api/ConfigSettings/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutConfigSetting(int id, ConfigSetting configSetting)
+        public IHttpActionResult PutConfigSetting(int id, CarSalesConfigSetting carSalesConfigSetting)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != configSetting.ID)
+            if (id != carSalesConfigSetting.ID)
             {
                 return BadRequest();
             }
+            ConfigSetting configSetting = new ConfigSetting();
+            configSetting.ID = carSalesConfigSetting.ID;
+            configSetting.VehicleAdvertisementNextRefNo = carSalesConfigSetting.VehicleAdvertisementNextRefNo;
 
             db.Entry(configSetting).State = EntityState.Modified;
 
@@ -71,22 +78,26 @@ namespace CarSales.API.Controllers
         }
 
         // POST: api/ConfigSettings
-        [ResponseType(typeof(ConfigSetting))]
-        public IHttpActionResult PostConfigSetting(ConfigSetting configSetting)
+        [ResponseType(typeof(CarSalesConfigSetting))]
+        public IHttpActionResult PostConfigSetting(ConfigSetting carSalesConfigSetting)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            ConfigSetting configSetting = new ConfigSetting();
+            configSetting.ID = carSalesConfigSetting.ID;
+            configSetting.VehicleAdvertisementNextRefNo = carSalesConfigSetting.VehicleAdvertisementNextRefNo;
+
 
             db.ConfigSettings.Add(configSetting);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = configSetting.ID }, configSetting);
+            return CreatedAtRoute("DefaultApi", new { id = configSetting.ID }, carSalesConfigSetting);
         }
 
         // DELETE: api/ConfigSettings/5
-        [ResponseType(typeof(ConfigSetting))]
+        [ResponseType(typeof(CarSalesConfigSetting))]
         public IHttpActionResult DeleteConfigSetting(int id)
         {
             ConfigSetting configSetting = db.ConfigSettings.Find(id);
@@ -98,7 +109,12 @@ namespace CarSales.API.Controllers
             db.ConfigSettings.Remove(configSetting);
             db.SaveChanges();
 
-            return Ok(configSetting);
+            CarSalesConfigSetting carSalesConfigSetting = new CarSalesConfigSetting();
+            carSalesConfigSetting.ID = configSetting.ID;
+            carSalesConfigSetting.VehicleAdvertisementNextRefNo = configSetting.VehicleAdvertisementNextRefNo;
+
+
+            return Ok(carSalesConfigSetting);
         }
 
         protected override void Dispose(bool disposing)

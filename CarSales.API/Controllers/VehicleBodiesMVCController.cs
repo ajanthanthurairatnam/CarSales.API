@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CarSales.API.Models;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {

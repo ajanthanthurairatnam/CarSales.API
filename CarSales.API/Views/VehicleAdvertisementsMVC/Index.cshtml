@@ -36,6 +36,12 @@
             @Html.DisplayNameFor(model => model.Spects)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Transmission)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.VehicleBody.BodyDescription)
         </th>
         <th>
@@ -75,6 +81,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Spects)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsFeatured)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Transmission)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.VehicleBody.BodyDescription)

@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSales.API", "CarSales.API\CarSales.API.csproj", "{A99D5B39-83E5-482D-A1E8-C615483FBEA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSales.API.Tests", "CarSales.API.Tests\CarSales.API.Tests.csproj", "{0FECDB8E-B9AC-410D-97FC-34A6B157E998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSales.Model", "CarSales.Model\CarSales.Model.csproj", "{363ED007-6B00-4BC0-A381-3EAEB0FF9184}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{0FECDB8E-B9AC-410D-97FC-34A6B157E998}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0FECDB8E-B9AC-410D-97FC-34A6B157E998}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0FECDB8E-B9AC-410D-97FC-34A6B157E998}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363ED007-6B00-4BC0-A381-3EAEB0FF9184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363ED007-6B00-4BC0-A381-3EAEB0FF9184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363ED007-6B00-4BC0-A381-3EAEB0FF9184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363ED007-6B00-4BC0-A381-3EAEB0FF9184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

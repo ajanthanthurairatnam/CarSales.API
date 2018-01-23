@@ -9,6 +9,9 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using CarSales.API.Models;
+ 
+using CarSales.API.Models.Classes;
+using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
 {
@@ -17,16 +20,17 @@ namespace CarSales.API.Controllers
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
         // GET: api/VehicleMakes
-        public IQueryable<VehicleMake> GetVehicleMakes()
-        {
-            return db.VehicleMakes;
+        public IQueryable<CarSalesVehicleMake> GetVehicleMakes()
+        {           
+            IQueryable<CarSalesVehicleMake> CarSalesVehicleMakes=   db.VehicleMakes.Select(p => new CarSalesVehicleMake { ID = p.ID, VehicleMake1 = p.VehicleMake1 });
+            return CarSalesVehicleMakes;
         }
 
         // GET: api/VehicleMakes/5
-        [ResponseType(typeof(VehicleMake))]
+        [ResponseType(typeof(CarSalesVehicleMake))]
         public IHttpActionResult GetVehicleMake(int id)
         {
-            VehicleMake vehicleMake = db.VehicleMakes.Find(id);
+            CarSalesVehicleMake vehicleMake = db.VehicleMakes.Where(e=>e.ID==id).Select(p => new CarSalesVehicleMake { ID = p.ID, VehicleMake1 = p.VehicleMake1 }).FirstOrDefault();
             if (vehicleMake == null)
             {
                 return NotFound();
@@ -37,17 +41,21 @@ namespace CarSales.API.Controllers
 
         // PUT: api/VehicleMakes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutVehicleMake(int id, VehicleMake vehicleMake)
+        public IHttpActionResult PutVehicleMake(int id, CarSalesVehicleMake carSalesVehicleMake)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != vehicleMake.ID)
+            if (id != carSalesVehicleMake.ID)
             {
                 return BadRequest();
             }
+
+            VehicleMake vehicleMake=new VehicleMake();
+            vehicleMake.ID = carSalesVehicleMake.ID;
+            vehicleMake.VehicleMake1 = carSalesVehicleMake.VehicleMake1;
 
             db.Entry(vehicleMake).State = EntityState.Modified;
 
@@ -71,22 +79,22 @@ namespace CarSales.API.Controllers
         }
 
         // POST: api/VehicleMakes
-        [ResponseType(typeof(VehicleMake))]
-        public IHttpActionResult PostVehicleMake(VehicleMake vehicleMake)
+        [ResponseType(typeof(CarSalesVehicleMake))]
+        public IHttpActionResult PostVehicleMake(CarSalesVehicleMake carSalesVehicleMake)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.VehicleMakes.Add(vehicleMake);
+            db.VehicleMakes.Add(new VehicleMake() { VehicleMake1 = carSalesVehicleMake.VehicleMake1 });
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = vehicleMake.ID }, vehicleMake);
+            return CreatedAtRoute("DefaultApi", new { id = carSalesVehicleMake.ID }, carSalesVehicleMake);
         }
 
         // DELETE: api/VehicleMakes/5
-        [ResponseType(typeof(VehicleMake))]
+        [ResponseType(typeof(CarSalesVehicleMake))]
         public IHttpActionResult DeleteVehicleMake(int id)
         {
             VehicleMake vehicleMake = db.VehicleMakes.Find(id);
@@ -97,6 +105,10 @@ namespace CarSales.API.Controllers
 
             db.VehicleMakes.Remove(vehicleMake);
             db.SaveChanges();
+
+            CarSalesVehicleMake carSalesVehicle = new CarSalesVehicleMake();
+            carSalesVehicle.ID = vehicleMake.ID;
+            carSalesVehicle.VehicleMake1 = vehicleMake.VehicleMake1;
 
             return Ok(vehicleMake);
         }
