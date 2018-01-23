@@ -194,6 +194,7 @@
     <Compile Include="Interfaces\IVehicleRepository.cs" />
     <Compile Include="Models\Classes\BaseEntity.cs" />
     <Compile Include="Models\Classes\CarSalesConfigSetting.cs" />
+    <Compile Include="Models\Classes\CarSaleSearch.cs" />
     <Compile Include="Models\Classes\CarSalesPageSettings.cs" />
     <Compile Include="Models\Classes\CarSalesSeller.cs" />
     <Compile Include="Models\Classes\CarSalesVehicleAdvertisement.cs" />
@@ -349,6 +350,7 @@
     <Content Include="Views\VehicleMakesMVC\Details.cshtml" />
     <Content Include="Views\VehicleMakesMVC\Edit.cshtml" />
     <Content Include="Views\VehicleMakesMVC\Index.cshtml" />
+    <Content Include="Views\VehicleAdvertisementsMVC\GetAdvertisements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
