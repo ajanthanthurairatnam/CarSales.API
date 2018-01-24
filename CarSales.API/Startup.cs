@@ -19,17 +19,13 @@ namespace Pluralsight.AspNetDemo
         public void Configuration(IAppBuilder app)
         {
              string connectionString = ConfigurationManager.ConnectionStrings["aspnetidentity"].ConnectionString;
-           // @"Data Source=(LocalDb)\MSSQLLocalDB;Database=Pluralsight.AspNetIdentityDemo.Module3.3;trusted_connection=yes;";
             app.CreatePerOwinContext(() => new IdentityDbContext(connectionString));
             app.CreatePerOwinContext<UserStore<IdentityUser>>((opt, cont) => new UserStore<IdentityUser>(cont.Get<IdentityDbContext>()));
             app.CreatePerOwinContext<UserManager<IdentityUser>>(
                 (opt, cont) =>
                 {
                     var usermanager = new UserManager<IdentityUser>(cont.Get<UserStore<IdentityUser>>());
-                    //usermanager.RegisterTwoFactorProvider("SMS", new PhoneNumberTokenProvider<IdentityUser> {MessageFormat = "Token: {0}"});
-                    //usermanager.SmsService = new SmsService();
-                    //usermanager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(opt.DataProtectionProvider.Create());
-                    //usermanager.EmailService = new EmailService();
+                    
 
                     usermanager.UserValidator = new UserValidator<IdentityUser>(usermanager) {RequireUniqueEmail = true};
                     usermanager.PasswordValidator = new PasswordValidator
@@ -55,6 +51,7 @@ namespace Pluralsight.AspNetDemo
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 Provider = new CookieAuthenticationProvider
                 {
+                    
                     OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<UserManager<IdentityUser>, IdentityUser>(
                         validateInterval: TimeSpan.FromSeconds(3),
                         regenerateIdentity: (manager, user) => manager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie))

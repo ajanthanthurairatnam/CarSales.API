@@ -79,7 +79,20 @@ namespace Pluralsight.AspNetDemo.Controllers
             }
         }
 
-        public async Task<ActionResult> ChooseProvider()
+       
+            public ActionResult Logout()
+        {
+
+            Request.GetOwinContext().Authentication.SignOut();
+
+            Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+            public async Task<ActionResult> ChooseProvider()
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             var providers = await UserManager.GetValidTwoFactorProvidersAsync(userId);
@@ -138,11 +151,7 @@ namespace Pluralsight.AspNetDemo.Controllers
             var identityResult = await UserManager.CreateAsync(user, model.Password);
 
             if (identityResult.Succeeded)
-            {
-                var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var confirmUrl = Url.Action("ConfirmEmail", "Account", new {userid = user.Id, token = token}, Request.Url.Scheme);
-                await
-                    UserManager.SendEmailAsync(user.Id, "Email Confirmation", $"Use link to confirm email: {confirmUrl}");
+            {              
 
                 return RedirectToAction("Index", "Home");
             }
