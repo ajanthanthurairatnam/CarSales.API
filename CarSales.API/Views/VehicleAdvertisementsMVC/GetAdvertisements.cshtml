@@ -1,14 +1,13 @@
 ﻿@model CarSales.API.Models.Classes.CarSaleSearch
 
 @{
-    ViewBag.Title = "GetAdvertisements";
+    ViewBag.Title = "";
 }
 
-<h2>GetAdvertisements</h2>
 @using (Html.BeginForm("GetAdvertisements", "VehicleAdvertisementsMVC", FormMethod.Post))
 {
     <div>
-        start
+        
         <div class="car-grid content-area">
             <div class="container">
                 <div class="row">
@@ -166,7 +165,7 @@
                 </div>
             </div>
         </div>
-        end
+       
     </div>
 }
 

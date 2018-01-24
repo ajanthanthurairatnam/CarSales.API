@@ -1,32 +1,139 @@
 ﻿@using Microsoft.Owin.Security
 @model Pluralsight.AspNetDemo.Controllers.LoginModel
 
-<h1>Registration</h1>
-<hr />
-@using (Html.BeginForm("Login", "Account", FormMethod.Post))
-{
-    @Html.ValidationSummary()
-    @Html.LabelFor(x => x.Username) @Html.TextBoxFor(x => x.Username)
-    <br />
-    @Html.LabelFor(x => x.Password) @Html.PasswordFor(x => x.Password)
-    <br />
-    <input class="btn" type="submit" value="Login" />
-}
-@Html.ActionLink("Forgot Password?", "ForgotPassword")
+   
 
-@{
-    var providers = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+@*@Html.ActionLink("Forgot Password?", "ForgotPassword")*@
 
-    if (providers != null && providers.Any())
+
+<div class="row">
+    <div class="col-lg-12">
+        <!-- form content box Start -->
+        <div class="form-content-box">
+            <!-- header -->
+            <div class="header">
+                <h3>Login</h3>
+                
+            </div>
+            <!-- Details -->
+            <div class="Details">
+                <!-- form -->
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
     {
-        using (Html.BeginForm("ExternalAuthentication", "Account", FormMethod.Post))
-        {
-            foreach (var provider in providers)
-            {
-                <button class="btn" value="@provider.AuthenticationType" name="provider" type="submit">
-                    @provider.Caption
-                </button>
+            <div class="form-group">
+                @Html.ValidationSummary()
+                @Html.TextBoxFor(x => x.Username, new { placeholder = "Email Address", @class = "input-text" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(x => x.Password, new { placeholder = "Password", @class = "input-text" })
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-submit" type="submit" value="Login" />
+            </div>
+}
+                <hr>
+                <!-- Social list 2 -->
+                <ul class="social-list-2">
+
+                    <li>
+
+
+                        <a href="#">
+
+
+
+                            @{
+                    var providers = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+
+                    if (providers != null && providers.Any())
+                    {
+                        using (Html.BeginForm("ExternalAuthentication", "Account", FormMethod.Post))
+                        {
+                            foreach (var provider in providers)
+                            {
+
+
+                                <button type="submit" value="@provider.AuthenticationType" name="provider" type="submit" class="btn btn-primary">
+                                    <i class="fa fa-google"></i>
+                                    @provider.Caption
+                                </button>
+                }
             }
         }
-    }
-}
+                            }
+
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- Footer -->
+            <div class="footer">
+                <span>
+                    New to Car Sales? <a href="signup.html">Sign up now</a>
+                </span>
+            </div>
+        </div>
+        <!-- Form content box End -->
+    </div>
+</div>
+
+<!-- External CSS libraries -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/slider.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/linearicons/style.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/flaticon/font/flaticon.css">
+
+<link href="https://storage.googleapis.com/themeforest-auto-car/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+<!-- Custom stylesheet -->
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/style.css">
+<link rel="stylesheet" type="text/css" id="style_sheet" href="https://storage.googleapis.com/themeforest-auto-car/css/colors/default.css">
+
+<!-- Favicon icon -->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+<!-- Google fonts -->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script type="text/javascript" src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="js/html5shiv.min.js"></script>
+<script type="text/javascript" src="js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap-slider.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/wow.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/jquery.scrollUp.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="jhttps://storage.googleapis.com/themeforest-auto-car/js/bootstrap-submenu.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Custom javascript -->
+<script type="text/javascript" src="js/app.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-100829780-2', 'auto');
+    ga('send', 'pageview');
+
+</script>

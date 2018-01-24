@@ -1,0 +1,627 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ConfigSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleAdvertisementNextRefNo" Type="int" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="50" />
+          <Property Name="ContactMobile" Type="varchar" MaxLength="50" />
+          <Property Name="ContactEMail" Type="varchar" MaxLength="50" />
+          <Property Name="PickupAddress" Type="varchar(max)" />
+          <Property Name="PostCode" Type="varchar" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="VehicleAdvertisement">
+          <Key>
+            <PropertyRef Name="Reference_ID" />
+          </Key>
+          <Property Name="Reference_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Reference_No" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="BodyType" Type="int" />
+          <Property Name="EngineCapacity" Type="int" />
+          <Property Name="AudoMeter" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Fuel" Type="int" />
+          <Property Name="Description" Type="varchar(max)" />
+          <Property Name="Feature" Type="ntext" />
+          <Property Name="Spects" Type="ntext" />
+          <Property Name="Make" Type="int" />
+          <Property Name="Model" Type="int" />
+          <Property Name="IsFeatured" Type="bit" Nullable="false" />
+          <Property Name="Transmission" Type="varchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VehicleBody">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BodyDescription" Type="varchar" MaxLength="50" />
+          <Property Name="ImageURL" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="VehicleFuel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FuelType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleMake" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="VehicleModel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleModel" Type="varchar" MaxLength="50" />
+          <Property Name="VehicleMakeID" Type="int" />
+        </EntityType>
+        <EntityType Name="VehicleSeller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleID" Type="int" />
+          <Property Name="SellerID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ViewPort">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ViewPortSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ViewPortID" Type="int" />
+          <Property Name="SettingCode" Type="varchar" MaxLength="50" />
+          <Property Name="PageSize" Type="int" />
+        </EntityType>
+        <Association Name="FK_VehicleAdvertisement_VehicleBody">
+          <End Role="VehicleBody" Type="Self.VehicleBody" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleBody">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="BodyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleFuel">
+          <End Role="VehicleFuel" Type="Self.VehicleFuel" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleFuel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Fuel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleModel">
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleModel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleModel_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleModel">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleSeller_Seller">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
+          <End Role="VehicleSeller" Type="Self.VehicleSeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleSeller">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleSeller_VehicleAdvertisement">
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="0..1" />
+          <End Role="VehicleSeller" Type="Self.VehicleSeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleAdvertisement">
+              <PropertyRef Name="Reference_ID" />
+            </Principal>
+            <Dependent Role="VehicleSeller">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewPortSetting_ViewPort">
+          <End Role="ViewPort" Type="Self.ViewPort" Multiplicity="1" />
+          <End Role="ViewPortSetting" Type="Self.ViewPortSetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ViewPort">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ViewPortSetting">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarSalesDBModelStoreContainer">
+          <EntitySet Name="ConfigSetting" EntityType="Self.ConfigSetting" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleAdvertisement" EntityType="Self.VehicleAdvertisement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleBody" EntityType="Self.VehicleBody" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleFuel" EntityType="Self.VehicleFuel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleMake" EntityType="Self.VehicleMake" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleModel" EntityType="Self.VehicleModel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VehicleSeller" EntityType="Self.VehicleSeller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewPort" EntityType="Self.ViewPort" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewPortSetting" EntityType="Self.ViewPortSetting" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleBody" Association="Self.FK_VehicleAdvertisement_VehicleBody">
+            <End Role="VehicleBody" EntitySet="VehicleBody" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleFuel" Association="Self.FK_VehicleAdvertisement_VehicleFuel">
+            <End Role="VehicleFuel" EntitySet="VehicleFuel" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleMake" Association="Self.FK_VehicleAdvertisement_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleModel" Association="Self.FK_VehicleAdvertisement_VehicleModel">
+            <End Role="VehicleModel" EntitySet="VehicleModel" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleModel_VehicleMake" Association="Self.FK_VehicleModel_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMake" />
+            <End Role="VehicleModel" EntitySet="VehicleModel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleSeller_Seller" Association="Self.FK_VehicleSeller_Seller">
+            <End Role="Seller" EntitySet="Seller" />
+            <End Role="VehicleSeller" EntitySet="VehicleSeller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleSeller_VehicleAdvertisement" Association="Self.FK_VehicleSeller_VehicleAdvertisement">
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisement" />
+            <End Role="VehicleSeller" EntitySet="VehicleSeller" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewPortSetting_ViewPort" Association="Self.FK_ViewPortSetting_ViewPort">
+            <End Role="ViewPort" EntitySet="ViewPort" />
+            <End Role="ViewPortSetting" EntitySet="ViewPortSetting" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarSalesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ConfigSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleAdvertisementNextRefNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactMobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEMail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PickupAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_Seller" FromRole="Seller" ToRole="VehicleSeller" />
+        </EntityType>
+        <EntityType Name="VehicleAdvertisement">
+          <Key>
+            <PropertyRef Name="Reference_ID" />
+          </Key>
+          <Property Name="Reference_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Reference_No" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="BodyType" Type="Int32" />
+          <Property Name="EngineCapacity" Type="Int32" />
+          <Property Name="AudoMeter" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Fuel" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Feature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Spects" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Make" Type="Int32" />
+          <Property Name="Model" Type="Int32" />
+          <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
+          <Property Name="Transmission" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VehicleBody" Relationship="Self.FK_VehicleAdvertisement_VehicleBody" FromRole="VehicleAdvertisement" ToRole="VehicleBody" />
+          <NavigationProperty Name="VehicleFuel" Relationship="Self.FK_VehicleAdvertisement_VehicleFuel" FromRole="VehicleAdvertisement" ToRole="VehicleFuel" />
+          <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleAdvertisement" ToRole="VehicleMake" />
+          <NavigationProperty Name="VehicleModel" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleAdvertisement" ToRole="VehicleModel" />
+          <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_VehicleAdvertisement" FromRole="VehicleAdvertisement" ToRole="VehicleSeller" />
+        </EntityType>
+        <EntityType Name="VehicleBody">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BodyDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleBody" FromRole="VehicleBody" ToRole="VehicleAdvertisement" />
+        </EntityType>
+        <EntityType Name="VehicleFuel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FuelType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleFuel" FromRole="VehicleFuel" ToRole="VehicleAdvertisement" />
+        </EntityType>
+        <EntityType Name="VehicleMake">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleMake1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleMake" ToRole="VehicleAdvertisement" />
+          <NavigationProperty Name="VehicleModels" Relationship="Self.FK_VehicleModel_VehicleMake" FromRole="VehicleMake" ToRole="VehicleModel" />
+        </EntityType>
+        <EntityType Name="VehicleModel">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleModel1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleMakeID" Type="Int32" />
+          <NavigationProperty Name="VehicleAdvertisements" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleModel" ToRole="VehicleAdvertisement" />
+          <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleModel_VehicleMake" FromRole="VehicleModel" ToRole="VehicleMake" />
+        </EntityType>
+        <EntityType Name="VehicleSeller">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VehicleID" Type="Int32" />
+          <Property Name="SellerID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Seller" Relationship="Self.FK_VehicleSeller_Seller" FromRole="VehicleSeller" ToRole="Seller" />
+          <NavigationProperty Name="VehicleAdvertisement" Relationship="Self.FK_VehicleSeller_VehicleAdvertisement" FromRole="VehicleSeller" ToRole="VehicleAdvertisement" />
+        </EntityType>
+        <EntityType Name="ViewPort">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ViewPortSetting" Relationship="Self.FK_ViewPortSetting_ViewPort" FromRole="ViewPort" ToRole="ViewPortSetting" />
+        </EntityType>
+        <EntityType Name="ViewPortSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ViewPortID" Type="Int32" />
+          <Property Name="SettingCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PageSize" Type="Int32" />
+          <NavigationProperty Name="ViewPort" Relationship="Self.FK_ViewPortSetting_ViewPort" FromRole="ViewPortSetting" ToRole="ViewPort" />
+        </EntityType>
+        <Association Name="FK_VehicleSeller_Seller">
+          <End Role="Seller" Type="Self.Seller" Multiplicity="1" />
+          <End Role="VehicleSeller" Type="Self.VehicleSeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Seller">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleSeller">
+              <PropertyRef Name="SellerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleBody">
+          <End Role="VehicleBody" Type="Self.VehicleBody" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleBody">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="BodyType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleFuel">
+          <End Role="VehicleFuel" Type="Self.VehicleFuel" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleFuel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Fuel" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Make" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleAdvertisement_VehicleModel">
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="0..1" />
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleModel">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleAdvertisement">
+              <PropertyRef Name="Model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleSeller_VehicleAdvertisement">
+          <End Role="VehicleAdvertisement" Type="Self.VehicleAdvertisement" Multiplicity="0..1" />
+          <End Role="VehicleSeller" Type="Self.VehicleSeller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleAdvertisement">
+              <PropertyRef Name="Reference_ID" />
+            </Principal>
+            <Dependent Role="VehicleSeller">
+              <PropertyRef Name="VehicleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VehicleModel_VehicleMake">
+          <End Role="VehicleMake" Type="Self.VehicleMake" Multiplicity="0..1" />
+          <End Role="VehicleModel" Type="Self.VehicleModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VehicleMake">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="VehicleModel">
+              <PropertyRef Name="VehicleMakeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ViewPortSetting_ViewPort">
+          <End Role="ViewPort" Type="Self.ViewPort" Multiplicity="1" />
+          <End Role="ViewPortSetting" Type="Self.ViewPortSetting" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ViewPort">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ViewPortSetting">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarSalesDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ConfigSettings" EntityType="Self.ConfigSetting" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
+          <EntitySet Name="VehicleAdvertisements" EntityType="Self.VehicleAdvertisement" />
+          <EntitySet Name="VehicleBodies" EntityType="Self.VehicleBody" />
+          <EntitySet Name="VehicleFuels" EntityType="Self.VehicleFuel" />
+          <EntitySet Name="VehicleMakes" EntityType="Self.VehicleMake" />
+          <EntitySet Name="VehicleModels" EntityType="Self.VehicleModel" />
+          <EntitySet Name="VehicleSellers" EntityType="Self.VehicleSeller" />
+          <EntitySet Name="ViewPorts" EntityType="Self.ViewPort" />
+          <EntitySet Name="ViewPortSettings" EntityType="Self.ViewPortSetting" />
+          <AssociationSet Name="FK_VehicleSeller_Seller" Association="Self.FK_VehicleSeller_Seller">
+            <End Role="Seller" EntitySet="Sellers" />
+            <End Role="VehicleSeller" EntitySet="VehicleSellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleBody" Association="Self.FK_VehicleAdvertisement_VehicleBody">
+            <End Role="VehicleBody" EntitySet="VehicleBodies" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleFuel" Association="Self.FK_VehicleAdvertisement_VehicleFuel">
+            <End Role="VehicleFuel" EntitySet="VehicleFuels" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleMake" Association="Self.FK_VehicleAdvertisement_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleAdvertisement_VehicleModel" Association="Self.FK_VehicleAdvertisement_VehicleModel">
+            <End Role="VehicleModel" EntitySet="VehicleModels" />
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleSeller_VehicleAdvertisement" Association="Self.FK_VehicleSeller_VehicleAdvertisement">
+            <End Role="VehicleAdvertisement" EntitySet="VehicleAdvertisements" />
+            <End Role="VehicleSeller" EntitySet="VehicleSellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VehicleModel_VehicleMake" Association="Self.FK_VehicleModel_VehicleMake">
+            <End Role="VehicleMake" EntitySet="VehicleMakes" />
+            <End Role="VehicleModel" EntitySet="VehicleModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ViewPortSetting_ViewPort" Association="Self.FK_ViewPortSetting_ViewPort">
+            <End Role="ViewPort" EntitySet="ViewPorts" />
+            <End Role="ViewPortSetting" EntitySet="ViewPortSettings" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarSalesDBModelStoreContainer" CdmEntityContainer="CarSalesDBEntities">
+          <EntitySetMapping Name="ConfigSettings">
+            <EntityTypeMapping TypeName="CarSalesDBModel.ConfigSetting">
+              <MappingFragment StoreEntitySet="ConfigSetting">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VehicleAdvertisementNextRefNo" ColumnName="VehicleAdvertisementNextRefNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="CarSalesDBModel.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactMobile" ColumnName="ContactMobile" />
+                <ScalarProperty Name="ContactEMail" ColumnName="ContactEMail" />
+                <ScalarProperty Name="PickupAddress" ColumnName="PickupAddress" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleAdvertisements">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleAdvertisement">
+              <MappingFragment StoreEntitySet="VehicleAdvertisement">
+                <ScalarProperty Name="Reference_ID" ColumnName="Reference_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Reference_No" ColumnName="Reference_No" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="BodyType" ColumnName="BodyType" />
+                <ScalarProperty Name="EngineCapacity" ColumnName="EngineCapacity" />
+                <ScalarProperty Name="AudoMeter" ColumnName="AudoMeter" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+                <ScalarProperty Name="Spects" ColumnName="Spects" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+                <ScalarProperty Name="Transmission" ColumnName="Transmission" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleBodies">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleBody">
+              <MappingFragment StoreEntitySet="VehicleBody">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BodyDescription" ColumnName="BodyDescription" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleFuels">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleFuel">
+              <MappingFragment StoreEntitySet="VehicleFuel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="FuelType" ColumnName="FuelType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleMakes">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleMake">
+              <MappingFragment StoreEntitySet="VehicleMake">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VehicleMake1" ColumnName="VehicleMake" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleModels">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleModel">
+              <MappingFragment StoreEntitySet="VehicleModel">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VehicleModel1" ColumnName="VehicleModel" />
+                <ScalarProperty Name="VehicleMakeID" ColumnName="VehicleMakeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VehicleSellers">
+            <EntityTypeMapping TypeName="CarSalesDBModel.VehicleSeller">
+              <MappingFragment StoreEntitySet="VehicleSeller">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="VehicleID" ColumnName="VehicleID" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewPorts">
+            <EntityTypeMapping TypeName="CarSalesDBModel.ViewPort">
+              <MappingFragment StoreEntitySet="ViewPort">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewPortSettings">
+            <EntityTypeMapping TypeName="CarSalesDBModel.ViewPortSetting">
+              <MappingFragment StoreEntitySet="ViewPortSetting">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ViewPortID" ColumnName="ViewPortID" />
+                <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
+                <ScalarProperty Name="PageSize" ColumnName="PageSize" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
