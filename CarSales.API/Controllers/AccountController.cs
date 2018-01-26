@@ -1,8 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CarSales.API.Models.CustomeFilter;
+using CarSales.API.Models.EF;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -79,7 +83,20 @@ namespace Pluralsight.AspNetDemo.Controllers
             }
         }
 
-        public async Task<ActionResult> ChooseProvider()
+       
+            public ActionResult Logout()
+        {
+
+            Request.GetOwinContext().Authentication.SignOut();
+
+            Request.GetOwinContext().Authentication.SignOut(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ApplicationCookie);
+
+
+            return RedirectToAction("Index", "Home");
+        }
+
+
+            public async Task<ActionResult> ChooseProvider()
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
             var providers = await UserManager.GetValidTwoFactorProvidersAsync(userId);
@@ -118,6 +135,7 @@ namespace Pluralsight.AspNetDemo.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<ActionResult> Register(RegisterModel model)
         {
@@ -138,11 +156,7 @@ namespace Pluralsight.AspNetDemo.Controllers
             var identityResult = await UserManager.CreateAsync(user, model.Password);
 
             if (identityResult.Succeeded)
-            {
-                var token = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                var confirmUrl = Url.Action("ConfirmEmail", "Account", new {userid = user.Id, token = token}, Request.Url.Scheme);
-                await
-                    UserManager.SendEmailAsync(user.Id, "Email Confirmation", $"Use link to confirm email: {confirmUrl}");
+            {              
 
                 return RedirectToAction("Index", "Home");
             }
@@ -203,7 +217,124 @@ namespace Pluralsight.AspNetDemo.Controllers
                     return View("Error");
             }
         }
+
+
+        public ActionResult SellerRegister()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> SellerRegister(SellerRegisterModel model)
+        {
+            var identityUser = await UserManager.FindByNameAsync(model.ContactEMail);
+            if (identityUser != null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var result = await UserManager.PasswordValidator.ValidateAsync(model.Password);
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", result.Errors.FirstOrDefault());
+                return View(model);
+            }
+
+            var user = new IdentityUser(model.ContactEMail) { Email = model.ContactEMail };
+            var identityResult = await UserManager.CreateAsync(user, model.Password);
+
+            if (identityResult.Succeeded)
+            {
+                Seller seller = new Seller() { AspNetUsersId= user.Id,
+                ContactEMail=model.ContactEMail,ContactMobile=model.ContactMobile,ContactPhone=model.ContactPhone,
+                Name=model.Name,PickupAddress=model.PickupAddress,PostCode=model.PostCode};
+                CarSalesDBEntities db = new CarSalesDBEntities();
+                db.Sellers.Add(seller);
+                db.SaveChanges();
+
+                return RedirectToAction("SellerRegisterDetail", "Account",new { ID=seller.ID});
+            }
+
+            ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
+
+            return View(model);
+        }
+
+        [Authorize]
+        [SellerActionFilter]
+        public ActionResult SellerRegisterDetail(int ID)
+        {
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            Seller seller = db.Sellers.Find(ID);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new SellerRegisterModel() {
+                AspNetUsersId=seller.AspNetUsersId,
+                ContactEMail=seller.ContactEMail,
+                ContactMobile=seller.ContactMobile,
+                ContactPhone=seller.ContactPhone,
+                ID=seller.ID,
+                Name=seller.Name,
+                PickupAddress=seller.PickupAddress,
+                PostCode=seller.PostCode
+            } );
+          
+        }
+
+        public ActionResult SellerRegisterEdit(int ID)
+        {
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            Seller seller = db.Sellers.Find(ID);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
+            return View(new SellerRegisterModel()
+            {
+                AspNetUsersId = seller.AspNetUsersId,
+                ContactEMail = seller.ContactEMail,
+                ContactMobile = seller.ContactMobile,
+                ContactPhone = seller.ContactPhone,
+                ID = seller.ID,
+                Name = seller.Name,
+                PickupAddress = seller.PickupAddress,
+                PostCode = seller.PostCode
+            });
+
+        }
+
+        [HttpPost]
+        public ActionResult SellerRegisterEdit(SellerRegisterModel SellerRegisterModel)
+        {
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            Seller seller = db.Sellers.Find(SellerRegisterModel.ID);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
+            else {
+                seller.Name = SellerRegisterModel.Name;
+                seller.ContactEMail = SellerRegisterModel.ContactEMail;
+                seller.ContactMobile= SellerRegisterModel.ContactMobile;
+                seller.ContactPhone = SellerRegisterModel.ContactPhone;
+                seller.PickupAddress = SellerRegisterModel.PickupAddress;
+                seller.PostCode = SellerRegisterModel.PostCode;
+                db.Entry(seller).State = EntityState.Modified;
+                db.SaveChanges();             
+
+                return RedirectToAction("SellerRegisterDetail", "Account", new { ID = seller.ID });
+            }
+          
+
+        }
+
     }
+
+
+
 
     public class PasswordResetModel
     {
@@ -239,6 +370,20 @@ namespace Pluralsight.AspNetDemo.Controllers
     public class RegisterModel
     {
         public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+
+    public class SellerRegisterModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string ContactPhone { get; set; }
+        public string ContactMobile { get; set; }
+        public string ContactEMail { get; set; }
+        public string PickupAddress { get; set; }
+        public string PostCode { get; set; }
+        public string AspNetUsersId { get; set; }
         public string Password { get; set; }
     }
 }

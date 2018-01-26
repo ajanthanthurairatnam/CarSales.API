@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ConfigSetting">
           <Key>
             <PropertyRef Name="ID" />
@@ -23,6 +23,7 @@
           <Property Name="ContactEMail" Type="varchar" MaxLength="50" />
           <Property Name="PickupAddress" Type="varchar(max)" />
           <Property Name="PostCode" Type="varchar" MaxLength="4" />
+          <Property Name="AspNetUsersId" Type="nvarchar" MaxLength="128" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleAdvertisement">
           <Key>
@@ -238,8 +239,7 @@
             <End Role="ViewPortSetting" EntitySet="ViewPortSetting" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CarSalesDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -262,6 +262,7 @@
           <Property Name="PickupAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PostCode" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_Seller" FromRole="Seller" ToRole="VehicleSeller" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VehicleAdvertisement">
           <Key>
@@ -509,6 +510,7 @@
           <EntitySetMapping Name="Sellers">
             <EntityTypeMapping TypeName="CarSalesDBModel.Seller">
               <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
