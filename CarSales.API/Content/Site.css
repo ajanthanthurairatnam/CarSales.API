@@ -1,7 +1,4 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿ 
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -21,4 +18,71 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.top-header ul li {
+
+    float: left;
+
+}
+
+.top-header ul li a {
+    display: block;
+    padding: 13px 20px;
+    text-transform: uppercase;
+ }
+
+.top-header ul li a.icon-1 i {
+
+    display: none;
+    margin-left: 5px;
+
+}
+
+.top-header {
+
+    background: #a7c45d;
+
+}
+li {
+
+    list-style: none;
+
+}
+
+.hotline::before {
+
+    position: absolute;
+    top: 0px;
+    left: -46px;
+    content: '';
+    border-width: 23px;
+    border-style: solid;
+    border-top-color: rgba(0, 0, 0, 0);
+    border-left-color: rgba(0, 0, 0, 0);
+    border-right-color: rgba(195, 246, 70, 0.82);
+    border-bottom-color: rgba(195, 246, 70, 0.82);
+
+}
+
+.hotline {
+
+    margin-top: 30px;
+    position: relative;
+    height: 46px;
+    background: rgba(195, 246, 70, 0.82);
+    display: inline-block;
+    margin-right: 1px;
+    float: right;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+.bg-3 {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
 }
