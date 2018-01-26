@@ -142,7 +142,8 @@ namespace Pluralsight.AspNetDemo.Controllers
             var identityUser = await UserManager.FindByNameAsync(model.Username);
             if (identityUser != null)
             {
-                return RedirectToAction("Index", "Home");
+                ModelState.AddModelError("", "Already Registered");
+                return View(model);
             }
 
             var result = await UserManager.PasswordValidator.ValidateAsync(model.Password);
@@ -162,8 +163,8 @@ namespace Pluralsight.AspNetDemo.Controllers
             }
 
             ModelState.AddModelError("", identityResult.Errors.FirstOrDefault());
-
             return View(model);
+
         }
 
         public async Task<ActionResult> ConfirmEmail(string userid, string token)
