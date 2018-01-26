@@ -222,6 +222,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\HelperClass.cs" />
     <Compile Include="Interfaces\IVehicleRepository.cs" />
     <Compile Include="Models\Classes\BaseEntity.cs" />
     <Compile Include="Models\Classes\CarSalesConfigSetting.cs" />
@@ -237,6 +238,9 @@
     <Compile Include="Models\Classes\CarSalesViewPort.cs" />
     <Compile Include="Models\Classes\CarSalesViewPortSetting.cs" />
     <Compile Include="Models\CustomeFilter\SupplierActionFilter.cs" />
+    <Compile Include="Models\EF\AspNetUser.cs">
+      <DependentUpon>CarSalesDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EF\BaseEntity.cs" />
     <Compile Include="Models\EF\CarSalesDBModel.Context.cs">
       <DependentUpon>CarSalesDBModel.Context.tt</DependentUpon>

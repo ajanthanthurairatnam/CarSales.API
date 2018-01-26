@@ -262,8 +262,7 @@ namespace Pluralsight.AspNetDemo.Controllers
             return View(model);
         }
 
-        [Authorize]
-        [SellerActionFilter]
+        [Authorize]       
         public ActionResult SellerRegisterDetail(int ID)
         {
             CarSalesDBEntities db = new CarSalesDBEntities();

@@ -35,5 +35,6 @@ namespace CarSales.API.Models.EF
         public virtual DbSet<VehicleSeller> VehicleSellers { get; set; }
         public virtual DbSet<ViewPort> ViewPorts { get; set; }
         public virtual DbSet<ViewPortSetting> ViewPortSettings { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
     }
 }
