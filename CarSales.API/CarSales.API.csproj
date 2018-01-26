@@ -236,6 +236,7 @@
     <Compile Include="Models\Classes\CarSalesVehicleSeller.cs" />
     <Compile Include="Models\Classes\CarSalesViewPort.cs" />
     <Compile Include="Models\Classes\CarSalesViewPortSetting.cs" />
+    <Compile Include="Models\CustomeFilter\SupplierActionFilter.cs" />
     <Compile Include="Models\EF\BaseEntity.cs" />
     <Compile Include="Models\EF\CarSalesDBModel.Context.cs">
       <DependentUpon>CarSalesDBModel.Context.tt</DependentUpon>
@@ -323,7 +324,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -389,6 +392,9 @@
     <Content Include="Views\Account\PasswordReset.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\TwoFactor.cshtml" />
+    <Content Include="Views\Account\SellerRegister.cshtml" />
+    <Content Include="Views\Account\SellerRegisterDetail.cshtml" />
+    <Content Include="Views\Account\SellerRegisterEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

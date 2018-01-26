@@ -27,6 +27,7 @@ namespace CarSales.API.Models.EF
         public string ContactEMail { get; set; }
         public string PickupAddress { get; set; }
         public string PostCode { get; set; }
+        public string AspNetUsersId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VehicleSeller> VehicleSellers { get; set; }
