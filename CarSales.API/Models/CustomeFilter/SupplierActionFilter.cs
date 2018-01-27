@@ -37,7 +37,7 @@ namespace CarSales.API.Models.CustomeFilter
 
           
 
-                if (CheckUrCondition)
+                if (!CheckUrCondition)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new
                 {

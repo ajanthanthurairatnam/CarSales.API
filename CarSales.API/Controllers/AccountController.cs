@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CarSales.API.Models.Classes;
 using CarSales.API.Models.CustomeFilter;
 using CarSales.API.Models.EF;
 using Microsoft.AspNet.Identity;
@@ -263,7 +264,8 @@ namespace Pluralsight.AspNetDemo.Controllers
         }
 
         [Authorize]       
-        public ActionResult SellerRegisterDetail(int ID)
+        [SellerActionFilter]
+        public ActionResult SellerRegisterDetail(int ID, string SearchText = "", int PageNos = 10, int PageIndex = 1)
         {
             CarSalesDBEntities db = new CarSalesDBEntities();
             Seller seller = db.Sellers.Find(ID);
@@ -271,17 +273,111 @@ namespace Pluralsight.AspNetDemo.Controllers
             {
                 return HttpNotFound();
             }
-            return View(new SellerRegisterModel() {
-                AspNetUsersId=seller.AspNetUsersId,
-                ContactEMail=seller.ContactEMail,
-                ContactMobile=seller.ContactMobile,
-                ContactPhone=seller.ContactPhone,
-                ID=seller.ID,
-                Name=seller.Name,
-                PickupAddress=seller.PickupAddress,
-                PostCode=seller.PostCode
-            } );
+
           
+
+            var vehicleAdvertisements = db.VehicleAdvertisements.Where(e => (SearchText.Length > 0 ? e.Title.Contains(SearchText.Trim()) : true));
+            var VehicleSeller = db.VehicleSellers.Where(e => e.SellerID==ID);
+            vehicleAdvertisements = vehicleAdvertisements.Join(VehicleSeller,
+                               VAdvertisement => VAdvertisement.Reference_ID,
+                               VSeller => VSeller.VehicleID,
+                               (VAdvertisement, VSeller) => VAdvertisement);
+
+
+            int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
+
+            int SkipCount = (PageIndex - 1) * PageNos;
+            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            SellerRegisterModel SellerRegisterModel = new SellerRegisterModel();
+            SellerRegisterModel.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement()
+            {
+                AudoMeter = e.AudoMeter,
+                BodyType = e.BodyType,
+                Description = e.Description,
+                EngineCapacity = e.EngineCapacity,
+                Feature = e.Feature,
+                Fuel = e.Fuel,
+                IsFeatured = e.IsFeatured,
+                Make = e.Make,
+                Model = e.Model,
+                Price = e.Price,
+                Reference_ID = e.Reference_ID,
+                Reference_No = e.Reference_No,
+                Spects = e.Spects,
+                Title = e.Title,
+                Transmission = e.Transmission
+            });
+            SellerRegisterModel.PageIndex = PageIndex;
+            SellerRegisterModel.PageNos = PageCount;
+            SellerRegisterModel.SearchText = SearchText;
+            SellerRegisterModel.AspNetUsersId = seller.AspNetUsersId;
+            SellerRegisterModel.ContactEMail = seller.ContactEMail;
+            SellerRegisterModel.ContactMobile = seller.ContactMobile;
+            SellerRegisterModel.ContactPhone = seller.ContactPhone;
+            SellerRegisterModel.ID = seller.ID;
+            SellerRegisterModel.Name = seller.Name;
+            SellerRegisterModel.PickupAddress = seller.PickupAddress;
+            SellerRegisterModel.PostCode = seller.PostCode;
+
+            return View(SellerRegisterModel);
+          
+        }
+
+        [HttpPost]
+        [Authorize]
+        [SellerActionFilter]
+        public ActionResult SellerRegisterDetail(int ID, string SearchText = "", int PageNos = 10, int PageIndex = 1,int num=0)
+        {
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            Seller seller = db.Sellers.Find(ID);
+            if (seller == null)
+            {
+                return HttpNotFound();
+            }
+
+            var vehicleAdvertisements = db.VehicleAdvertisements.Where(e => (SearchText.Length > 0 ? e.Title.Contains(SearchText.Trim()) : true));
+            var VehicleSeller = db.VehicleSellers.Where(e => e.SellerID == ID);
+            vehicleAdvertisements = vehicleAdvertisements.Join(VehicleSeller,
+                               VAdvertisement => VAdvertisement.Reference_ID,
+                               VSeller => VSeller.VehicleID,
+                               (VAdvertisement, VSeller) => VAdvertisement);
+            int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
+
+            int SkipCount = (PageIndex - 1) * PageNos;
+            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            SellerRegisterModel SellerRegisterModel = new SellerRegisterModel();
+            SellerRegisterModel.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement()
+            {
+                AudoMeter = e.AudoMeter,
+                BodyType = e.BodyType,
+                Description = e.Description,
+                EngineCapacity = e.EngineCapacity,
+                Feature = e.Feature,
+                Fuel = e.Fuel,
+                IsFeatured = e.IsFeatured,
+                Make = e.Make,
+                Model = e.Model,
+                Price = e.Price,
+                Reference_ID = e.Reference_ID,
+                Reference_No = e.Reference_No,
+                Spects = e.Spects,
+                Title = e.Title,
+                Transmission = e.Transmission
+            });
+            SellerRegisterModel.PageIndex = PageIndex;
+            SellerRegisterModel.PageNos = PageCount;
+            SellerRegisterModel.SearchText = SearchText;
+            SellerRegisterModel.AspNetUsersId = seller.AspNetUsersId;
+            SellerRegisterModel.ContactEMail = seller.ContactEMail;
+            SellerRegisterModel.ContactMobile = seller.ContactMobile;
+            SellerRegisterModel.ContactPhone = seller.ContactPhone;
+            SellerRegisterModel.ID = seller.ID;
+            SellerRegisterModel.Name = seller.Name;
+            SellerRegisterModel.PickupAddress = seller.PickupAddress;
+            SellerRegisterModel.PostCode = seller.PostCode;
+
+            return View(SellerRegisterModel);
+
         }
 
         public ActionResult SellerRegisterEdit(int ID)
@@ -385,5 +481,9 @@ namespace Pluralsight.AspNetDemo.Controllers
         public string PostCode { get; set; }
         public string AspNetUsersId { get; set; }
         public string Password { get; set; }
+        public string SearchText { get; set; }
+        public int PageIndex { get; set; }
+        public int PageNos { get; set; }
+        public IEnumerable<CarSalesVehicleAdvertisement> Advertisement { get; set; }
     }
 }

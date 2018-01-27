@@ -1,82 +1,309 @@
-﻿@model Pluralsight.AspNetDemo.Controllers.SellerRegisterModel
+﻿
+@model Pluralsight.AspNetDemo.Controllers.SellerRegisterModel
 
 @{
-    ViewBag.Title = "SellerRegisterDetail";
+    ViewBag.Title = "";
 }
 
-<h2>SellerRegisterDetail</h2>
+@using (Html.BeginForm("SellerRegisterDetail", "Account", FormMethod.Post))
+{
+    <div>
 
-<div>
-    <h4>SellerRegisterModel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <div class="car-grid content-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8 col-xs-12 col-md-push-4">
+                        <!-- Block heading Start-->
+                        <div class="block-heading">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-5 col-sm-5 col-xs-2">
+                                    <div class="sorting-options">
+                                        <span style="margin: 10px 15px 0 0"> @Html.TextBoxFor(model => model.SearchText)</span>
+                                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+                                </div>
+                                <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
+                                    <div class="sorting-options">
+                                        <select class="sorting">
+                                            <option>Price: High to low</option>
+                                            <option>Price: Low to high</option>
+                                            <option>Sells: High to low</option>
+                                            <option>Sells: Low to high</option>
+                                        </select>
+                                        <a href="car-list-2.html" class="change-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a href="car-grid-2.html" class="change-view-btn active-view-btn"><i class="fa fa-th-large"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Block heading end -->
+                        <!-- Car grid start -->
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            @foreach (var a in Model.Advertisement)
+                            {
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInUp delay-03s" style="visibility: visible; animation-name: fadeInUp;">
+                                    <!-- Car box start-->
+                                    <div class="thumbnail car-box clearfix">
+                                        <div class="car-box-thumbnail">
+                                            <img src="https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg" alt="bmw_emw_m3_diski_serie">
+                                            <div class="is-featured">
+                                                <span>Featured</span>
+                                            </div>
+                                            <div class="listing-for">
+                                                <span class="for">For Rent</span>
+                                            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactPhone)
-        </dt>
+                                            <div class="listing-price">
+                                                <span class="del"><del>$1250.00</del></span>
+                                                <br>
+                                                <span>$1000.00</span>
+                                            </div>
+                                        </div>
+                                        <!-- detail -->
+                                        <div class="caption detail">
+                                            <!-- Header -->
+                                            <header class="clearfix">
+                                                <h5 class="title">
+                                                    <a href="car-details.html">@a.Title</a>
+                                                </h5>
 
-        <dd>
-            @Html.DisplayFor(model => model.ContactPhone)
-        </dd>
+                                            </header>
+                                            <!-- paragraph -->
+                                            <p>@a.Description</p>
+                                            <!-- Facilities List -->
+                                            <div class="facilities-area">
+                                                <ul class="facilities-list clearfix">
+                                                    <li>
+                                                        <i class="fa fa-tachometer"></i>
+                                                        <span>@a.Fuel</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-automatic-flash-symbol"></i>
+                                                        <span>@a.Transmission</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-road-with-broken-line"></i>
+                                                        <span>@a.AudoMeter</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-racing-flag"></i>
+                                                        <span>@a.BodyType</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-transport"></i>
+                                                        <span>@a.BodyType</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="flaticon-time"></i>
+                                                        <span>2017</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactMobile)
-        </dt>
+                                            <div class="carbox-overlap-wrapper">
+                                                <h2>Bmw e46 m3 Diski Serie</h2>
+                                                <h4>$49,000</h4>
+                                                <div class="overlap-btns-area">
+                                                    <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
+                                                    <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
+                                                    <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Car box end-->
+                                </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ContactMobile)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactEMail)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ContactEMail)
-        </dd>
+                            }
+                            <!-- Repeat -->
+                            <!-- End Repeat -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PickupAddress)
-        </dt>
+                        </div>
+                        <!-- Car grid end-->
+                        <!-- Page navigation start-->
 
-        <dd>
-            @Html.DisplayFor(model => model.PickupAddress)
-        </dd>
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination">
+                                @for (int i = 0; i < Model.PageNos; i++)
+                                {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PostCode)
-        </dt>
+                                    <li>
 
-        <dd>
-            @Html.DisplayFor(model => model.PostCode)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUsersId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUsersId)
-        </dd>
+                                        @Html.ActionLink(
+                               linkText: (i + 1).ToString(),
+                               actionName: "GetAdvertisements",
+                               controllerName: "VehicleAdvertisementsMVC",
+                               routeValues: new
+                               {
+                                   PageSize = 10,
+                                   SearchText = Model.SearchText,
+                                   PageNo = (i + 1)
+                               },
+                               htmlAttributes: null
+                               )
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
+                                    </li>
 
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
+                                }
 
-    </dl>
-</div>
+
+
+                            </ul>
+                        </nav>
+
+
+                        <!-- Page navigation end-->
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
+                        <!-- Sidebar start-->
+                        <div>
+                            <h4>SellerRegisterModel</h4>
+                            <hr />
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Name)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContactPhone)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.ContactPhone)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContactMobile)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.ContactMobile)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ContactEMail)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.ContactEMail)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PickupAddress)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PickupAddress)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.PostCode)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.PostCode)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.AspNetUsersId)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.AspNetUsersId)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Password)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Password)
+                                </dd>
+
+                            </dl>
+                        </div>
+                        <p>
+                            @Html.ActionLink("Edit", "SellerRegisterEdit","Account", new { ID = Model.ID },null) |
+
+                        </p>
+
+                        <!-- Sidebar End-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
 <p>
-    @Html.ActionLink("Edit", "SellerRegisterEdit", new { ID = Model.ID }) |
-  
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
+<!-- External CSS libraries -->
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-submenu.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/slider.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/linearicons/style.css">
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/flaticon/font/flaticon.css">
+
+<link href="https://storage.googleapis.com/themeforest-auto-car/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+<!-- Custom stylesheet -->
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/style.css">
+<link rel="stylesheet" type="text/css" id="style_sheet" href="https://storage.googleapis.com/themeforest-auto-car/css/colors/default.css">
+
+<!-- Favicon icon -->
+<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+
+<!-- Google fonts -->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script type="text/javascript" src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="js/html5shiv.min.js"></script>
+<script type="text/javascript" src="js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap-slider.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/wow.min.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/jquery.scrollUp.js"></script>
+<script type="text/javascript" src="https://storage.googleapis.com/themeforest-auto-car/js/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="jhttps://storage.googleapis.com/themeforest-auto-car/js/bootstrap-submenu.js"></script>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script type="text/javascript" src="js/ie10-viewport-bug-workaround.js"></script>
+
+<!-- Custom javascript -->
+<script type="text/javascript" src="js/app.js"></script>
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-100829780-2', 'auto');
+    ga('send', 'pageview');
+
+</script>
