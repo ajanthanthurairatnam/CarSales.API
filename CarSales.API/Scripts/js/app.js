@@ -4,8 +4,8 @@ $(function () {
     $(window).on('load', function () {
         setTimeout(function () {
             $(".page_loader").fadeOut("fast");
-            $('link[id="style_sheet"]').attr('href', 'css/colors/default.css');
-            $('.logo img').attr('src', 'img/logos/logo.png');
+            $('link[id="style_sheet"]').attr('href', 'Content/css/colors/default.css');
+            $('.logo img').attr('src', 'Content/img/logos/logo.png');
         }, 100)
     });
 
@@ -171,12 +171,12 @@ $(function () {
     // Change color plate
     $('.color-plate').on('click', function () {
         var name = $(this).attr('data-color');
-        $('link[id="style_sheet"]').attr('href', 'css/colors/'+name+'.css');
+        $('link[id="style_sheet"]').attr('href', 'Content/css/colors/'+name+'.css');
         if(name == 'default'){
-            $('.logo img').attr('src', 'img/logos/logo.png');
+            $('.logo img').attr('src', 'Content/img/logos/logo.png');
         }
         else{
-            $('.logo img').attr('src', 'img/logos/'+name+'-logo.png');
+            $('.logo img').attr('src', 'Content/img/logos/'+name+'-logo.png');
         }
     });
 
