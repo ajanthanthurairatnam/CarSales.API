@@ -372,11 +372,6 @@
     <Content Include="Views\SellersMVC\Details.cshtml" />
     <Content Include="Views\SellersMVC\Edit.cshtml" />
     <Content Include="Views\SellersMVC\Index.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Create.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Delete.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Details.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Edit.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Index.cshtml" />
     <Content Include="Views\VehicleBodiesMVC\Create.cshtml" />
     <Content Include="Views\VehicleBodiesMVC\Delete.cshtml" />
     <Content Include="Views\VehicleBodiesMVC\Details.cshtml" />
@@ -417,6 +412,8 @@
     <Content Include="Views\Account\SellerRegister.cshtml" />
     <Content Include="Views\Account\SellerRegisterDetail.cshtml" />
     <Content Include="Views\Account\SellerRegisterEdit.cshtml" />
+    <Content Include="Views\VehicleAdvertisementsMVC\Create.cshtml" />
+    <Content Include="Views\Shared\_CarSalesLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

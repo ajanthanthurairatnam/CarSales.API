@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarSales.API.Models.EF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -22,5 +23,19 @@ namespace CarSales.API.Models.Classes
         public Nullable<int> Model { get; set; }
         public bool IsFeatured { get; set; }
         public string Transmission { get; set; }
+        public IEnumerable<CarSalesVehicleBody> VehicleBody { get; set; }
+        public IEnumerable<CarSalesVehicleFuel> VehicleFuel { get; set; }
+        public IEnumerable<CarSalesVehicleMake> VehicleMake { get; set; }
+        public IEnumerable<CarSalesVehicleModel> VehicleModel { get; set; }
+
+        public CarSalesVehicleAdvertisement()
+        {
+            CarSalesDBEntities db = new CarSalesDBEntities();
+
+            VehicleBody = db.VehicleBodies.Select(e => new CarSalesVehicleBody() { BodyDescription = e.BodyDescription, ID = e.ID, ImageURL = e.ImageURL });
+            VehicleFuel = db.VehicleFuels.Select(e => new CarSalesVehicleFuel() { FuelType = e.FuelType, ID=e.ID });
+            VehicleMake = db.VehicleMakes.Select(e => new CarSalesVehicleMake() { VehicleMake1 = e.VehicleMake1, ID = e.ID});
+            VehicleModel = db.VehicleModels.Select(e => new CarSalesVehicleModel() { VehicleModel1 = e.VehicleModel1, ID = e.ID,VehicleMakeID=e.VehicleMakeID });
+        }
     }
 }

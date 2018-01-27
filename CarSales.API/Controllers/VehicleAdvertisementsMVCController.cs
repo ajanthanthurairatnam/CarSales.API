@@ -107,10 +107,7 @@ namespace CarSales.API.Controllers
         // GET: VehicleAdvertisementsMVC/Create
         public ActionResult Create()
         {
-            ViewBag.BodyType = new SelectList(db.VehicleBodies, "ID", "BodyDescription");
-            ViewBag.Fuel = new SelectList(db.VehicleFuels, "ID", "FuelType");
-            ViewBag.Make = new SelectList(db.VehicleMakes, "ID", "VehicleMake1");
-            ViewBag.Model = new SelectList(db.VehicleModels, "ID", "VehicleModel1");
+           
             return View();
         }
 
