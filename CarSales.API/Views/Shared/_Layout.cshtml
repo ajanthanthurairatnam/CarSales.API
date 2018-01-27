@@ -1,153 +1,392 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from storage.googleapis.com/themeforest-auto-car/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 27 Jan 2018 07:58:17 GMT -->
 <head>
-    <meta charset="utf-8" />
+    <title>Auto Car - Car Dealer HTML Template</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/bundles/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <meta charset="utf-8">
+    <!-- External CSS libraries -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-submenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/slider.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/flaticon/font/flaticon.css">
+    <link href="~/Content/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
+    <!-- Custom stylesheet -->
+    <link href="~/Content/css/animate.min.css" rel="stylesheet" />
+    
+    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/style.css">
+    <link rel="stylesheet" type="text/css" id="style_sheet" href="https://storage.googleapis.com/themeforest-auto-car/css/colors/default.css">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="~/Content/img/favicon.ico" type="image/x-icon">
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="~/Content/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script type="text/javascript" src="~/Scripts/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script type="text/javascript" src="~/Scripts/js/ie-emulation-modes-warning.js"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="~/Scripts/js/html5shiv.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-    <header>
-        <div class="top-header">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6 ">
-                        <p class="f-14">
-                            <i class="fa fa-map-marker"></i><strong>The Vehicle Store</strong> - CHADSTONE VIC 3148, Victoria, Australia
-
-                        </p>
+    <div class="page_loader"><img src="~/Content/img/loader.gif" alt="Loader"></div>
+    <!-- Option Panel -->
+    <div class="option-panel option-panel-collased">
+        <h2>Change Color</h2>
+        <div class="color-plate default-plate" data-color="default"></div>
+        <div class="color-plate blue-plate" data-color="blue"></div>
+        <div class="color-plate yellow-plate" data-color="yellow"></div>
+        <div class="color-plate blue-light-plate" data-color="blue-light"></div>
+        <div class="color-plate green-light-plate" data-color="green-light"></div>
+        <div class="color-plate green-plate" data-color="green"></div>
+        <div class="color-plate yellow-light-plate" data-color="yellow-light"></div>
+        <div class="color-plate green-light-2-plate" data-color="green-light-2"></div>
+        <div class="color-plate olive-plate" data-color="olive"></div>
+        <div class="color-plate purple-plate" data-color="purple"></div>
+        <div class="color-plate midnight-blue-plate" data-color="midnight-blue"></div>
+        <div class="color-plate red-plate" data-color="red"></div>
+        <div class="setting-button">
+            <i class="fa fa-gear"></i>
+        </div>
+    </div>
+    <!-- /Option Panel -->
+    <!-- Top Header start -->
+    <header class="top-header hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-7 col-xs-12">
+                    <div class="list-inline">
+                        <a href="tel:1-8X0-666-8X88"><i class="fa fa-phone"></i>Need Support? 1-8X0-666-8X88</a>
+                        <a href="tel:info@themevessel.com"><i class="fa fa-envelope"></i>info@themevessel.com</a>
                     </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <ul class="pull-right">
-
-
-                            <li class="cart-icon">
-                                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name) != null)
-
-    {
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-5 col-xs-12">
+                    <ul class="social-list clearfix pull-right">
+                        <li>
                             <a href="#">
-                                @Html.ActionLink("My Sales", "SellerRegisterDetail", "Account",  new { ID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID }, null)
+                                <i class="fa fa-facebook"></i>
                             </a>
-}
-else
-{
+                        </li>
+                        <li>
                             <a href="#">
-                                @Html.ActionLink("Sell my car", "SellerRegister", "Account")
+                                <i class="fa fa-twitter"></i>
                             </a>
-}
-                            </li>
-
-    
-                            <li>
-
-                                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-        {
-
-                        @Html.ActionLink(String.Format("Welcome {0} ", @System.Web.HttpContext.Current.User.Identity.Name), "Login", "Account")
-}
-else
-{
-                        @Html.ActionLink("Login", "Login", "Account")
-}
-
-
-                            </li>
-                            <li>
-                                <a href="#" class="icon-1"><i class="fa fa-heart-o"></i><span>Wishlist (0)</span></a>
-                            </li>
-                            <li><a href="#" class="icon-1"><i class="fa fa-cart-plus"></i><span>Checkout</span></a></li>
-
-                            <li class="cart-icon">
-                                <a href="#">
-                                    <i class="fa fa-shopping-basket"></i>
-                                </a>
-
-                            </li>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-rss"></i>
+                            </a>
+                        </li>
+                        <li>
 
                             @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
     {
 
-                        <li class="cart-icon">
-                            <a href="#">
-                                @Html.ActionLink("Logout", "Logout", "Account")
-                            </a>
+                       
 
-                        </li>
+                        <a href="@Url.Action("Logout", "Account")" class="sign-in">
+                            <i class="fa fa-user"></i>
+                            <span>
+                                Logout
+                            </span>
+                        </a>
+
 }
 else
 {
-                        <li class="cart-icon">
-                            <a href="#">
-                                @Html.ActionLink("Register", "Register", "Account")
-                            </a>
 
-                        </li>
+
+                        <a href="@Url.Action("Login", "Account")" class="sign-in">
+                            <i class="fa fa-user"></i>
+                            <span>
+                                Login
+                            </span>
+                        </a>
+
 }
 
-
-                        </ul>
-                    </div>
+                        </li>
+                       
+                        <li>
+                             <a href="@Url.Action("Register", "Account")" class="personal-info">
+                                <i class="fa fa-user"></i>
+                                <span>
+                                    Register
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <!-- Menu -->
-        <div class="menu-bg">
-            <div class="container">
+    </header>
+    <!-- Top Header end -->
+    <!-- Main header start -->
+    <header class="main-header">
+        <div class="container">
+            <nav class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navigation" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="index.html" class="logo">
+                        <img src="~/Content/img/logos/green-light-logo.png" alt="logo">
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown active">                            
+                            @Html.ActionLink("Home", "GetAdvertisements", "VehicleAdvertisementsMVC")
+                        </li>
+                        <li class="dropdown">
+                            @Html.ActionLink("Car Listing", "GetAdvertisements", "VehicleAdvertisementsMVC")
+                        </li>
+                        <li class="dropdown">
+                            @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name) != null)
+
+                            {
+
+                                @Html.ActionLink("My Sales", "SellerRegisterDetail", "Account", new { ID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID }, null)
+
+                            }
+                            else
+                            {
+
+                                @Html.ActionLink("Sell my car", "SellerRegister", "Account")
+
+                            }
+
+                        </li>
+                        <li class="dropdown">
+                            <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
+                                Contact<span class="caret"></span>
+                            </a>
+                            
+                        </li>
+                       
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+                        <li>
+                            <div class="navbar-search-box">
+                                <form class="navbar-search" method="GET">
+                                    <input type="search" placeholder="Search......" name="search" class="navbar-search-input" onkeyup="buttonUp();" required>
+                                    <button type="submit" class="navbar-search-submit">Go</button>
+                                    <span class="navbar-search-icon">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+                <!-- /.container -->
+            </nav>
+        </div>
+    </header>
+    <!-- Main header end -->
+    <!-- Content start-->
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <!-- Content End-->
+    <!-- Footer start-->
+    <footer class="main-footer clearfix">
+        <div class="container">
+            <!-- Sub footer-->
+            <div class="sub-footer">
                 <div class="row">
-                    <!-- Logo -->
-                    <div class="col-md-3 col-lg-3">
-                        <a href="index.html" class="logo"><img src="images/logo.png" alt="logo"></a>
-                    </div>
-                    <div class="col-md-9 col-lg-9">
-                        <div class="hotline">
-                            <span class="m-r-lg-10"> Call us: </span>
-                            <i class="fa fa-phone"></i>+61406314133
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="logo-2">
+                            <a href="index.html">
+                                <img src="~/Content/img/logos/footer-logo.png" alt="footer-logo">
+                            </a>
                         </div>
-                        <div class="clearfix"></div>
-                        <!-- Menu -->
-                        <div class="main-menu">
-                            <div class="container1">
-                                <nav class="navbar navbar-default menu">
-                                    <div class="container1-fluid">
-                                        <div class="navbar-header">
-                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                                                    aria-expanded="false">
-                                                <span class="sr-only">Toggle navigation</span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
-                                                <span class="icon-bar"></span>
-                                            </button>
-                                        </div>
-                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                                            <ul class="nav navbar-nav">
-                                                <li class="dropdown">
-                                                    <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
-                                                   
-                                                </li>
-                                                <li class="dropdown">
-                                                                                                       @Html.ActionLink("Car Listing", "GetAdvertisements", "VehicleAdvertisementsMVC")
-                                                    <ul class="dropdown-menu">
-                                                        <li><a href="car_list.html">Car List</a></li>
-                                                        <li><a href="car_detail.html">Car Details</a></li>
-                                                        <li><a href="dealer_detail.html">Dealer detail</a></li>
-                                                        <li><a href="sell_a_car.html">Sell a car</a></li>
-                                                    </ul>
-                                                </li>
-                                                 <li><a href="contact.html">Contact us</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </nav>
-                                <!-- Search -->
-                                <div class="search-box">
-                                    <i class="fa fa-search"></i>
-                                    <form>
-                                        <input type="text" name="search-txt" placeholder="Search..." class="search-txt form-item">
-                                        <button type="submit" name="submit" class="search-btn btn-1">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </form>
+                    </div>
+                    <div class="col-lg-4 col-lg-offset-2 col-md-4 col-sm-6 col-xs-12">
+                        <form action="#" method="GET">
+                            <div class="form-group">
+                                <input type="text" class="form-contact" name="email" placeholder="Enter your email">
+                                <button type="submit" name="submitNewsletter" class="btn btn-default button-small">
+                                    <i class="fa fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                        <div class="social-list clearfix">
+                            <a href="#" class="bg-facebook">
+                                <i class="fa fa-facebook"></i>
+                            </a>
+                            <a href="#" class="bg-twitter">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                            <a href="#" class="bg-google">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                            <a href="#" class="bg-linkedin">
+                                <i class="fa fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="bg-pinterest">
+                                <i class="fa fa-pinterest"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer info-->
+            <div class="footer-info">
+                <div class="row">
+                    <!-- About us -->
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="footer-item clearfix">
+                            <h2 class="title">Contact Us</h2>
+                            <p>
+                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's printing and typesetting
+                            </p>
+                            <ul class="personal-info">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    Address: 20/F Green Road, Dhanmondi, Dhaka
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    Email:<a href="mailto:info@themevessel.com">info@themevessel.com</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    Phone: <a href="tel:+55-417-634-7071">+55 4XX-634-7071</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-fax"></i>
+                                    Fax: +55 4XX-634-7071
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Links -->
+                    <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                        <div class="footer-item clearfix">
+                            <h2 class="title">Links</h2>
+                            <ul class="links">
+                                <li>
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li>
+                                    <a href="about.html">About Us</a>
+                                </li>
+                                <li>
+                                    <a href="car-list.html">Car Listing</a>
+                                </li>
+                                <li>
+                                    <a href="car-grid.html">Car Grid</a>
+                                </li>
+                                <li>
+                                    <a href="contact.html">Contact Us</a>
+                                </li>
+                                <li>
+                                    <a href="with-right-sidebar.html">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="car-details.html">Car Details</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Tags -->
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="footer-item clearfix">
+                            <h2 class="title">Tags</h2>
+                            <div class="tags">
+                                <a href="#">Cars</a>
+                                <a href="#">Cars Dealer</a>
+                                <a href="#">Car Template</a>
+                                <a href="#">Dealer</a>
+                                <a href="#">Auto Car</a>
+                                <a href="#">Automobile</a>
+                                <a href="#">Vehicles</a>
+                                <a href="#">Journey</a>
+                                <a href="#">Car Selling</a>
+                                <a href="#">Car Dealing</a>
+                                <a href="#">Car Website</a>
+                                <a href="#">Car Template</a>
+                                <a href="#">HTML Template</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent cars -->
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div class="footer-item recent-car clearfix">
+                            <h2 class="title">Recent Cars</h2>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="~/Content/img/recent/recent-1.jpg" alt="recent-1">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h3>
+                                        <a href="car-details.html">Porsche Cayen Last</a>
+                                    </h3>
+                                    <span>October 18, 2017</span>
+                                    <p>$36.000</p>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="~/Content/img/recent/recent-2.jpg" alt="recent-2">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h3>
+                                        <a href="car-details.html">McLaren-650S</a>
+                                    </h3>
+                                    <span>november 13, 2017</span>
+                                    <p>$28.490</p>
+                                </div>
+                            </div>
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="~/Content/img/recent/recent-3.jpg" alt="recent-3">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h3>
+                                        <a href="car-details.html">BMW e46 M3 Diski Serie</a>
+                                    </h3>
+                                    <span>december 21, 2017</span>
+                                    <p>$49.000</p>
                                 </div>
                             </div>
                         </div>
@@ -155,38 +394,99 @@ else
                 </div>
             </div>
         </div>
-    </header>
-    
-    @*<div class="navbar navbar-inverse navbar-fixed-top">
+    </footer>
+    <!-- Footer end-->
+    <!-- Copy right start-->
+    <div class="copy-right">
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Logout", "Account")</li>
-                </ul>
+            <p>&copy;  2017 Theme Vessel. Trademarks and brands are the property of their respective owners.</p>
+        </div>
+    </div>
+    <!-- Copy right end-->
+    <!-- Car Viedo Modal -->
+    <div class="modal fade" id="carVideo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Vencer Sarthe Supercar</h4>
+                </div>
+                <div class="modal-body">
+                    <iframe src="https://www.youtube.com/embed/m5_AKjDdqaU"></iframe>
+                </div>
             </div>
         </div>
-    </div>*@
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
+    <!-- Car Gallary Modal -->
+    <div class="modal fade" id="carGallary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel1">Vencer Sarthe Supercar</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="carGallaryCarousel" class="carousel slide" data-ride="carousel">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <div class="item active">
+                                <img src="~/Content/img/grid/vencer-sarthe-supercar.jpg" alt="Vencer-Sarthe-Supercar" class="img-responsive">
+                            </div>
+                            <div class="item">
+                                <img src="~/Content/img/grid/bmw_emw_m3_diski_serie.jpg" alt="Vencer-Sarthe-Supercar" class="img-responsive">
+                            </div>
+                            <div class="item">
+                                <img src="~/Content/img/grid/gridmclaren_650S.jpg" alt="Vencer-Sarthe-Supercar" class="img-responsive">
+                            </div>
+                            <div class="item">
+                                <img src="~/Content/img/grid/vencer-sarthe-supercar.jpg" alt="Vencer-Sarthe-Supercar" class="img-responsive">
+                            </div>
+                        </div>
+                        <!-- Left and right controls -->
+                        <a class="left carousel-control" href="#carGallaryCarousel" role="button" data-slide="prev">
+                            <span class="slider-mover-left" aria-hidden="true">
+                                <img src="~/Content/img/png/chevron-left.png" alt="left-chevron">
+                            </span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="right carousel-control" href="#carGallaryCarousel" role="button" data-slide="next">
+                            <span class="slider-mover-right" aria-hidden="true">
+                                <img src="~/Content/img/png/chevron-right.png" alt="right-chevron">
+                            </span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/Scripts/js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/bootstrap-slider.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/wow.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/jquery.scrollUp.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/bootstrap-submenu.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script type="text/javascript" src="~/Scripts/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Custom javascript -->
+    <script type="text/javascript" src="~/Scripts/js/app.js"></script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../www.google-analytics.com/analytics.js', 'ga');
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+        ga('create', 'UA-100829780-2', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
+<!-- Mirrored from storage.googleapis.com/themeforest-auto-car/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 27 Jan 2018 08:00:04 GMT -->
 </html>

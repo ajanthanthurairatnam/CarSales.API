@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/bundles/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6 ">
+                        <p class="f-14">
+                            <i class="fa fa-map-marker"></i><strong>The Vehicle Store</strong> - CHADSTONE VIC 3148, Victoria, Australia
+
+                        </p>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <ul class="pull-right">
+
+
+                            <li class="cart-icon">
+                                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated && CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name) != null)
+
+                                {
+                                    <a href="#">
+                                        @Html.ActionLink("My Sales", "SellerRegisterDetail", "Account", new { ID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID }, null)
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="#">
+                                        @Html.ActionLink("Sell my car", "SellerRegister", "Account")
+                                    </a>
+                                }
+                            </li>
+
+
+                            <li>
+
+                                @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+
+                                    @Html.ActionLink(String.Format("Welcome {0} ", @System.Web.HttpContext.Current.User.Identity.Name), "Login", "Account")
+                                }
+                                else
+                                {
+                                    @Html.ActionLink("Login", "Login", "Account")
+                                }
+
+
+                            </li>
+                            <li>
+                                <a href="#" class="icon-1"><i class="fa fa-heart-o"></i><span>Wishlist (0)</span></a>
+                            </li>
+                            <li><a href="#" class="icon-1"><i class="fa fa-cart-plus"></i><span>Checkout</span></a></li>
+
+                            <li class="cart-icon">
+                                <a href="#">
+                                    <i class="fa fa-shopping-basket"></i>
+                                </a>
+
+                            </li>
+
+                            @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+
+                                <li class="cart-icon">
+                                    <a href="#">
+                                        @Html.ActionLink("Logout", "Logout", "Account")
+                                    </a>
+
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="cart-icon">
+                                    <a href="#">
+                                        @Html.ActionLink("Register", "Register", "Account")
+                                    </a>
+
+                                </li>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Menu -->
+        <div class="menu-bg">
+            <div class="container">
+                <div class="row">
+                    <!-- Logo -->
+                    <div class="col-md-3 col-lg-3">
+                        <a href="index.html" class="logo"><img src="images/logo.png" alt="logo"></a>
+                    </div>
+                    <div class="col-md-9 col-lg-9">
+                        <div class="hotline">
+                            <span class="m-r-lg-10"> Call us: </span>
+                            <i class="fa fa-phone"></i>+61406314133
+                        </div>
+                        <div class="clearfix"></div>
+                        <!-- Menu -->
+                        <div class="main-menu">
+                            <div class="container1">
+                                <nav class="navbar navbar-default menu">
+                                    <div class="container1-fluid">
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                                                    aria-expanded="false">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>
+                                        </div>
+                                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                            <ul class="nav navbar-nav">
+                                                <li class="dropdown">
+                                                    <a href="index.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home</a>
+
+                                                </li>
+                                                <li class="dropdown">
+                                                    @Html.ActionLink("Car Listing", "GetAdvertisements", "VehicleAdvertisementsMVC")
+                                                    <ul class="dropdown-menu">
+                                                        <li><a href="car_list.html">Car List</a></li>
+                                                        <li><a href="car_detail.html">Car Details</a></li>
+                                                        <li><a href="dealer_detail.html">Dealer detail</a></li>
+                                                        <li><a href="sell_a_car.html">Sell a car</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="contact.html">Contact us</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </nav>
+                                <!-- Search -->
+                                <div class="search-box">
+                                    <i class="fa fa-search"></i>
+                                    <form>
+                                        <input type="text" name="search-txt" placeholder="Search..." class="search-txt form-item">
+                                        <button type="submit" name="submit" class="search-btn btn-1">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Logout", "Account")</li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
