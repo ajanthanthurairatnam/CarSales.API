@@ -198,7 +198,7 @@ else
                         <li>
                             <div class="navbar-search-box">
                                 <form class="navbar-search" method="GET">
-                                    <input type="search" placeholder="Search......" name="SearchText" class="navbar-search-input" onblur="if(this.value!=''){ location.href='@Url.Action("GetAdvertisements", "VehicleAdvertisementsMVC")'}" onkeyup="buttonUp();" required>
+                                    <input type="search" placeholder="Search......" name="SearchText" class="navbar-search-input" onblur="var username = this.value;if(this.value!=''){location.href='@Url.Action("GetAdvertisements", "VehicleAdvertisementsMVC")?SearchText=' + username }" onkeyup="buttonUp();" required>
                                     <span class="navbar-search-icon">
                                         <i class="fa fa-search"></i>
                                     </span>
@@ -214,7 +214,7 @@ else
     </header>
     <!-- Main header end -->
     <!-- Content start-->
-    <div class="container body-content">
+    <div>
         @RenderBody()
     </div>
     <!-- Content End-->
