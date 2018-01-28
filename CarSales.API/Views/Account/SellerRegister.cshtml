@@ -104,8 +104,7 @@
 <script type="text/javascript">
 
     // Shorthand for $( document ).ready()
-    $(function () {
-
+    $(function () {      
 
         $('#SellerName').prop('readonly', true);
         $('#ContactPhone').prop('readonly', true);
@@ -129,7 +128,7 @@
         $("#ContactMobile").focus(function () {
             $('#ContactMobile').prop('readonly', false);
         });
-        if ($('#IsUser').val() == "false") {
+        if ($('#IsUser').val() == "False") {
             $("#ContactEMail").focus(function () {
                 $('#ContactEMail').prop('readonly', false);
             });
@@ -167,7 +166,7 @@
         $("#ContactMobile").blur(function () {
                      CheckControls(false, false, true, false, false, false, false, false);
                  });
-        if ($('#IsUser').val() == "false") {
+        if ($('#IsUser').val() == "False") {
             $("#ContactEMail").click(function () {
                 $('#ContactEMail').prop('readonly', false);
             });
@@ -289,7 +288,7 @@
 
 
         var ContactEMailValid = true;
-        if ($('#IsUser').val() == "false") {
+        if ($('#IsUser').val() == "False") {
             var ContactEMailError = '';
             var emailPattern = /(\w(=?@@)\w+\.{1}[a-zA-Z]{2,})/i
             if ($('#ContactEMail').val() == '') {
@@ -371,7 +370,7 @@
         }
 
         var PasswordValid = true;
-        if ($('#IsUser').val() == "false") {
+        if ($('#IsUser').val() == "False") {
             var PasswordError = '';
             if ($('#Password').val() == '') {
                 PasswordValid = false;
@@ -390,7 +389,7 @@
         }
 
         var RetypePasswordValid = true;
-      if ($('#IsUser').val() == "false") {
+      if ($('#IsUser').val() == "False") {
             if (PasswordValid || (Password && $('#RetypePassword').val().length > 0)) {
                 var RetypePasswordError = '';
                 if ($('#RetypePassword').val() == '') {
