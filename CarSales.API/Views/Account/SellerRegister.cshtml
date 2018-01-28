@@ -7,84 +7,84 @@
 <h2>SellerRegister</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>SellerRegisterModel</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactPhone, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactPhone, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactPhone, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactMobile, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactMobile, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactMobile, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.ContactEMail, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ContactEMail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ContactEMail, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PickupAddress, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PickupAddress, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PickupAddress, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AspNetUsersId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AspNetUsersId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AspNetUsersId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+<div class="form-horizontal">
+    <h4>SellerRegisterModel</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "SellerName" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", id = "SellerNameValidate" })
         </div>
     </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContactPhone, new { htmlAttributes = new { @class = "form-control", id = "ContactPhone" } })
+            @Html.ValidationMessageFor(model => model.ContactPhone, "", new { @class = "text-danger", id = "ContactPhoneValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactMobile, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContactMobile, new { htmlAttributes = new { @class = "form-control", id = "ContactMobile" } })
+            @Html.ValidationMessageFor(model => model.ContactMobile, "", new { @class = "text-danger", id = "ContactMobileValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ContactEMail, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ContactEMail, new { htmlAttributes = new { @class = "form-control", id = "ContactEMail" } })
+            @Html.ValidationMessageFor(model => model.ContactEMail, "", new { @class = "text-danger", id = "ContactEMailValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PickupAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PickupAddress, new { htmlAttributes = new { @class = "form-control", id = "PickupAddress" } })
+            @Html.ValidationMessageFor(model => model.PickupAddress, "", new { @class = "text-danger", id = "PickupAddressValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PostCode, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.PostCode, new { htmlAttributes = new { @class = "form-control", id = "PostCode" } })
+            @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger", id = "PostCodeValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "Password" } })
+            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "PasswordValidate" })
+        </div>
+    </div>
+
+    <div class="form-group">
+       <label class="control-label col-md-2">Retype Password</label>
+       <div class="col-md-10">
+           <input type="password" class="form-control" id="RetypePassword" />
+           <span id="RetypePasswordValidate" class="text-danger"></span>        
+       </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" id="Create" />
+        </div>
+    </div>
+</div>
 }
 
 <div>
@@ -94,3 +94,335 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    // Shorthand for $( document ).ready()
+    $(function () {
+
+
+        $('#SellerName').prop('readonly', true);
+        $('#ContactPhone').prop('readonly', true);
+        $('#ContactMobile').prop('readonly', true);
+        $('#ContactEMail').prop('readonly', true);
+        $('#PickupAddress').prop('readonly', true);
+        $('#PostCode').prop('readonly', true);
+        $('#Password').prop('readonly', true);
+        $('#RetypePassword').prop('readonly', true);
+        
+        $('#Create').attr("disabled", true);
+
+        $("#SellerName").focus(function () {
+            $('#SellerName').prop('readonly', false);
+        });
+        $("#ContactPhone").focus(function () {
+            $('#ContactPhone').prop('readonly', false);
+        });
+        $("#ContactMobile").focus(function () {
+            $('#ContactMobile').prop('readonly', false);
+        });
+        $("#ContactEMail").focus(function () {
+            $('#ContactEMail').prop('readonly', false);
+        });
+        $("#PickupAddress").focus(function () {
+            $('#PickupAddress').prop('readonly', false);
+        });
+        $("#PostCode").focus(function () {
+            $('#PostCode').prop('readonly', false);
+        });
+        $("#Password").focus(function () {
+            $('#Password').prop('readonly', false);
+        });
+        $("#Password").focus(function () {
+            $('#Password').prop('readonly', false);
+        });
+        $("#Create").focus(function () {
+            $('#Create').prop('readonly', false);
+        });
+
+        $("#SellerName").blur(function () {
+            CheckControls(true, false, false, false, false, false, false,false);
+        });
+
+        $("#ContactPhone").click(function () {
+            $('#ContactPhone').prop('readonly', false);
+        });
+        $("#ContactPhone").blur(function () {
+            CheckControls(false, true, false, false, false, false, false, false);
+        });
+
+        $("#ContactMobile").click(function () {
+            $('#ContactMobile').prop('readonly', false);
+        });
+        $("#ContactMobile").blur(function () {
+            CheckControls(false, false, true, false, false, false, false, false);
+        });
+
+        $("#ContactEMail").click(function () {
+            $('#ContactEMail').prop('readonly', false);
+        });
+        $("#ContactEMail").blur(function () {
+            CheckControls(false, false, false, true, false, false, false, false);
+        });
+
+        $("#PickupAddress").click(function () {
+            $('#PickupAddress').prop('readonly', false);
+        });
+        $("#PickupAddress").blur(function () {
+            CheckControls(false, false, false, false, true, false, false, false);
+        });
+
+        $("#PostCode").click(function () {
+            $('#PostCode').prop('readonly', false);
+        });
+        $("#PostCode").blur(function () {
+            CheckControls(false, false, false, false, false, true, false, false);
+        });
+
+        $("#Password").click(function () {
+            $('#Password').prop('readonly', false);
+        });
+        $("#Password").blur(function () {
+            CheckControls(false, false, false, false, false, false, true, true);
+        });
+
+        $("#RetypePassword").click(function () {
+            $('#RetypePassword').prop('readonly', false);
+        });
+        $("#RetypePassword").blur(function () {
+            CheckControls(false, false, false, false, false, false, true, true);
+        });
+
+
+        $("#PostCode").keypress(function (e) {
+            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+        });
+
+        $("#ContactPhone").keypress(function (e) {
+            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+        });
+
+        $("#ContactMobile").keypress(function (e) {
+            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+        });
+
+    });
+
+
+    function CheckControls(SellerName, ContactPhone, ContactMobile, ContactEMail, PickupAddress, PostCode, Password, RetypePassword) {
+        var IsValid = true;
+        var SellerNameValid = true;
+        var SellerNameError = '';
+        if ($('#SellerName').val() == '') {
+            SellerNameValid = false;
+            IsValid = false;
+            SellerNameError = 'Please enter seller name.';
+        }
+        if (SellerName) {
+            if (SellerNameValid == false) {
+                $('#SellerNameValidate').text(SellerNameError);
+            }
+            else {
+                $('#SellerNameValidate').text('');
+                $('#SellerName').prop('readonly', true);
+            }
+        }
+
+        var ContactPhoneValid = true;
+        var ContactPhoneError = '';
+        var phonePattern = /^0[0-8]\d{8}$/g;
+        //phone number is not valid. Please notice th
+        if ($('#ContactPhone').val() == '') {
+            ContactPhoneValid = false;
+            IsValid = false;
+            ContactPhoneError = 'Please enter a phone number.';
+        }
+        else if (!phonePattern.test($('#ContactPhone').val())) {
+            ContactPhoneValid = false;
+            IsValid = false;
+            ContactPhoneError = 'Please enter a valid phone number.';
+        }
+
+        if (ContactPhone) {
+            if (ContactPhoneValid == false) {
+                $('#ContactPhoneValidate').text(ContactPhoneError);
+            }
+            else {
+                $('#ContactPhoneValidate').text('');
+                $('#ContactPhone').prop('readonly', true);
+            }
+        }
+        var mobilePattern = /^0[0-8]\d{8}$/g;
+
+        var ContactMobileValid = true;
+        var ContactMobileError = '';
+        if ($('#ContactMobile').val() == '') {
+            ContactMobileValid = false;
+            IsValid = false;
+            ContactMobileError = 'Please enter a mobile number.';
+        }
+        else if (!mobilePattern.test($('#ContactMobile').val())) {
+            ContactMobileValid = false;
+            IsValid = false;
+            ContactMobileError = 'Please enter a valid mobile number.';
+        }
+        if (ContactMobile) {
+            if (ContactMobileValid == false) {
+                $('#ContactMobileValidate').text(ContactMobileError);
+            }
+            else {
+                $('#ContactMobileValidate').text('');
+                $('#ContactMobile').prop('readonly', true);
+            }
+        }
+
+
+        var ContactEMailValid = true;
+        var ContactEMailError = '';
+        var emailPattern = /(\w(=?@@)\w+\.{1}[a-zA-Z]{2,})/i
+        if ($('#ContactEMail').val() == '') {
+            ContactEMailValid = false;
+            IsValid = false;
+            ContactEMailError = 'Please enter an Email address.';
+        }
+        else if (!emailPattern.test($('#ContactEMail').val())) {
+            ContactEMailValid = false;
+            IsValid = false;
+            ContactEMailError = 'Please enter a valid Email number.';
+        }
+        else if (ContactEMail == true) {
+            $.ajax({
+                url: '/api/Email?Email=' + $('#ContactEMail').val(),
+                type: 'GET',
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    console.log(data.Exist);
+                    if (data.Exist != 'Valid') {
+                        ContactEMailValid = false;
+                        IsValid = false;
+                        ContactEMailError = 'Email already registred.';                       
+                    }
+                }
+            });
+        }
+
+        if (ContactEMail) {
+            if (ContactEMailValid == false) {
+                $('#ContactEMailValidate').text(ContactEMailError);
+            }
+            else {
+                $('#ContactEMailValidate').text('');
+                $('#ContactEMail').prop('readonly', true);
+            }
+        }
+
+        var PickupAddressValid = true;
+        var PickupAddressError = '';
+        if ($('#PickupAddress').val() == '') {
+            PickupAddressValid = false;
+            IsValid = false;
+            PickupAddressError = 'Please enter a valid pickup address.';
+        }
+        if (PickupAddress) {
+            if (PickupAddressValid == false) {
+                $('#PickupAddressValidate').text(PickupAddressError);
+            }
+            else {
+                $('#PickupAddressValidate').text('');
+                $('#PickupAddress').prop('readonly', true);
+            }
+        }
+
+        var PostCodeValid = true;
+        var PostCodeError = '';
+        if ($('#PostCode').val() == '') {
+            PostCodeValid = false;
+            IsValid = false;
+            PostCodeError = 'Please enter a valid post code.';
+        }
+        else if ($('#PostCode').val().length != 4) {
+            PostCodeValid = false;
+            IsValid = false;
+            PostCodeError = 'Please enter a valid post code.';
+        }
+        if (PostCode) {
+            if (PostCodeValid == false) {
+                $('#PostCodeValidate').text(PostCodeError);
+            }
+            else {
+                $('#PostCodeValidate').text('');
+                $('#PostCode').prop('readonly', true);
+            }
+        }
+
+        var PasswordValid = true;
+        var PasswordError = '';
+        if ($('#Password').val() == '') {
+            PasswordValid = false;
+            IsValid = false;
+            PasswordError = 'Please enter a valid password.';
+        }
+        if (Password) {
+            if (PasswordValid == false) {
+                $('#PasswordValidate').text(PasswordError);
+            }
+            else {
+                $('#PasswordValidate').text('');
+                $('#Password').prop('readonly', true);
+            }
+        }
+
+        var RetypePasswordValid = true;
+        if (PasswordValid || (Password && $('#RetypePassword').val().length>0)) {
+            var RetypePasswordError = '';
+            if ($('#RetypePassword').val() == '') {
+                RetypePasswordValid = false;
+                IsValid = false;
+                RetypePasswordError = 'Please retype the password.';
+            }
+            else if ($('#RetypePassword').val() != $('#Password').val()) {
+                RetypePasswordValid = false;
+                IsValid = false;
+                RetypePasswordError = 'Passwords did not match.';
+            }
+            if (RetypePassword) {
+                if (RetypePasswordValid == false) {
+                    $('#RetypePasswordValidate').text(RetypePasswordError);
+                }
+                else {
+                    $('#RetypePasswordValidate').text('');
+                    $('#RetypePassword').prop('readonly', true);
+                }
+            }
+        }
+        else {
+            $('#RetypePasswordValidate').text('');
+            $('#RetypePassword').prop('readonly', true);
+        }
+
+
+        console.log(SellerNameValid);
+        console.log('1');
+        console.log(ContactPhoneValid);
+        console.log('2');
+        console.log(ContactMobileValid);
+        console.log('3');
+        console.log(ContactEMailValid);
+        console.log(PickupAddressValid);
+        console.log(PostCodeValid);
+        console.log(PasswordValid);
+        console.log(RetypePasswordValid);
+        if (SellerNameValid && ContactPhoneValid && ContactMobileValid && ContactEMailValid && PickupAddressValid && PostCodeValid && PasswordValid && RetypePasswordValid) {
+            $('#Create').removeAttr("disabled");
+        }
+        else {
+            $('#Create').attr("disabled", true);
+        }
+        return IsValid;
+    }
+
+</script>

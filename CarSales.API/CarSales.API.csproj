@@ -199,6 +199,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ConfigSettingsController.cs" />
     <Compile Include="Controllers\ConfigSettingsMVCController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PageSettingsController.cs" />
     <Compile Include="Controllers\SellersController.cs" />
@@ -396,16 +397,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="js\app.js" />
-    <Content Include="js\bootstrap-select.min.js" />
-    <Content Include="js\bootstrap-slider.js" />
-    <Content Include="js\bootstrap-submenu.js" />
-    <Content Include="js\bootstrap.min.js" />
-    <Content Include="js\ie-emulation-modes-warning.js" />
-    <Content Include="js\ie10-viewport-bug-workaround.js" />
-    <Content Include="js\jquery-2.2.0.min.js" />
-    <Content Include="js\jquery.scrollUp.js" />
-    <Content Include="js\wow.min.js" />
     <Content Include="Models\EF\CarSalesDBModel.Context.tt">
       <DependentUpon>CarSalesDBModel.edmx</DependentUpon>
       <Generator>TextTemplatingFileGenerator</Generator>

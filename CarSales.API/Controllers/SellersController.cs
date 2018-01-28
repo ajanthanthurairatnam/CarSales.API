@@ -43,6 +43,10 @@ namespace CarSales.API.Controllers
             //return Ok(new CarSalesSeller() { ContactEMail =seller.ContactEMail,ContactMobile=seller.ContactMobile,ContactPhone=seller.ContactPhone, ID = seller.ID,Name=seller.Name,PickupAddress=seller.PickupAddress,PostCode=seller.PickupAddress});
         }
 
+
+
+
+
         // PUT: api/Sellers/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutSeller(int id, VehicleSeller carSalesSeller)
