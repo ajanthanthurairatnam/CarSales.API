@@ -223,7 +223,20 @@ namespace Pluralsight.AspNetDemo.Controllers
 
         public ActionResult SellerRegister()
         {
-            return View();
+            if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                SellerRegisterModel model = new SellerRegisterModel();
+                model.ContactEMail = System.Web.HttpContext.Current.User.Identity.Name;
+                model.IsUser = true;
+                return View(model);
+            }
+            else
+            {
+
+                SellerRegisterModel model = new SellerRegisterModel();
+                model.IsUser = false;
+                return View(model);
+            }
         }
 
 
@@ -233,7 +246,21 @@ namespace Pluralsight.AspNetDemo.Controllers
             var identityUser = await UserManager.FindByNameAsync(model.ContactEMail);
             if (identityUser != null)
             {
-                return RedirectToAction("Index", "Home");
+                Seller seller = new Seller()
+                {
+                    AspNetUsersId = identityUser.Id,
+                    ContactEMail = model.ContactEMail,
+                    ContactMobile = model.ContactMobile,
+                    ContactPhone = model.ContactPhone,
+                    Name = model.Name,
+                    PickupAddress = model.PickupAddress,
+                    PostCode = model.PostCode
+                };
+                CarSalesDBEntities db = new CarSalesDBEntities();
+                db.Sellers.Add(seller);
+                db.SaveChanges();
+
+                return RedirectToAction("SellerRegisterDetail", "Account", new { ID = seller.ID });
             }
 
             var result = await UserManager.PasswordValidator.ValidateAsync(model.Password);
@@ -484,6 +511,7 @@ namespace Pluralsight.AspNetDemo.Controllers
         public string SearchText { get; set; }
         public int PageIndex { get; set; }
         public int PageNos { get; set; }
+        public bool IsUser { get; set; }
         public IEnumerable<CarSalesVehicleAdvertisement> Advertisement { get; set; }
     }
 }

@@ -20,6 +20,8 @@
         <div class="col-md-10">
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", id = "SellerName" } })
             @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", id = "SellerNameValidate" })
+            @Html.HiddenFor(model => model.IsUser, new { htmlAttributes = new {  id = "IsUser" } })
+
         </div>
     </div>
 
@@ -62,29 +64,31 @@
             @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger", id = "PostCodeValidate" })
         </div>
     </div>
+    @if (Model.IsUser == false)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "Password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "PasswordValidate" })
+            </div>
+        </div>
 
-    <div class="form-group">
-        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "Password" } })
-            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "PasswordValidate" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Retype Password</label>
+            <div class="col-md-10">
+                <input type="password" class="form-control" id="RetypePassword" />
+                <span id="RetypePasswordValidate" class="text-danger"></span>
+            </div>
+        </div>
+    }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" id="Create" />
+            </div>
         </div>
     </div>
-
-    <div class="form-group">
-       <label class="control-label col-md-2">Retype Password</label>
-       <div class="col-md-10">
-           <input type="password" class="form-control" id="RetypePassword" />
-           <span id="RetypePasswordValidate" class="text-danger"></span>        
-       </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Create" class="btn btn-default" id="Create" />
-        </div>
-    </div>
-</div>
 }
 
 <div>
@@ -106,107 +110,112 @@
         $('#SellerName').prop('readonly', true);
         $('#ContactPhone').prop('readonly', true);
         $('#ContactMobile').prop('readonly', true);
+
         $('#ContactEMail').prop('readonly', true);
+
         $('#PickupAddress').prop('readonly', true);
         $('#PostCode').prop('readonly', true);
         $('#Password').prop('readonly', true);
         $('#RetypePassword').prop('readonly', true);
-        
+
         $('#Create').attr("disabled", true);
 
         $("#SellerName").focus(function () {
             $('#SellerName').prop('readonly', false);
-        });
+                 });
         $("#ContactPhone").focus(function () {
             $('#ContactPhone').prop('readonly', false);
-        });
+                 });
         $("#ContactMobile").focus(function () {
             $('#ContactMobile').prop('readonly', false);
         });
-        $("#ContactEMail").focus(function () {
-            $('#ContactEMail').prop('readonly', false);
-        });
+        if ($('#IsUser').val() == "false") {
+            $("#ContactEMail").focus(function () {
+                $('#ContactEMail').prop('readonly', false);
+            });
+        }
         $("#PickupAddress").focus(function () {
             $('#PickupAddress').prop('readonly', false);
-        });
+                 });
         $("#PostCode").focus(function () {
             $('#PostCode').prop('readonly', false);
-        });
+                 });
         $("#Password").focus(function () {
             $('#Password').prop('readonly', false);
-        });
+                 });
         $("#Password").focus(function () {
             $('#Password').prop('readonly', false);
-        });
+                 });
         $("#Create").focus(function () {
             $('#Create').prop('readonly', false);
-        });
+                 });
 
         $("#SellerName").blur(function () {
-            CheckControls(true, false, false, false, false, false, false,false);
-        });
+                     CheckControls(true, false, false, false, false, false, false,false);
+                 });
 
         $("#ContactPhone").click(function () {
             $('#ContactPhone').prop('readonly', false);
-        });
+                 });
         $("#ContactPhone").blur(function () {
-            CheckControls(false, true, false, false, false, false, false, false);
-        });
+                     CheckControls(false, true, false, false, false, false, false, false);
+                 });
 
         $("#ContactMobile").click(function () {
             $('#ContactMobile').prop('readonly', false);
-        });
+                 });
         $("#ContactMobile").blur(function () {
-            CheckControls(false, false, true, false, false, false, false, false);
-        });
-
-        $("#ContactEMail").click(function () {
-            $('#ContactEMail').prop('readonly', false);
-        });
-        $("#ContactEMail").blur(function () {
-            CheckControls(false, false, false, true, false, false, false, false);
-        });
+                     CheckControls(false, false, true, false, false, false, false, false);
+                 });
+        if ($('#IsUser').val() == "false") {
+            $("#ContactEMail").click(function () {
+                $('#ContactEMail').prop('readonly', false);
+            });
+            $("#ContactEMail").blur(function () {
+                CheckControls(false, false, false, true, false, false, false, false);
+            });
+        }
 
         $("#PickupAddress").click(function () {
             $('#PickupAddress').prop('readonly', false);
-        });
+                 });
         $("#PickupAddress").blur(function () {
-            CheckControls(false, false, false, false, true, false, false, false);
-        });
+                     CheckControls(false, false, false, false, true, false, false, false);
+                 });
 
         $("#PostCode").click(function () {
             $('#PostCode').prop('readonly', false);
-        });
+                 });
         $("#PostCode").blur(function () {
-            CheckControls(false, false, false, false, false, true, false, false);
-        });
+                     CheckControls(false, false, false, false, false, true, false, false);
+                 });
 
         $("#Password").click(function () {
             $('#Password').prop('readonly', false);
-        });
+                 });
         $("#Password").blur(function () {
-            CheckControls(false, false, false, false, false, false, true, true);
-        });
+                     CheckControls(false, false, false, false, false, false, true, true);
+                 });
 
         $("#RetypePassword").click(function () {
             $('#RetypePassword').prop('readonly', false);
-        });
+                 });
         $("#RetypePassword").blur(function () {
-            CheckControls(false, false, false, false, false, false, true, true);
-        });
+                     CheckControls(false, false, false, false, false, false, true, true);
+                 });
 
 
         $("#PostCode").keypress(function (e) {
-            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
-        });
+                     return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+             });
 
         $("#ContactPhone").keypress(function (e) {
-            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
-        });
+                 return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+             });
 
         $("#ContactMobile").keypress(function (e) {
-            return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
-        });
+                 return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+             });
 
     });
 
@@ -280,43 +289,45 @@
 
 
         var ContactEMailValid = true;
-        var ContactEMailError = '';
-        var emailPattern = /(\w(=?@@)\w+\.{1}[a-zA-Z]{2,})/i
-        if ($('#ContactEMail').val() == '') {
-            ContactEMailValid = false;
-            IsValid = false;
-            ContactEMailError = 'Please enter an Email address.';
-        }
-        else if (!emailPattern.test($('#ContactEMail').val())) {
-            ContactEMailValid = false;
-            IsValid = false;
-            ContactEMailError = 'Please enter a valid Email number.';
-        }
-        else if (ContactEMail == true) {
-            $.ajax({
-                url: '/api/Email?Email=' + $('#ContactEMail').val(),
-                type: 'GET',
-                async: false,
-                dataType: 'json',
-                success: function (data) {
-                    console.log(data);
-                    console.log(data.Exist);
-                    if (data.Exist != 'Valid') {
-                        ContactEMailValid = false;
-                        IsValid = false;
-                        ContactEMailError = 'Email already registred.';                       
-                    }
-                }
-            });
-        }
-
-        if (ContactEMail) {
-            if (ContactEMailValid == false) {
-                $('#ContactEMailValidate').text(ContactEMailError);
+        if ($('#IsUser').val() == "false") {
+            var ContactEMailError = '';
+            var emailPattern = /(\w(=?@@)\w+\.{1}[a-zA-Z]{2,})/i
+            if ($('#ContactEMail').val() == '') {
+                ContactEMailValid = false;
+                IsValid = false;
+                ContactEMailError = 'Please enter an Email address.';
             }
-            else {
-                $('#ContactEMailValidate').text('');
-                $('#ContactEMail').prop('readonly', true);
+            else if (!emailPattern.test($('#ContactEMail').val())) {
+                ContactEMailValid = false;
+                IsValid = false;
+                ContactEMailError = 'Please enter a valid Email number.';
+            }
+            else if (ContactEMail == true) {
+                $.ajax({
+                    url: '/api/Email?Email=' + $('#ContactEMail').val(),
+                    type: 'GET',
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                        console.log(data.Exist);
+                        if (data.Exist != 'Valid') {
+                            ContactEMailValid = false;
+                            IsValid = false;
+                            ContactEMailError = 'Email already registred.';
+                        }
+                    }
+                });
+            }
+
+            if (ContactEMail) {
+                if (ContactEMailValid == false) {
+                    $('#ContactEMailValidate').text(ContactEMailError);
+                }
+                else {
+                    $('#ContactEMailValidate').text('');
+                    $('#ContactEMail').prop('readonly', true);
+                }
             }
         }
 
@@ -360,62 +371,58 @@
         }
 
         var PasswordValid = true;
-        var PasswordError = '';
-        if ($('#Password').val() == '') {
-            PasswordValid = false;
-            IsValid = false;
-            PasswordError = 'Please enter a valid password.';
-        }
-        if (Password) {
-            if (PasswordValid == false) {
-                $('#PasswordValidate').text(PasswordError);
+        if ($('#IsUser').val() == "false") {
+            var PasswordError = '';
+            if ($('#Password').val() == '') {
+                PasswordValid = false;
+                IsValid = false;
+                PasswordError = 'Please enter a valid password.';
             }
-            else {
-                $('#PasswordValidate').text('');
-                $('#Password').prop('readonly', true);
+            if (Password) {
+                if (PasswordValid == false) {
+                    $('#PasswordValidate').text(PasswordError);
+                }
+                else {
+                    $('#PasswordValidate').text('');
+                    $('#Password').prop('readonly', true);
+                }
             }
         }
 
         var RetypePasswordValid = true;
-        if (PasswordValid || (Password && $('#RetypePassword').val().length>0)) {
-            var RetypePasswordError = '';
-            if ($('#RetypePassword').val() == '') {
-                RetypePasswordValid = false;
-                IsValid = false;
-                RetypePasswordError = 'Please retype the password.';
-            }
-            else if ($('#RetypePassword').val() != $('#Password').val()) {
-                RetypePasswordValid = false;
-                IsValid = false;
-                RetypePasswordError = 'Passwords did not match.';
-            }
-            if (RetypePassword) {
-                if (RetypePasswordValid == false) {
-                    $('#RetypePasswordValidate').text(RetypePasswordError);
+      if ($('#IsUser').val() == "false") {
+            if (PasswordValid || (Password && $('#RetypePassword').val().length > 0)) {
+                var RetypePasswordError = '';
+                if ($('#RetypePassword').val() == '') {
+                    RetypePasswordValid = false;
+                    IsValid = false;
+                    RetypePasswordError = 'Please retype the password.';
                 }
-                else {
-                    $('#RetypePasswordValidate').text('');
-                    $('#RetypePassword').prop('readonly', true);
+                else if ($('#RetypePassword').val() != $('#Password').val()) {
+                    RetypePasswordValid = false;
+                    IsValid = false;
+                    RetypePasswordError = 'Passwords did not match.';
+                }
+                if (RetypePassword) {
+                    if (RetypePasswordValid == false) {
+                        $('#RetypePasswordValidate').text(RetypePasswordError);
+                    }
+                    else {
+                        $('#RetypePasswordValidate').text('');
+                        $('#RetypePassword').prop('readonly', true);
+                    }
                 }
             }
-        }
-        else {
-            $('#RetypePasswordValidate').text('');
-            $('#RetypePassword').prop('readonly', true);
+            else {
+                $('#RetypePasswordValidate').text('');
+                $('#RetypePassword').prop('readonly', true);
+            }
         }
 
 
-        console.log(SellerNameValid);
-        console.log('1');
-        console.log(ContactPhoneValid);
-        console.log('2');
-        console.log(ContactMobileValid);
-        console.log('3');
-        console.log(ContactEMailValid);
-        console.log(PickupAddressValid);
-        console.log(PostCodeValid);
         console.log(PasswordValid);
         console.log(RetypePasswordValid);
+        console.log(ContactEMailValid);
         if (SellerNameValid && ContactPhoneValid && ContactMobileValid && ContactEMailValid && PickupAddressValid && PostCodeValid && PasswordValid && RetypePasswordValid) {
             $('#Create').removeAttr("disabled");
         }
