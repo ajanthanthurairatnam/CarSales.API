@@ -15,7 +15,7 @@ namespace Pluralsight.AspNetDemo
             var to = new EmailAddress(message.Destination);
             var email = MailHelper.CreateSingleEmail(@from, to, message.Subject, message.Body, message.Body);
 
-            await client.SendEmailAsync(email);
+            var response = await client.SendEmailAsync(email);
         }
     }
 }
