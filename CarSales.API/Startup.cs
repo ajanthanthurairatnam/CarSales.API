@@ -37,6 +37,8 @@ namespace Pluralsight.AspNetDemo
                         RequiredLength = 8
                     };
 
+                    usermanager.UserTokenProvider = new DataProtectorTokenProvider<IdentityUser>(opt.DataProtectionProvider.Create());
+                    usermanager.EmailService = new EmailService();
                     usermanager.UserLockoutEnabledByDefault = true;
                     usermanager.MaxFailedAccessAttemptsBeforeLockout = 2;
                     usermanager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(3);
