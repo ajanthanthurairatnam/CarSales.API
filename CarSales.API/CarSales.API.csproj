@@ -533,6 +533,7 @@
     <Content Include="Views\Account\SellerRegisterEdit.cshtml" />
     <Content Include="Views\VehicleAdvertisementsMVC\Create.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -184,6 +184,25 @@ namespace Pluralsight.AspNetDemo.Controllers
             return View(new PasswordResetModel {UserId = userid, Token = token});
         }
 
+        [Authorize]
+        public ActionResult ChangePassword()
+        {
+            LoginModel user = new LoginModel();
+            user.Username = User.Identity.GetUserName();
+            return View(user);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult ChangePassword(LoginModel LoginModel)
+        {
+            var identityUser =  UserManager.FindByName(LoginModel.Username);
+            UserManager.RemovePassword(identityUser.Id);
+            UserManager.AddPassword(identityUser.Id, LoginModel.Password);
+            LoginModel user = new LoginModel();
+            return RedirectToAction("Index", "Home");
+        }
+
         [HttpPost]
         public async Task<ActionResult> PasswordReset(PasswordResetModel model)
         {
@@ -191,7 +210,7 @@ namespace Pluralsight.AspNetDemo.Controllers
 
             if (!identityResult.Succeeded)
             {
-                return View("Error");
+                return View(model);
             }
 
             return RedirectToAction("Index", "Home");

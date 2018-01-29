@@ -105,41 +105,55 @@
                         <li>
 
                             @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-    {
+        {
 
-                       
 
-                        <a href="@Url.Action("Logout", "Account")" class="sign-in">
-                            <i class="fa fa-user"></i>
-                            <span>
-                                Logout
-                            </span>
-                        </a>
+
+                    <a href="@Url.Action("Logout", "Account")" class="sign-in">
+                        <i class="fa fa-user"></i>
+                        <span>
+                            Logout
+                        </span>
+                    </a>
 
 }
 else
 {
 
 
-                        <a href="@Url.Action("Login", "Account")" class="sign-in">
-                            <i class="fa fa-user"></i>
-                            <span>
-                                Login
-                            </span>
-                        </a>
+                    <a href="@Url.Action("Login", "Account")" class="sign-in">
+                        <i class="fa fa-user"></i>
+                        <span>
+                            Login
+                        </span>
+                    </a>
 
 }
 
                         </li>
-                       
+
+                        @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+
                         <li>
-                             <a href="@Url.Action("Register", "Account")" class="personal-info">
-                                <i class="fa fa-user"></i>
+                            <a href="@Url.Action("ChangePassword", "Account")" class="sign-in">
+
+                                <i class="fa fa-key"></i>
                                 <span>
-                                    Register
+                                    ChangePassword
                                 </span>
                             </a>
                         </li>
+                        }
+
+                    <li>
+                        <a href="@Url.Action("Register", "Account")" class="personal-info">
+                            <i class="fa fa-user"></i>
+                            <span>
+                                Register
+                            </span>
+                        </a>
+                    </li>
                     </ul>
                 </div>
             </div>
