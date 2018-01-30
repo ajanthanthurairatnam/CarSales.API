@@ -23,6 +23,9 @@ namespace CarSales.API.Models.Classes
         public Nullable<int> Model { get; set; }
         public bool IsFeatured { get; set; }
         public string Transmission { get; set; }
+        public Nullable<DateTime>  DateAdvertised { get; set; }
+        public bool Sold { get; set; }
+        public bool Archived { get; set; }
         public IEnumerable<CarSalesVehicleBody> VehicleBody { get; set; }
         public IEnumerable<CarSalesVehicleFuel> VehicleFuel { get; set; }
         public IEnumerable<CarSalesVehicleMake> VehicleMake { get; set; }

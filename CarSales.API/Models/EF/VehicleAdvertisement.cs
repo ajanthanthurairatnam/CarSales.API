@@ -35,6 +35,9 @@ namespace CarSales.API.Models.EF
         public Nullable<int> Model { get; set; }
         public bool IsFeatured { get; set; }
         public string Transmission { get; set; }
+        public Nullable<System.DateTime> DateAdvertised { get; set; }
+        public bool Sold { get; set; }
+        public bool Archived { get; set; }
     
         public virtual VehicleBody VehicleBody { get; set; }
         public virtual VehicleFuel VehicleFuel { get; set; }

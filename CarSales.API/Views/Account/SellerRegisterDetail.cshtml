@@ -19,9 +19,11 @@
                                 <div class="col-lg-6 col-md-5 col-sm-5 col-xs-2">
                                     <div class="sorting-options">
                                         <span style="margin: 10px 15px 0 0"> @Html.TextBoxFor(model => model.SearchText)</span>
+                                        @Html.ActionLink("Create", "Create", "VehicleAdvertisementsMVC")
                                     </div>
-
+                                   
                                 </div>
+
                                 <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
                                     <div class="sorting-options">
                                         <select class="sorting">
@@ -213,29 +215,15 @@
                                     @Html.DisplayFor(model => model.PostCode)
                                 </dd>
 
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.AspNetUsersId)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.AspNetUsersId)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Password)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.Password)
-                                </dd>
+                    
 
                             </dl>
                         </div>
                         <p>
-                            @Html.ActionLink("Edit", "SellerRegisterEdit","Account", new { ID = Model.ID },null) |
+                            @Html.ActionLink("Edit", "SellerRegisterEdit", "Account", new { ID = Model.ID }, null) 
 
                         </p>
-
+                       
                         <!-- Sidebar End-->
                     </div>
                 </div>
@@ -245,10 +233,7 @@
     </div>
 }
 
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
 <!-- External CSS libraries -->
 <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-submenu.css">

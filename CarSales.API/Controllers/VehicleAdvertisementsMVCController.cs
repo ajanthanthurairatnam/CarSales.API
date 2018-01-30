@@ -107,8 +107,9 @@ namespace CarSales.API.Controllers
         // GET: VehicleAdvertisementsMVC/Create
         public ActionResult Create()
         {
+
            
-            return View();
+            return View(new CarSalesVehicleAdvertisement());
         }
 
         // POST: VehicleAdvertisementsMVC/Create
@@ -116,20 +117,37 @@ namespace CarSales.API.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Reference_ID,Title,Reference_No,Price,BodyType,EngineCapacity,AudoMeter,Fuel,Description,Feature,Spects,Make,Model,IsFeatured,Transmission")] VehicleAdvertisement vehicleAdvertisement)
+        public ActionResult Create(CarSalesVehicleAdvertisement CarSalesVehicleAdvertisement)
         {
             if (ModelState.IsValid)
             {
-                db.VehicleAdvertisements.Add(vehicleAdvertisement);
+                db.VehicleAdvertisements.Add(new VehicleAdvertisement()
+                {Archived=CarSalesVehicleAdvertisement.Archived,
+                AudoMeter=CarSalesVehicleAdvertisement.AudoMeter,
+                BodyType=CarSalesVehicleAdvertisement.BodyType,
+                DateAdvertised=CarSalesVehicleAdvertisement.DateAdvertised,
+                Description=CarSalesVehicleAdvertisement.Description,
+                EngineCapacity=CarSalesVehicleAdvertisement.EngineCapacity,
+                Feature=CarSalesVehicleAdvertisement.Feature,
+                Fuel=CarSalesVehicleAdvertisement.Fuel,
+                IsFeatured=CarSalesVehicleAdvertisement.IsFeatured,
+               Make=CarSalesVehicleAdvertisement.Make,
+               Model=CarSalesVehicleAdvertisement.Model,
+               Price=CarSalesVehicleAdvertisement.Price,
+               Reference_ID=CarSalesVehicleAdvertisement.Reference_ID,
+              Reference_No=CarSalesVehicleAdvertisement.Reference_No,
+              Sold=CarSalesVehicleAdvertisement.Sold,
+              Spects=CarSalesVehicleAdvertisement.Spects,
+              Title=CarSalesVehicleAdvertisement.Title,
+              Transmission=CarSalesVehicleAdvertisement.Transmission           
+
+                }
+                );
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BodyType = new SelectList(db.VehicleBodies, "ID", "BodyDescription", vehicleAdvertisement.BodyType);
-            ViewBag.Fuel = new SelectList(db.VehicleFuels, "ID", "FuelType", vehicleAdvertisement.Fuel);
-            ViewBag.Make = new SelectList(db.VehicleMakes, "ID", "VehicleMake1", vehicleAdvertisement.Make);
-            ViewBag.Model = new SelectList(db.VehicleModels, "ID", "VehicleModel1", vehicleAdvertisement.Model);
-            return View(vehicleAdvertisement);
+            return View(CarSalesVehicleAdvertisement);
         }
 
         // GET: VehicleAdvertisementsMVC/Edit/5

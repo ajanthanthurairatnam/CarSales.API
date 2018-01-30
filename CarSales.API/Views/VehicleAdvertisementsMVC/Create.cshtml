@@ -50,7 +50,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.BodyType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.BodyType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.BodyType, Model.VehicleBody.Select(e => new SelectListItem() { Text = e.BodyDescription, Value = e.ID.ToString() }), "Choose... ")
+
                 @Html.ValidationMessageFor(model => model.BodyType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -74,7 +75,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Fuel, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Fuel, new { htmlAttributes = new { @class = "form-control" } })
+                  @Html.DropDownListFor(model => model.Fuel, Model.VehicleFuel.Select(e=>new SelectListItem() {Text=e.FuelType,Value=e.ID.ToString()  }), "Choose... ")
                 @Html.ValidationMessageFor(model => model.Fuel, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -106,7 +107,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Make, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Make, Model.VehicleMake.Select(e => new SelectListItem() { Text = e.VehicleMake1, Value = e.ID.ToString() }), "Choose... ")
+
                 @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -114,7 +116,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.DropDownListFor(model => model.Model, Model.VehicleModel.Select(e => new SelectListItem() { Text = e.VehicleModel1, Value = e.ID.ToString() }), "Choose... ")
+
+            
                 @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger" })
             </div>
         </div>
