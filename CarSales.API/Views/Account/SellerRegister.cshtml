@@ -25,7 +25,7 @@
               </div>
           </div>
           <div class="heading-1">
-              <h3>Car Infomation</h3>
+              <h3>Seller Infomation</h3>
           </div>
       <div class="row">
           <div class="form-horizontal">
@@ -70,7 +70,16 @@
                   <div class="form-group">
                       @Html.LabelFor(model => model.PickupAddress, htmlAttributes: new { @class = "control-label col-md-2" })
                       <div class="col-md-10">
-                          @Html.EditorFor(model => model.PickupAddress, new { htmlAttributes = new { @class = "form-control", id = "PickupAddress" } })
+                           @Html.TextAreaFor(model => model.PickupAddress, new
+                       {
+                           @class = "form-control",
+                           maxlength = "950",
+                           style = "width: 100%; height: 100px;",
+                           cols = 20,
+                           rows = 2
+                       })
+
+
                           @Html.ValidationMessageFor(model => model.PickupAddress, "", new { @class = "text-danger", id = "PickupAddressValidate" })
                       </div>
                   </div>
@@ -85,9 +94,10 @@
                   @if (Model.IsUser == false)
                   {
                       <div class="form-group">
+
                           @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
                           <div class="col-md-10">
-                              @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "Password" } })
+                              @Html.PasswordFor(model => model.Password, htmlAttributes: new { @class = "form-control", id = "Password" } )
                               @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger", id = "PasswordValidate" })
                           </div>
                       </div>
