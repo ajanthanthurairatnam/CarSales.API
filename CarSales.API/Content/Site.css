@@ -1,4 +1,6 @@
-﻿ 
+﻿ body {
+    font-family: 'Open Sans', sans-serif;
+}
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -20,36 +22,38 @@ textarea {
     max-width: 280px;
 }
 
-.top-header ul li {
-
-    float: left;
-
+.top-header .list-inline {
+    padding: 10px 0;
 }
 
-.top-header ul li a {
-    display: block;
-    padding: 13px 20px;
-    text-transform: uppercase;
- }
-
-.top-header ul li a.icon-1 i {
-
-    display: none;
-    margin-left: 5px;
-
-}
-
-.top-header {
-
-    background: #171C26;
-
-}
 li {
 
     list-style: none !important;
 
 }
 
+.top-header .social-list li a {
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    color: #949494;
+    display: inline-block;
+}
+ 
+ .top-header .sign-in {
+    text-transform: uppercase;
+    font-weight: 600;
+     margin-left: 20px;
+}
+
+ .top-header .social-list li {
+   list-style: none;
+    margin: 0 5px;
+    display: inline-block;
+    line-height: 30px;
+}
+
+ 
 .hotline::before {
 
     position: absolute;
@@ -237,11 +241,7 @@ ul {
     float: left !important;
 }
 
-* {
-    font-size: 15px;
-    line-height: 1.5;
-   
-}
+
 
 #wrap-body, .wrap-body-inner {
     background: #fff;
