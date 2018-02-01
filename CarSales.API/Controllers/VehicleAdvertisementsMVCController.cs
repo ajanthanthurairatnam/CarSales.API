@@ -6,18 +6,19 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CarSales.API.Models;
 using CarSales.API.Models.Classes;
 using CarSales.API.Models.EF;
 
 namespace CarSales.API.Controllers
+ 
 {
     public class VehicleAdvertisementsMVCController : Controller
     {
         private CarSalesDBEntities db = new CarSalesDBEntities();
 
-        // GET: VehicleAdvertisementsMVC
-        public ActionResult Index()
+
+    // GET: VehicleAdvertisementsMVC
+    public ActionResult Index()
         {
             var vehicleAdvertisements = db.VehicleAdvertisements.Include(v => v.VehicleBody).Include(v => v.VehicleFuel).Include(v => v.VehicleMake).Include(v => v.VehicleModel);
             return View(vehicleAdvertisements.ToList());
@@ -33,21 +34,25 @@ namespace CarSales.API.Controllers
             var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
             CarSaleSearch CarSaleSearch = new CarSaleSearch();
             CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement() {
-                AudoMeter=e.AudoMeter,
-                BodyType=e.BodyType,
-                Description=e.Description,
-                EngineCapacity=e.EngineCapacity,
-                Feature=e.Feature,
-                Fuel=e.Fuel,
-                IsFeatured=e.IsFeatured,
-                Make=e.Make,
-                Model=e.Model,
-                Price=e.Price,
-                Reference_ID=e.Reference_ID,
-                Reference_No=e.Reference_No,
-                Spects=e.Spects,
-                Title=e.Title,
-                Transmission=e.Transmission
+                AudoMeter = e.AudoMeter,
+                BodyType = e.BodyType,
+                Description = e.Description,
+                EngineCapacity = e.EngineCapacity,
+                Feature = e.Feature,
+                Fuel = e.Fuel,
+                IsFeatured = e.IsFeatured,
+                Make = e.Make,
+                Model = e.Model,
+                Price = e.Price,
+                Reference_ID = e.Reference_ID,
+                Reference_No = e.Reference_No,
+                Spects = e.Spects,
+                Title = e.Title,
+                Transmission = e.Transmission,
+                Archived = false,
+                DateAdvertised = DateTime.Today,
+                Sold = false
+
             });
             CarSaleSearch.PageIndex = PageIndex;
             CarSaleSearch.PageNos = PageCount;
@@ -107,9 +112,12 @@ namespace CarSales.API.Controllers
         // GET: VehicleAdvertisementsMVC/Create
         public ActionResult Create()
         {
-
-           
-            return View(new CarSalesVehicleAdvertisement());
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            var ConfigSettings=  db.ConfigSettings.FirstOrDefault();
+            var CarSalesVehicleAdvertisement = new CarSalesVehicleAdvertisement() { Reference_No = string.Format("{0:000000}", ConfigSettings.VehicleAdvertisementNextRefNo.ToString()) };
+            ConfigSettings.VehicleAdvertisementNextRefNo = ConfigSettings.VehicleAdvertisementNextRefNo + 1;
+            db.SaveChanges();
+            return View(CarSalesVehicleAdvertisement);
         }
 
         // POST: VehicleAdvertisementsMVC/Create
@@ -121,30 +129,42 @@ namespace CarSales.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.VehicleAdvertisements.Add(new VehicleAdvertisement()
-                {Archived=CarSalesVehicleAdvertisement.Archived,
-                AudoMeter=CarSalesVehicleAdvertisement.AudoMeter,
-                BodyType=CarSalesVehicleAdvertisement.BodyType,
-                DateAdvertised=CarSalesVehicleAdvertisement.DateAdvertised,
-                Description=CarSalesVehicleAdvertisement.Description,
-                EngineCapacity=CarSalesVehicleAdvertisement.EngineCapacity,
-                Feature=CarSalesVehicleAdvertisement.Feature,
-                Fuel=CarSalesVehicleAdvertisement.Fuel,
-                IsFeatured=CarSalesVehicleAdvertisement.IsFeatured,
-               Make=CarSalesVehicleAdvertisement.Make,
-               Model=CarSalesVehicleAdvertisement.Model,
-               Price=CarSalesVehicleAdvertisement.Price,
-               Reference_ID=CarSalesVehicleAdvertisement.Reference_ID,
-              Reference_No=CarSalesVehicleAdvertisement.Reference_No,
-              Sold=CarSalesVehicleAdvertisement.Sold,
-              Spects=CarSalesVehicleAdvertisement.Spects,
-              Title=CarSalesVehicleAdvertisement.Title,
-              Transmission=CarSalesVehicleAdvertisement.Transmission           
 
-                }
-                );
+                var VehicleAdvertisement = new VehicleAdvertisement()
+                {
+                    Archived = CarSalesVehicleAdvertisement.Archived,
+                    AudoMeter = CarSalesVehicleAdvertisement.AudoMeter,
+                    BodyType = CarSalesVehicleAdvertisement.BodyType,
+                    DateAdvertised = DateTime.Today,
+                    Description = CarSalesVehicleAdvertisement.Description,
+                    EngineCapacity = CarSalesVehicleAdvertisement.EngineCapacity,
+                    Feature = CarSalesVehicleAdvertisement.Feature,
+                    Fuel = CarSalesVehicleAdvertisement.Fuel,
+                    IsFeatured = CarSalesVehicleAdvertisement.IsFeatured,
+                    Make = CarSalesVehicleAdvertisement.Make,
+                    Model = CarSalesVehicleAdvertisement.Model,
+                    Price = CarSalesVehicleAdvertisement.Price,
+                    Reference_ID = CarSalesVehicleAdvertisement.Reference_ID,
+                    Reference_No = CarSalesVehicleAdvertisement.Reference_No,
+                    Sold = CarSalesVehicleAdvertisement.Sold,
+                    Spects = CarSalesVehicleAdvertisement.Spects,
+                    Title = CarSalesVehicleAdvertisement.Title,
+                    Transmission = CarSalesVehicleAdvertisement.Transmission
+                };
+                db.VehicleAdvertisements.Add(VehicleAdvertisement);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                int SellerID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID;
+            var VehicleSeller = new VehicleSeller()
+            {
+                    SellerID= SellerID,
+
+
+                VehicleID = VehicleAdvertisement.Reference_ID,
+
+            };
+                db.VehicleSellers.Add(VehicleSeller);
+                db.SaveChanges();
+                return RedirectToAction("SellerRegisterDetail", "Account", new { ID = SellerID });
             }
 
             return View(CarSalesVehicleAdvertisement);
