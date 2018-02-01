@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CarSalesDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2005" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="AspNetUsers">
           <Key>
             <PropertyRef Name="Id" />
@@ -61,6 +61,9 @@
           <Property Name="Model" Type="int" />
           <Property Name="IsFeatured" Type="bit" Nullable="false" />
           <Property Name="Transmission" Type="varchar" MaxLength="1" Nullable="false" />
+          <Property Name="DateAdvertised" Type="datetime" />
+          <Property Name="Sold" Type="bit" Nullable="false" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleBody">
           <Key>
@@ -306,6 +309,9 @@
           <NavigationProperty Name="VehicleMake" Relationship="Self.FK_VehicleAdvertisement_VehicleMake" FromRole="VehicleAdvertisement" ToRole="VehicleMake" />
           <NavigationProperty Name="VehicleModel" Relationship="Self.FK_VehicleAdvertisement_VehicleModel" FromRole="VehicleAdvertisement" ToRole="VehicleModel" />
           <NavigationProperty Name="VehicleSellers" Relationship="Self.FK_VehicleSeller_VehicleAdvertisement" FromRole="VehicleAdvertisement" ToRole="VehicleSeller" />
+          <Property Name="DateAdvertised" Type="DateTime" Precision="3" />
+          <Property Name="Sold" Type="Boolean" Nullable="false" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="VehicleBody">
           <Key>
@@ -560,6 +566,9 @@
           <EntitySetMapping Name="VehicleAdvertisements">
             <EntityTypeMapping TypeName="CarSalesDBModel.VehicleAdvertisement">
               <MappingFragment StoreEntitySet="VehicleAdvertisement">
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="Sold" ColumnName="Sold" />
+                <ScalarProperty Name="DateAdvertised" ColumnName="DateAdvertised" />
                 <ScalarProperty Name="Reference_ID" ColumnName="Reference_ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Reference_No" ColumnName="Reference_No" />
