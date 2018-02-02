@@ -86,6 +86,8 @@ li {
     background-position: top center;
     background-size: cover;
 }
+
+/*navigation*/
 .navbar-collapse {
 
     padding: 0px;
@@ -226,6 +228,7 @@ ul {
     background: none;
 }
 
+/*navigation*/
 .wrap-body-inner {
     width: 100% !important;
     padding-left: 30px !important;
@@ -244,6 +247,7 @@ ul {
     background: #fff;
 }
 
+/*breadcrumb*/
 .ht-breadcrumb {
     margin-top: 5px !important;
      margin-bottom: 5px;
@@ -312,3 +316,5 @@ ul li {
     display: block;
     height: 34px;
 }
+
+/*breadcrumb*/

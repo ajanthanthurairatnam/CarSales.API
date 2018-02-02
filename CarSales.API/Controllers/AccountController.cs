@@ -12,6 +12,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System.ComponentModel.DataAnnotations;
 
 namespace Pluralsight.AspNetDemo.Controllers
 {
@@ -520,10 +521,20 @@ namespace Pluralsight.AspNetDemo.Controllers
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        [Display(Name = "Contact Phone")]
         public string ContactPhone { get; set; }
+
+        [Display(Name = "Contact Mobile")]
         public string ContactMobile { get; set; }
+
+        [Display(Name = "Contact Email")]
         public string ContactEMail { get; set; }
+
+        [Display(Name = "Pickup Address")]
         public string PickupAddress { get; set; }
+
+        [Display(Name = "Post Code")]
         public string PostCode { get; set; }
         public string AspNetUsersId { get; set; }
         public string Password { get; set; }
