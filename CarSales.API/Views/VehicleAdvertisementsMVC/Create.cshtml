@@ -164,41 +164,48 @@ new SelectListItem{ Text="Automatic", Value = "A" }
         $(".form-control").each(function () {
             $(this).prop('readonly', true);
             if (IsValidControls() == false) {
-                $('#Create').removeAttr("disabled");
+                $('#Create').attr("disabled", true);
+              
             }
             else {
-                $('#Create').attr("disabled", true);
+                $('#Create').removeAttr("disabled");
             }
             $(this).focus(function () {
                 $(this).prop('readonly', false);
-                //if (IsValidControls() == false) {
-                //    $('#Create').removeAttr("disabled");
-                //}
-                //else {
-                //    $('#Create').attr("disabled", true);
-                //}
+               
             });
             $(this).click(function () {
                 $(this).prop('readonly', false);
-                //if (IsValidControls() == false) {
-                //    $('#Create').removeAttr("disabled");
-                //}
-                //else {
-                //    $('#Create').attr("disabled", true);
-                //}
-            });
+               
+            });    
             $(this).blur(function () {
                 $(this).prop('readonly', true);
-            });
-        });    
-        
+                  if (IsValidControls() == false) {
+                    $('#Create').attr("disabled", true);
+                }
+                else {
+                    $('#Create').removeAttr("disabled");
+                }
+                return false;
+
+            });   
+        });         
+       
     });
+
+
+    function BindBlur(control) {       
+        console.log(control);
+        control.blur(function () { 
+            alert('s');
+            control.prop('readonly', false);
+        });    
+    }
+ 
     function IsValidControls() {
         var IsValid = true;
-        $(".form-control").each(function () {
-
-            console.log(this);
-            if (this.val == "") {
+        $(".text-box").each(function () {            
+            if ($(this).val() == "") {
                 IsValid = false;
                 return false;
             }
