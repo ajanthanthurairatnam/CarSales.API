@@ -114,7 +114,7 @@ namespace CarSales.API.Controllers
         {
             CarSalesDBEntities db = new CarSalesDBEntities();
             var ConfigSettings=  db.ConfigSettings.FirstOrDefault();
-            var CarSalesVehicleAdvertisement = new CarSalesVehicleAdvertisement() { Reference_No = string.Format("{0:000000}", ConfigSettings.VehicleAdvertisementNextRefNo.ToString()) };
+            var CarSalesVehicleAdvertisement = new CarSalesVehicleAdvertisement() { Reference_No =  ConfigSettings.VehicleAdvertisementNextRefNo.Value.ToString("00000") };
             ConfigSettings.VehicleAdvertisementNextRefNo = ConfigSettings.VehicleAdvertisementNextRefNo + 1;
             db.SaveChanges();
             return View(CarSalesVehicleAdvertisement);

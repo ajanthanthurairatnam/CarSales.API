@@ -162,58 +162,79 @@ new SelectListItem{ Text="Automatic", Value = "A" }
     // Shorthand for $( document ).ready()
     $(function () {
         $(".form-control").each(function () {
+            console.log($(this));
             $(this).prop('readonly', true);
-            if (IsValidControls() == false) {
-                $('#Create').attr("disabled", true);
-              
+            if ($(this).attr('id')!= "Reference_No") {
+                if (IsValidControls() == false) {
+                    $('#Create').attr("disabled", true);
+
+                }
+                else {
+                    $('#Create').removeAttr("disabled");
+                }
+                $(this).focus(function () {
+                    $(this).prop('readonly', false);
+
+                });
+                $(this).click(function () {
+                    $(this).prop('readonly', false);
+                });
             }
-            else {
-                $('#Create').removeAttr("disabled");
-            }
-            $(this).focus(function () {
-                $(this).prop('readonly', false);
-               
-            });
-            $(this).click(function () {
-                $(this).prop('readonly', false);               
-            });  
         });
 
         $('#Title').blur(function () {
             $(this).prop('readonly', true);          
             if (IsValidControls() == false) {
                 $('#Create').attr("disabled", true);
+            }
+            else {
+                $('#Create').removeAttr("disabled");
+            }
+        }); 
+
+        $('#Transmission').blur(function () {
+            $(this).prop('readonly', true);
+            if (IsValidControls() == false) {
+                $('#Create').attr("disabled", true);
 
             }
             else {
                 $('#Create').removeAttr("disabled");
             }
-        });  
+        }); 
+        $("#Price").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $("#AudoMeter").on("keypress keyup blur", function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+        $("#EngineCapacity").on("keypress keyup blur", function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
        
     });
 
 
     function IsValidControls() {
-        var IsValid = true;     
-       
-        
-       
+        var IsValid = true; 
         if ($('#Title').val() == "") {   
-            console.log($('#Title').val());
-            return false;
-        }
-        if ($('#Reference_No').val() == "") {
-            console.log($('#Reference_No').val());
-            return false;
-        }
-        if ($('#Price').val() == "") {
-            console.log($('#Price').val());
-            return false;
+             return false;
         }       
-        if ($('#EngineCapacity').val() == "") {
-            console.log($('#EngineCapacity').val());
+        if ($('#Transmission').val() == "") {
             return false;
-        }
+        }      
+       
       
         return true;
     }
