@@ -134,7 +134,7 @@
 {
 new SelectListItem{ Text="Manuel", Value = "M" },
 new SelectListItem{ Text="Automatic", Value = "A" }
-}, "Choose... ", new { htmlAttributes = new { @class = "form-control", id = "Transmission" } })
+}, "Choose... ", new { htmlAttributes = new { @class = "form-control DropDO", id = "Transmission" } })
 
             @Html.ValidationMessageFor(model => model.Transmission, "", new { @class = "text-danger" , id = "TransmissionValidate" })
             </div>
@@ -175,41 +175,46 @@ new SelectListItem{ Text="Automatic", Value = "A" }
                
             });
             $(this).click(function () {
-                $(this).prop('readonly', false);
-               
-            });    
-            $(this).blur(function () {
-                $(this).prop('readonly', true);
-                  if (IsValidControls() == false) {
-                    $('#Create').attr("disabled", true);
-                }
-                else {
-                    $('#Create').removeAttr("disabled");
-                }
-                return false;
+                $(this).prop('readonly', false);               
+            });  
+        });
 
-            });   
-        });         
+        $('#Title').blur(function () {
+            $(this).prop('readonly', true);          
+            if (IsValidControls() == false) {
+                $('#Create').attr("disabled", true);
+
+            }
+            else {
+                $('#Create').removeAttr("disabled");
+            }
+        });  
        
     });
 
 
-    function BindBlur(control) {       
-        console.log(control);
-        control.blur(function () { 
-            alert('s');
-            control.prop('readonly', false);
-        });    
-    }
- 
     function IsValidControls() {
-        var IsValid = true;
-        $(".text-box").each(function () {            
-            if ($(this).val() == "") {
-                IsValid = false;
-                return false;
-            }
-        });
-        return IsValid;
+        var IsValid = true;     
+       
+        
+       
+        if ($('#Title').val() == "") {   
+            console.log($('#Title').val());
+            return false;
+        }
+        if ($('#Reference_No').val() == "") {
+            console.log($('#Reference_No').val());
+            return false;
+        }
+        if ($('#Price').val() == "") {
+            console.log($('#Price').val());
+            return false;
+        }       
+        if ($('#EngineCapacity').val() == "") {
+            console.log($('#EngineCapacity').val());
+            return false;
+        }
+      
+        return true;
     }
 </script>
