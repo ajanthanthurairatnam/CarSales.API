@@ -538,7 +538,7 @@
     <Content Include="Views\Account\SellerRegister.cshtml" />
     <Content Include="Views\Account\SellerRegisterDetail.cshtml" />
     <Content Include="Views\Account\SellerRegisterEdit.cshtml" />
-    <Content Include="Views\VehicleAdvertisementsMVC\Create.cshtml" />
+    <Content Include="Views\VehicleAdvertisementsMVC\Edit.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Account\ChangePassword.cshtml" />
   </ItemGroup>

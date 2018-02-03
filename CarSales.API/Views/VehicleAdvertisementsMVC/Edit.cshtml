@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Create/Edit</h2>
 
 
 @using (Html.BeginForm()) 
@@ -20,7 +20,8 @@
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "Title" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", id = "TitleValidate"  })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", id = "TitleValidate" })
+                @Html.HiddenFor(model => model.Reference_ID)
             </div>
         </div>
 
