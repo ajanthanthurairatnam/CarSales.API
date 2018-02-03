@@ -64,7 +64,7 @@
 
                                     <div class="listing-for">
                                         <span class="for">                                           
-                                            @Html.ActionLink("Edit", "Edit", "VehicleAdvertisementsMVC", new { ID = a.Reference_ID }, null)
+                                            @Html.ActionLink("Edit", "Edit", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
                                         </span>
                                     </div>
 
@@ -78,9 +78,8 @@
                                 <div class="caption detail">
                                     <!-- Header -->
                                     <header class="clearfix">
-                                        <h5 class="title">
-                                            <a href="car-details.html">@a.Title</a>
-
+                                        <h5 class="title">                                          
+                                            @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
                                         </h5>
 
                                     </header>
@@ -117,9 +116,13 @@
                                     </div>
 
                                     <div class="carbox-overlap-wrapper">
-                                        <h2>Bmw e46 m3 Diski Serie</h2>
+                                        <h2>
+                                            @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
+
+                                        </h2>
                                         <h4>$49,000</h4>
                                         <div class="overlap-btns-area">
+                                         
                                             <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
                                             <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
                                             <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>

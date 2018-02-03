@@ -95,18 +95,38 @@ namespace CarSales.API.Controllers
 
 
         // GET: VehicleAdvertisementsMVC/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? Reference_ID = 0)
         {
-            if (id == null)
+            CarSalesVehicleAdvertisement CarSalesVehicleAdvertisement;
+            CarSalesDBEntities db = new CarSalesDBEntities();
+            VehicleAdvertisement vehicleAdvertisement = db.VehicleAdvertisements.Find(Reference_ID);
+            if (Reference_ID != 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            VehicleAdvertisement vehicleAdvertisement = db.VehicleAdvertisements.Find(id);
-            if (vehicleAdvertisement == null)
-            {
+                CarSalesVehicleAdvertisement = new CarSalesVehicleAdvertisement()
+                {
+                    Archived = vehicleAdvertisement.Archived,
+                    AudoMeter = vehicleAdvertisement.AudoMeter,
+                    BodyType = vehicleAdvertisement.BodyType,
+                    DateAdvertised = vehicleAdvertisement.DateAdvertised,
+                    Description = vehicleAdvertisement.Description,
+                    EngineCapacity = vehicleAdvertisement.EngineCapacity,
+                    Feature = vehicleAdvertisement.Feature,
+                    Fuel = vehicleAdvertisement.Fuel,
+                    IsFeatured = vehicleAdvertisement.IsFeatured,
+                    Make = vehicleAdvertisement.Make,
+                    Model = vehicleAdvertisement.Model,
+                    Price = vehicleAdvertisement.Price,
+                    Reference_ID = vehicleAdvertisement.Reference_ID,
+                    Reference_No = vehicleAdvertisement.Reference_No,
+                    Sold = vehicleAdvertisement.Sold,
+                    Spects = vehicleAdvertisement.Spects,
+                    Title = vehicleAdvertisement.Title,
+                    Transmission = vehicleAdvertisement.Transmission
+                };
+                return View(CarSalesVehicleAdvertisement);
+            }        
+           
                 return HttpNotFound();
-            }
-            return View(vehicleAdvertisement);
         }
 
         // GET: VehicleAdvertisementsMVC/Create
