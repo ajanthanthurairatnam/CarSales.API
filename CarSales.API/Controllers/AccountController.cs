@@ -301,6 +301,7 @@ namespace Pluralsight.AspNetDemo.Controllers
                 CarSalesDBEntities db = new CarSalesDBEntities();
                 db.Sellers.Add(seller);
                 db.SaveChanges();
+                var signInStatus =  SignInManager.PasswordSignIn(user.Email, model.Password, true, true);
 
                 return RedirectToAction("SellerRegisterDetail", "Account",new { ID=seller.ID});
             }

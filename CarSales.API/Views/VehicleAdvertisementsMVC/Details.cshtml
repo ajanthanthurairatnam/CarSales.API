@@ -1,0 +1,163 @@
+﻿@model CarSales.API.Models.Classes.CarSalesVehicleAdvertisement
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CarSalesVehicleAdvertisement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference_No)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference_No)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BodyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BodyType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EngineCapacity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EngineCapacity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AudoMeter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AudoMeter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Fuel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Fuel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Feature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Feature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Spects)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Spects)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Make)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Make)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Model)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Model)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFeatured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Transmission)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Transmission)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateAdvertised)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateAdvertised)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sold)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sold)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Archived)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Archived)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
