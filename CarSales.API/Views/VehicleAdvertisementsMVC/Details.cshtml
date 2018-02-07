@@ -1,162 +1,128 @@
 ﻿@model CarSales.API.Models.Classes.CarSalesVehicleAdvertisement
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Details of "+ Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/flaticon/font/flaticon.css">
 
-<div>
-    <h4>CarSalesVehicleAdvertisement</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Reference_ID)
-        </dt>
+ 
 
-        <dd>
-            @Html.DisplayFor(model => model.Reference_ID)
-        </dd>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="option-bar  details-option-bar clearfix">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="section-heading">
+                            <div class="media">
+                                <div class="media-left">
+                                    <i class="flaticon-sedan-car-front"></i>
+                                </div>
+                                <div class="media-body hidden-xs">
+                                    <h4>@Model.Title</h4>
+                                    <div class="border"></div>
+                                    <p>Details of @Model.Title</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <div class="header-price">
+                            <h3>$@Model.Price</h3>
+                            <p>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="car-details sidebar-widget">
+                <div class="car-detail-slider simple-slider">
+                    <div id="carousel-custom" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-outer">
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner">
+                                <div class="item">
+                                    <img src="img/details/big-2.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item">
+                                    <img src="img/details/big-1.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item">
+                                    <img src="img/details/big-3.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item active">
+                                    <img src="img/details/big-5.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item">
+                                    <img src="img/details/big-4.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item">
+                                    <img src="img/details/big-6.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                                <div class="item">
+                                    <img src="img/details/big-7.jpg" class="thumb-preview" alt="Chevrolet Impala" style="height: 525.4px;">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="sidebar-widget car-details-sidebar hidden-xs hidden-sm">
+            <div class="section-heading option-bar">
+                <div class="media">
+                    <div class="media-left">
+                        <i class="flaticon-sedan-car-front"></i>
+                    </div>
+                    <div class="media-body">
+                        <h4>Car Specifications</h4>
+                        <div class="border"></div>
+                        <p>Check the car specifications</p>
+                    </div>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Reference_No)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Reference_No)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BodyType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BodyType)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EngineCapacity)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EngineCapacity)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AudoMeter)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AudoMeter)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Fuel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Fuel)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Feature)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Feature)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Spects)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Spects)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Make)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Make)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Model)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Model)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsFeatured)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsFeatured)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Transmission)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Transmission)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateAdvertised)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateAdvertised)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Sold)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sold)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Archived)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Archived)
-        </dd>
-
-    </dl>
-</div>
+            <ul>
+                <li>
+                    <span>Make</span>@Model.VehicleMake.Where(x=>x.ID== @Model.Make).SingleOrDefault().VehicleMake1   
+                </li>
+                <li>
+                    <span>Model</span>@Model.VehicleModel.Where(x => x.ID == @Model.Model).SingleOrDefault().VehicleModel1  
+                </li>
+                
+                <li>
+                    <span>Fuel Type</span>@Model.VehicleFuel.Where(x => x.ID == @Model.Fuel).SingleOrDefault().FuelType  
+                </li>
+                 
+                <li>
+                    <span>Mileage</span>@Model.AudoMeter
+                </li>
+                <li>
+                    <span>Body</span>@Model.VehicleBody.Where(x => x.ID == @Model.BodyType).SingleOrDefault().BodyDescription
+                </li>
+                <li>
+                    <span>Transmission</span>@Model.Transmission
+                </li>
+                <li>
+                    <span>Engine Capacity</span>@Model.EngineCapacity 
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     @Html.ActionLink("Back to List", "Index")

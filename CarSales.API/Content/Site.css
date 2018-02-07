@@ -318,3 +318,23 @@ ul li {
 }
 
 /*breadcrumb*/
+
+
+/*car details*/
+.details-option-bar {
+    padding: 20px;
+    background: #fff;
+}
+.option-bar {
+    margin-bottom: 30px;
+}
+
+.car-details-body {
+    color: #5a5959;
+}
+.sidebar-widget {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+/*car details*/
