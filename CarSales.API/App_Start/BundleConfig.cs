@@ -26,6 +26,7 @@ namespace CarSales.API
             bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/font-awesome.min.css",
+                       "~/Content/flaticon.css",
                       "~/Content/Site.css"));
         }
     }

@@ -78,7 +78,7 @@
                                 <div class="caption detail">
                                     <!-- Header -->
                                     <header class="clearfix">
-                                        <h5 class="title">                                          
+                                        <h5 class="title">
                                             @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
                                         </h5>
 
@@ -89,27 +89,27 @@
                                     <div class="facilities-area">
                                         <ul class="facilities-list clearfix">
                                             <li>
+                                                <i class="fa fa-compass"></i>
+                                                <span>@a.VehicleFuel.Where(e => e.ID == a.Fuel).FirstOrDefault().FuelType</span>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-car"></i>
+                                                <span>@(a.Transmission == "A" ? "Automatic" : "Manuel")</span>
+                                            </li>
+                                            <li>
                                                 <i class="fa fa-tachometer"></i>
-                                                <span>@a.Fuel</span>
+                                                <span>@string.Format(a.AudoMeter.ToString() + "km")</span>
                                             </li>
                                             <li>
-                                                <i class="flaticon-automatic-flash-symbol"></i>
-                                                <span>@a.Transmission</span>
+                                                <i class="fa fa-flag-checkered"></i>
+                                                <span>@a.VehicleBody.Where(e => e.ID == a.BodyType).FirstOrDefault().BodyDescription</span>
                                             </li>
                                             <li>
-                                                <i class="flaticon-road-with-broken-line"></i>
-                                                <span>@a.AudoMeter</span>
+                                                <i class="fa fa-cog"></i>
+                                                <span>@a.EngineCapacity</span>
                                             </li>
                                             <li>
-                                                <i class="flaticon-racing-flag"></i>
-                                                <span>@a.BodyType</span>
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-transport"></i>
-                                                <span>@a.BodyType</span>
-                                            </li>
-                                            <li>
-                                                <i class="flaticon-time"></i>
+                                                <i class="fa fa-calendar"></i>
                                                 <span>2017</span>
                                             </li>
                                         </ul>
@@ -122,7 +122,7 @@
                                         </h2>
                                         <h4>$49,000</h4>
                                         <div class="overlap-btns-area">
-                                         
+
                                             <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
                                             <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
                                             <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>

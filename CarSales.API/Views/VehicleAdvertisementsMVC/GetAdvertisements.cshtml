@@ -45,18 +45,13 @@
                                     <!-- Car box start-->
                                     <div class="thumbnail car-box clearfix">
                                         <div class="car-box-thumbnail">
-                                            <img src="https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg" alt="bmw_emw_m3_diski_serie">
-                                            <div class="is-featured">
-                                                <span>Featured</span>
-                                            </div>
+                                            <img src="https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg" alt="bmw_emw_m3_diski_serie">                                           
                                             <div class="listing-for">
-                                                <span class="for">For Rent</span>
+                                                <span class="for">For Sale</span>
                                             </div>
 
-                                            <div class="listing-price">
-                                                <span class="del"><del>$1250.00</del></span>
-                                                <br>
-                                                <span>$1000.00</span>
+                                            <div class="listing-price">                                               
+                                                <span>@a.Price</span>
                                             </div>
                                         </div>
                                         <!-- detail -->
@@ -70,33 +65,32 @@
                                                 </h5>
 
                                             </header>
-                                            <!-- paragraph -->
-                                            <p>@a.Description</p>
+                                            <!-- paragraph -->                                            
                                             <!-- Facilities List -->
                                             <div class="facilities-area">
                                                 <ul class="facilities-list clearfix">
                                                     <li>
+                                                        <i class="fa fa-compass"></i>
+                                                        <span>@a.VehicleFuel.Where(e=>e.ID==a.Fuel).FirstOrDefault().FuelType</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-car"></i>
+                                                        <span>@(a.Transmission=="A"?"Automatic":"Manuel")</span>
+                                                    </li>
+                                                    <li>
                                                         <i class="fa fa-tachometer"></i>
-                                                        <span>@a.Fuel</span>
+                                                        <span>@string.Format(a.AudoMeter.ToString()+"km")</span>
                                                     </li>
                                                     <li>
-                                                        <i class="flaticon-automatic-flash-symbol"></i>
-                                                        <span>@a.Transmission</span>
+                                                        <i class="fa fa-flag-checkered"></i>
+                                                        <span>@a.VehicleBody.Where(e => e.ID == a.BodyType).FirstOrDefault().BodyDescription</span>
                                                     </li>
                                                     <li>
-                                                        <i class="flaticon-road-with-broken-line"></i>
-                                                        <span>@a.AudoMeter</span>
+                                                        <i class="fa fa-cog"></i>
+                                                        <span>@a.EngineCapacity</span>
                                                     </li>
                                                     <li>
-                                                        <i class="flaticon-racing-flag"></i>
-                                                        <span>@a.BodyType</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-transport"></i>
-                                                        <span>@a.BodyType</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="flaticon-time"></i>
+                                                        <i class="fa fa-calendar"></i>
                                                         <span>2017</span>
                                                     </li>
                                                 </ul>
@@ -108,7 +102,7 @@
                                                     @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
 
                                                 </h2>
-                                                <h4>$49,000</h4>
+                                                <h4>@a.Price</h4>
                                                 <div class="overlap-btns-area">
                                                   
                                                     <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>

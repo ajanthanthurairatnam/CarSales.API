@@ -19,12 +19,12 @@
     <link rel="stylesheet" type="text/css" href="~/Content/css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/css/slider.css">
     <link rel="stylesheet" type="text/css" href="~/Content/fonts/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/fonts/linearicons/style.css">
-    <link rel="stylesheet" type="text/css" href="~/Content/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/fonts/linearicons/style.css">   
+    <link href="~/Content/flaticon.css" rel="stylesheet" />    
     <link href="~/Content/css/bootstrap-select.min.css" type="text/css" rel="stylesheet">
     <!-- Custom stylesheet -->
     <link href="~/Content/css/animate.min.css" rel="stylesheet" />
-    
+
     <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/css/style.css">
     <link rel="stylesheet" type="text/css" id="style_sheet" href="https://storage.googleapis.com/themeforest-auto-car/css/colors/default.css">
 
@@ -105,55 +105,55 @@
                         <li>
 
                             @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
-        {
+                            {
 
 
 
-                    <a href="@Url.Action("Logout", "Account")" class="sign-in">
-                        <i class="fa fa-user"></i>
-                        <span>
-                            Logout
-                        </span>
-                    </a>
+                                <a href="@Url.Action("Logout", "Account")" class="sign-in">
+                                    <i class="fa fa-user"></i>
+                                    <span>
+                                        Logout
+                                    </span>
+                                </a>
 
-}
-else
-{
+                            }
+                            else
+                            {
 
 
-                    <a href="@Url.Action("Login", "Account")" class="sign-in">
-                        <i class="fa fa-user"></i>
-                        <span>
-                            Login
-                        </span>
-                    </a>
+                                <a href="@Url.Action("Login", "Account")" class="sign-in">
+                                    <i class="fa fa-user"></i>
+                                    <span>
+                                        Login
+                                    </span>
+                                </a>
 
-}
+                            }
 
                         </li>
 
                         @if (System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
                         {
 
-                        <li>
-                            <a href="@Url.Action("ChangePassword", "Account")" class="sign-in">
+                            <li>
+                                <a href="@Url.Action("ChangePassword", "Account")" class="sign-in">
 
-                                <i class="fa fa-key"></i>
+                                    <i class="fa fa-key"></i>
+                                    <span>
+                                        ChangePassword
+                                    </span>
+                                </a>
+                            </li>
+                        }
+
+                        <li>
+                            <a href="@Url.Action("Register", "Account")" class="personal-info">
+                                <i class="fa fa-user"></i>
                                 <span>
-                                    ChangePassword
+                                    Register
                                 </span>
                             </a>
                         </li>
-                        }
-
-                    <li>
-                        <a href="@Url.Action("Register", "Account")" class="personal-info">
-                            <i class="fa fa-user"></i>
-                            <span>
-                                Register
-                            </span>
-                        </a>
-                    </li>
                     </ul>
                 </div>
             </div>
@@ -178,8 +178,8 @@ else
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="navbar-collapse collapse" role="navigation" aria-expanded="true" id="app-navigation">
                     <ul class="nav navbar-nav">
-                        <li class="dropdown active">                            
-                            @Html.ActionLink("Home", "Index","Home")
+                        <li class="dropdown active">
+                            @Html.ActionLink("Home", "Index", "Home")
                         </li>
                         <li class="dropdown">
                             @Html.ActionLink("Car Listing", "GetAdvertisements", "VehicleAdvertisementsMVC")
@@ -204,9 +204,9 @@ else
                             <a tabindex="0" data-toggle="dropdown" data-submenu="" aria-expanded="false">
                                 Contact<span class="caret"></span>
                             </a>
-                            
+
                         </li>
-                       
+
                     </ul>
                     <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
                         <li>
@@ -289,7 +289,7 @@ else
                             <ul class="personal-info">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    Address: 
+                                    Address:
                                 <li>
                                     <i class="fa fa-envelope"></i>
                                     Email:<a href="mailto:info@themevessel.com">ajanthan2018@outlook.com</a>
@@ -472,7 +472,7 @@ else
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="~/Scripts/js/jquery-2.2.0.min.js"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/bootstrap-slider.js"></script>
     <script type="text/javascript" src="~/Scripts/js/wow.min.js"></script>
@@ -497,7 +497,7 @@ else
     </script>
 
     @*@Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")*@
+        @Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 <!-- Mirrored from storage.googleapis.com/themeforest-auto-car/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 27 Jan 2018 08:00:04 GMT -->
