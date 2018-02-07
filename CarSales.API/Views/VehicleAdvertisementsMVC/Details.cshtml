@@ -1,13 +1,13 @@
 ﻿@model CarSales.API.Models.Classes.CarSalesVehicleAdvertisement
 
 @{
-    ViewBag.Title = "Details of "+ Model.Title;
+    ViewBag.Title = "Details of " + Model.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/themeforest-auto-car/fonts/flaticon/font/flaticon.css">
 
- 
+
 
 <div class="container">
     <div class="row">
@@ -76,10 +76,10 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
         <div class="sidebar-widget car-details-sidebar hidden-xs hidden-sm">
             <div class="section-heading option-bar">
                 <div class="media">
@@ -96,34 +96,37 @@
 
             <ul>
                 <li>
-                    <span>Make</span>@Model.VehicleMake.Where(x=>x.ID== @Model.Make).SingleOrDefault().VehicleMake1   
+                    <span>Make</span>@Model.VehicleMake.Where(x => x.ID == @Model.Make).SingleOrDefault().VehicleMake1
                 </li>
                 <li>
-                    <span>Model</span>@Model.VehicleModel.Where(x => x.ID == @Model.Model).SingleOrDefault().VehicleModel1  
+                    <span>Model</span>@Model.VehicleModel.Where(x => x.ID == @Model.Model).SingleOrDefault().VehicleModel1
                 </li>
-                
+
                 <li>
-                    <span>Fuel Type</span>@Model.VehicleFuel.Where(x => x.ID == @Model.Fuel).SingleOrDefault().FuelType  
+                    <span>Fuel Type</span>@Model.VehicleFuel.Where(x => x.ID == @Model.Fuel).SingleOrDefault().FuelType
                 </li>
-                 
+
                 <li>
                     <span>Mileage</span>@Model.AudoMeter
                 </li>
                 <li>
                     <span>Body</span>@Model.VehicleBody.Where(x => x.ID == @Model.BodyType).SingleOrDefault().BodyDescription
                 </li>
+                @{
+                    var Transmission = Model.Transmission == "A" ? "Auto" : "Manual";
+                }
                 <li>
-                    <span>Transmission</span>@Model.Transmission
+                    <span>Transmission</span>  @Transmission
                 </li>
                 <li>
-                    <span>Engine Capacity</span>@Model.EngineCapacity 
+                    <span>Engine Capacity</span>@Model.EngineCapacity
                 </li>
-                
+
             </ul>
         </div>
-        
+
     </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
