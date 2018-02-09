@@ -315,8 +315,8 @@
     <Content Include="Content\default.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
-    <Content Include="Content\fonts\flaticon\font\flaticon.css" />
-    <Content Include="Content\fonts\flaticon\font\Flaticon.svg" />
+    <Content Include="Content\flaticon.css" />
+    <Content Include="Content\Flaticon.svg" />
     <Content Include="Content\fonts\font-awesome\css\font-awesome.min.css" />
     <Content Include="Content\fonts\font-awesome\fonts\fontawesome-webfont3e6e.svg" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
@@ -426,10 +426,10 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\fonts\flaticon\font\Flaticon.eot" />
-    <Content Include="Content\fonts\flaticon\font\Flaticon.ttf" />
-    <Content Include="Content\fonts\flaticon\font\Flaticon.woff" />
-    <Content Include="Content\fonts\flaticon\font\Flaticond41d.eot" />
+    <Content Include="Content\Flaticon.eot" />
+    <Content Include="Content\Flaticon.ttf" />
+    <Content Include="Content\Flaticon.woff" />
+    <Content Include="Content\Flaticond41d.eot" />
     <Content Include="Content\fonts\font-awesome\fonts\fontawesome-webfont3e6e.eot" />
     <Content Include="Content\fonts\font-awesome\fonts\fontawesome-webfont3e6e.ttf" />
     <Content Include="Content\fonts\font-awesome\fonts\fontawesome-webfont3e6e.woff" />
