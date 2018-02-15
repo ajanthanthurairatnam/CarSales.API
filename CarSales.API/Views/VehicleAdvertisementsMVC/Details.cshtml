@@ -31,14 +31,17 @@
 
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                         <div class="header-price">
-                            <h3>$@Model.Price</h3>
-                            <p>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star-o"></i>
-                            </p>
+                            @if (Model.Price != null)
+                            {
+                        <h3>$@Model.Price</h3>
+                            }
+                        <p>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                        </p>
                         </div>
                     </div>
                 </div>
@@ -95,33 +98,51 @@
             </div>
 
             <ul>
+                @if (Model.Make != null)
+    {
+            <li>
+                <span>Make</span>@Model.VehicleMake.Where(x => x.ID == @Model.Make).SingleOrDefault().VehicleMake1
+            </li>
+}
+                @if (Model.Model != null)
+    {
+            <li>
+                <span>Model</span>@Model.VehicleModel.Where(x => x.ID == @Model.Model).SingleOrDefault().VehicleModel1
+            </li>
+}
+                @if (Model.Fuel != null)
+    {
+            <li>
+                <span>Fuel Type</span>@Model.VehicleFuel.Where(x => x.ID == @Model.Fuel).SingleOrDefault().FuelType
+            </li>
+}
                 <li>
-                    <span>Make</span>@Model.VehicleMake.Where(x => x.ID == @Model.Make).SingleOrDefault().VehicleMake1
+                    @if (Model.AudoMeter != null)
+        {
+            <span>Mileage</span>@Model.AudoMeter
+}
                 </li>
                 <li>
-                    <span>Model</span>@Model.VehicleModel.Where(x => x.ID == @Model.Model).SingleOrDefault().VehicleModel1
-                </li>
-
-                <li>
-                    <span>Fuel Type</span>@Model.VehicleFuel.Where(x => x.ID == @Model.Fuel).SingleOrDefault().FuelType
-                </li>
-
-                <li>
-                    <span>Mileage</span>@Model.AudoMeter
-                </li>
-                <li>
-                    <span>Body</span>@Model.VehicleBody.Where(x => x.ID == @Model.BodyType).SingleOrDefault().BodyDescription
+                    @if (Model.BodyType != null)
+        {
+            <span>Body</span>@Model.VehicleBody.Where(x => x.ID == @Model.BodyType).SingleOrDefault().BodyDescription
+}
                 </li>
                 @{
-                    var Transmission = Model.Transmission == "A" ? "Auto" : "Manual";
+        var Transmission = Model.Transmission == "A" ? "Auto" : "Manual";
                 }
-                <li>
-                    <span>Transmission</span>  @Transmission
-                </li>
-                <li>
-                    <span>Engine Capacity</span>@Model.EngineCapacity
-                </li>
-
+                @if (Model.Transmission != null)
+    {
+            <li>
+                <span>Transmission</span>  @Transmission
+            </li>
+}
+                @if (Model.EngineCapacity != null)
+                {
+            <li>
+                <span>Engine Capacity</span>@Model.EngineCapacity
+            </li>
+                }
             </ul>
         </div>
 
