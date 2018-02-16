@@ -10,233 +10,238 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>CarSalesVehicleAdvertisement</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })   
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "Title" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", id = "TitleValidate" })
-                @Html.HiddenFor(model => model.Reference_ID)
-            </div>
+    <div class="container">
+        <div class="heading-1">
+            <h3>Post Vehicle Advertisement </h3>
         </div>
+        <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Reference_No, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Reference_No, new { htmlAttributes = new { @class = "form-control" , id = "Reference_No" } })
-                @Html.ValidationMessageFor(model => model.Reference_No, "", new { @class = "text-danger", id = "Reference_NoValidate" })
-            </div>
-        </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", id = "Price" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger", id = "PriceValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.BodyType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.BodyType, Model.VehicleBody.Select(e => new SelectListItem() { Text = e.BodyDescription, Value = e.ID.ToString() }), "Choose... ", new { htmlAttributes = new { @class = "form-control", id = "VehicleBody" } })
-
-                @Html.ValidationMessageFor(model => model.BodyType, "", new { @class = "text-danger", id = "BodyTypeValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.EngineCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EngineCapacity, new { htmlAttributes = new { @class = "form-control", id = "EngineCapacity" } })
-                @Html.ValidationMessageFor(model => model.EngineCapacity, "", new { @class = "text-danger", id = "EngineCapacityValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.AudoMeter, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.AudoMeter, new { htmlAttributes = new { @class = "form-control", id = "AudoMeter" } })
-                @Html.ValidationMessageFor(model => model.AudoMeter, "", new { @class = "text-danger", id = "AudoMeterValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Fuel, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                  @Html.DropDownListFor(model => model.Fuel, Model.VehicleFuel.Select(e=>new SelectListItem() {Text=e.FuelType,Value=e.ID.ToString()  }), "Choose... ", new { htmlAttributes = new { @class = "form-control", id = "Fuel" } })
-                @Html.ValidationMessageFor(model => model.Fuel, "", new { @class = "text-danger", id = "FuelValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "Description" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger", id = "DescriptionValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Feature, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Feature, new { htmlAttributes = new { @class = "form-control", id = "Feature" } })
-                @Html.ValidationMessageFor(model => model.Feature, "", new { @class = "text-danger" , id = "FeatureValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Spects, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Spects, new { htmlAttributes = new { @class = "form-control", id = "Spects" } })
-                @Html.ValidationMessageFor(model => model.Spects, "", new { @class = "text-danger", id = "SpectsValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Make, Model.VehicleMake.Select(e => new SelectListItem() { Text = e.VehicleMake1, Value = e.ID.ToString() }), "Choose... ", new { htmlAttributes = new { @class = "form-control", id = "Make" } })
-
-                @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger", id = "MakeValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Model, Model.VehicleModel.Select(e => new SelectListItem() { Text = e.VehicleModel1, Value = e.ID.ToString() }), "Choose... ", new { htmlAttributes = new { @class = "form-control", id = "Model" } })
-
-            
-                @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger", id = "ModelValidate" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IsFeatured, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.IsFeatured)
-                    @Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "Title", style = "width:200px;" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", id = "TitleValidate" })
+                    @Html.HiddenFor(model => model.Reference_ID)
                 </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Transmission, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Transmission, new List<SelectListItem>()
+            <div class="form-group">
+                @Html.LabelFor(model => model.Reference_No, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Reference_No, new { htmlAttributes = new { @class = "form-control", id = "Reference_No", style = "width:200px;" } })
+                    @Html.ValidationMessageFor(model => model.Reference_No, "", new { @class = "text-danger", id = "Reference_NoValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", id = "Price", style = "width:200px;" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger", id = "PriceValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.BodyType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.BodyType, Model.VehicleBody.Select(e => new SelectListItem() { Text = e.BodyDescription, Value = e.ID.ToString() }), "Choose... ",  new { @class = "form-control", id = "VehicleBody", style = "width:200px;"  })
+
+                    @Html.ValidationMessageFor(model => model.BodyType, "", new { @class = "text-danger", id = "BodyTypeValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EngineCapacity, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EngineCapacity, new { htmlAttributes = new { @class = "form-control", id = "EngineCapacity", style = "width:200px;" } })
+                    @Html.ValidationMessageFor(model => model.EngineCapacity, "", new { @class = "text-danger", id = "EngineCapacityValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AudoMeter, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.AudoMeter, new { htmlAttributes = new { @class = "form-control", id = "AudoMeter", style = "width:200px;" } })
+                    @Html.ValidationMessageFor(model => model.AudoMeter, "", new { @class = "text-danger", id = "AudoMeterValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Fuel, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Fuel, Model.VehicleFuel.Select(e => new SelectListItem() { Text = e.FuelType, Value = e.ID.ToString() }), "Choose... ",   new { @class = "form-control", id = "Fuel", style = "width:200px;" })
+                    @Html.ValidationMessageFor(model => model.Fuel, "", new { @class = "text-danger", id = "FuelValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description,  new { @class = "form-control", id = "Description", style = "width:400px;height:100px;"   })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger", id = "DescriptionValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Feature, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Feature,   new { @class = "form-control", id = "Feature", style = "width:400px;height:100px;" })
+                    @Html.ValidationMessageFor(model => model.Feature, "", new { @class = "text-danger", id = "FeatureValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Spects, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Spects,  new { @class = "form-control", id = "Spects", style = "width:400px;height:100px;" })
+                    @Html.ValidationMessageFor(model => model.Spects, "", new { @class = "text-danger", id = "SpectsValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Make, Model.VehicleMake.Select(e => new SelectListItem() { Text = e.VehicleMake1, Value = e.ID.ToString() }), "Choose... ",    new { @class = "form-control", id = "Make", style = "width:200px;" })
+
+                    @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger", id = "MakeValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Model, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Model, Model.VehicleModel.Select(e => new SelectListItem() { Text = e.VehicleModel1, Value = e.ID.ToString() }), "Choose... ",   new { @class = "form-control", id = "Model", style = "width:200px;" })
+
+
+                    @Html.ValidationMessageFor(model => model.Model, "", new { @class = "text-danger", id = "ModelValidate" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsFeatured, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.IsFeatured)
+                        @Html.ValidationMessageFor(model => model.IsFeatured, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Transmission, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Transmission, new List<SelectListItem>()
 
 {
 new SelectListItem{ Text="Manuel", Value = "M" },
 new SelectListItem{ Text="Automatic", Value = "A" }
-}, "Choose... ", new { htmlAttributes = new { @class = "form-control DropDO", id = "Transmission" } })
+}, "Choose... ", new { @class = "form-control DropDO", id = "Transmission", style = "width:200px;" }  )
 
-            @Html.ValidationMessageFor(model => model.Transmission, "", new { @class = "text-danger" , id = "TransmissionValidate" })
+                    @Html.ValidationMessageFor(model => model.Transmission, "", new { @class = "text-danger", id = "TransmissionValidate" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default"  id = "Create"  />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" id="Create" />
+                </div>
             </div>
         </div>
     </div>
-}
+        
+        }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+        <div>
+            @Html.ActionLink("Back to List", "Index")
+        </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script type="text/javascript">
-    // Shorthand for $( document ).ready()
-    $(function () {
-        $(".form-control").each(function () {
-            console.log($(this));
-            $(this).prop('readonly', true);
-            if ($(this).attr('id')!= "Reference_No") {
-                if (IsValidControls() == false) {
-                    $('#Create').attr("disabled", true);
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+                crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            // Shorthand for $( document ).ready()
+            $(function () {
+                $(".form-control").each(function () {
+                    console.log($(this));
+                    $(this).prop('readonly', true);
+                    if ($(this).attr('id') != "Reference_No") {
+                        if (IsValidControls() == false) {
+                            $('#Create').attr("disabled", true);
 
-                }
-                else {
-                    $('#Create').removeAttr("disabled");
-                }
-                $(this).focus(function () {
-                    $(this).prop('readonly', false);
+                        }
+                        else {
+                            $('#Create').removeAttr("disabled");
+                        }
+                        $(this).focus(function () {
+                            $(this).prop('readonly', false);
 
+                        });
+                        $(this).click(function () {
+                            $(this).prop('readonly', false);
+                        });
+                    }
                 });
-                $(this).click(function () {
-                    $(this).prop('readonly', false);
+
+                $('#Title').blur(function () {
+                    $(this).prop('readonly', true);
+                    if (IsValidControls() == false) {
+                        $('#Create').attr("disabled", true);
+                    }
+                    else {
+                        $('#Create').removeAttr("disabled");
+                    }
                 });
-            }
-        });
 
-        $('#Title').blur(function () {
-            $(this).prop('readonly', true);          
-            if (IsValidControls() == false) {
-                $('#Create').attr("disabled", true);
-            }
-            else {
-                $('#Create').removeAttr("disabled");
-            }
-        }); 
+                $('#Transmission').blur(function () {
+                    $(this).prop('readonly', true);
+                    if (IsValidControls() == false) {
+                        $('#Create').attr("disabled", true);
 
-        $('#Transmission').blur(function () {
-            $(this).prop('readonly', true);
-            if (IsValidControls() == false) {
-                $('#Create').attr("disabled", true);
+                    }
+                    else {
+                        $('#Create').removeAttr("disabled");
+                    }
+                });
+                $("#Price").on("keypress keyup blur", function (event) {
+                    //this.value = this.value.replace(/[^0-9\.]/g,'');
+                    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+                    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
 
-            }
-            else {
-                $('#Create').removeAttr("disabled");
-            }
-        }); 
-        $("#Price").on("keypress keyup blur", function (event) {
-            //this.value = this.value.replace(/[^0-9\.]/g,'');
-            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
-            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-        });
+                $("#AudoMeter").on("keypress keyup blur", function (event) {
+                    $(this).val($(this).val().replace(/[^\d].+/, ""));
+                    if ((event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
+                $("#EngineCapacity").on("keypress keyup blur", function (event) {
+                    $(this).val($(this).val().replace(/[^\d].+/, ""));
+                    if ((event.which < 48 || event.which > 57)) {
+                        event.preventDefault();
+                    }
+                });
 
-        $("#AudoMeter").on("keypress keyup blur", function (event) {
-            $(this).val($(this).val().replace(/[^\d].+/, ""));
-            if ((event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-        });
-        $("#EngineCapacity").on("keypress keyup blur", function (event) {
-            $(this).val($(this).val().replace(/[^\d].+/, ""));
-            if ((event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-        });
-       
-    });
+            });
 
 
-    function IsValidControls() {
-        var IsValid = true; 
-        if ($('#Title').val() == "") {   
-             return false;
-        }       
-        if ($('#Transmission').val() == "") {
-            return false;
-        }      
-       
-      
-        return true;
-    }
-</script>
+            function IsValidControls() {
+                var IsValid = true;
+                if ($('#Title').val() == "") {
+                    return false;
+                }
+                if ($('#Transmission').val() == "") {
+                    return false;
+                }
+
+
+                return true;
+            }
+        </script>

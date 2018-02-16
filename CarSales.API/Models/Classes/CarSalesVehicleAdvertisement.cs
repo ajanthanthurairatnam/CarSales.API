@@ -3,17 +3,25 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
- 
+using System.ComponentModel.DataAnnotations;
 namespace CarSales.API.Models.Classes
 {
     public class CarSalesVehicleAdvertisement  
     {
         public int Reference_ID { get; set; }
         public string Title { get; set; }
+
+        [Display(Name = "Reference No")]
         public string Reference_No { get; set; }
         public Nullable<decimal> Price { get; set; }
+
+        [Display(Name = "Body Type")]
         public Nullable<int> BodyType { get; set; }
+
+        [Display(Name = "Engine Capacity")]
         public Nullable<int> EngineCapacity { get; set; }
+
+        [Display(Name = "Audo Meter")]
         public Nullable<decimal> AudoMeter { get; set; }
         public Nullable<int> Fuel { get; set; }
         public string Description { get; set; }
@@ -21,6 +29,8 @@ namespace CarSales.API.Models.Classes
         public string Spects { get; set; }
         public Nullable<int> Make { get; set; }
         public Nullable<int> Model { get; set; }
+
+        [Display(Name = "Featured")]
         public bool IsFeatured { get; set; }
         public string Transmission { get; set; }
         public Nullable<DateTime>  DateAdvertised { get; set; }
