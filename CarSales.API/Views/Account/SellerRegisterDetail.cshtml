@@ -2,7 +2,7 @@
 @model Pluralsight.AspNetDemo.Controllers.SellerRegisterModel
 
 @{
-    ViewBag.Title = "";
+    ViewBag.Title = "Create Car";
 }
 
 @using (Html.BeginForm("SellerRegisterDetail", "Account", FormMethod.Post))
@@ -179,67 +179,36 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-md-pull-8">
                         <!-- Sidebar start-->
-                        <div>
-                            <h4>SellerRegisterModel</h4>
-                            <hr />
-                            <dl class="dl-horizontal">
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.Name)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.Name)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.ContactPhone)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.ContactPhone)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.ContactMobile)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.ContactMobile)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.ContactEMail)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.ContactEMail)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.PickupAddress)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.PickupAddress)
-                                </dd>
-
-                                <dt>
-                                    @Html.DisplayNameFor(model => model.PostCode)
-                                </dt>
-
-                                <dd>
-                                    @Html.DisplayFor(model => model.PostCode)
-                                </dd>
-
-                    
-
-                            </dl>
+                        <div class="heading-1">
+                            <h3>Sell Register</h3>
                         </div>
-                        <p>
-                           
 
-                        </p>
-                       
+                        <div class="sidebar-widget car-details-sidebar hidden-xs hidden-sm">
+                            <ul>
+                                <li>
+                                    <span>Name</span>@Model.Name
+                                </li>
+                                <li>
+                                    <span>Contact Phone</span>@Model.ContactPhone
+                                </li>
+
+                                <li>
+                                    <span>Contact Mobile</span>@Model.ContactMobile
+                                </li>
+
+                                <li>
+                                    <span>Contact Email</span>@Model.ContactEMail
+                                </li>
+                                <li>
+                                    <span>Pickup Address</span>@Model.PickupAddress
+                                </li>
+                                <li>
+                                    <span>Post Code</span>@Model.PostCode
+                                </li>
+                            </ul>
+                               
+</div>
+                      
                         <!-- Sidebar End-->
                     </div>
                 </div>
