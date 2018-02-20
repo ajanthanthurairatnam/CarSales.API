@@ -183,6 +183,11 @@ namespace CarSales.API.Controllers
                 int SellerID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID;
 
                 VehicleAdvertisement VehicleAdvertisement = db.VehicleAdvertisements.Find(CarSalesVehicleAdvertisement.Reference_ID);
+                if (VehicleAdvertisement == null)
+                {
+                    VehicleAdvertisement = new VehicleAdvertisement();
+                }
+
                 VehicleAdvertisement.Archived = CarSalesVehicleAdvertisement.Archived;
                 VehicleAdvertisement.AudoMeter = CarSalesVehicleAdvertisement.AudoMeter;
                     VehicleAdvertisement.BodyType = CarSalesVehicleAdvertisement.BodyType;
