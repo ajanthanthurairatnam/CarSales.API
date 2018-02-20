@@ -63,10 +63,8 @@
                                     </div>
 
                                     <div class="listing-for">
-                                        <span class="for">      
-                                           
+                                        <span class="for">                                           
                                             @Html.ActionLink("Edit", "Edit", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
-                                           
                                         </span>
                                     </div>
 
@@ -102,13 +100,10 @@
                                                 <i class="fa fa-tachometer"></i>
                                                 <span>@string.Format(a.AudoMeter.ToString() + "km")</span>
                                             </li>
-                                            @if (a.BodyType != null)
-                                            {
                                             <li>
                                                 <i class="fa fa-flag-checkered"></i>
-                                                <span>@a.VehicleBody.Where(e => e.ID == a.BodyType.Value).FirstOrDefault().BodyDescription</span>
+                                                <span>@a.VehicleBody.Where(e => e.ID == a.BodyType).FirstOrDefault().BodyDescription</span>
                                             </li>
-                                            }
                                             <li>
                                                 <i class="fa fa-cog"></i>
                                                 <span>@a.EngineCapacity</span>
