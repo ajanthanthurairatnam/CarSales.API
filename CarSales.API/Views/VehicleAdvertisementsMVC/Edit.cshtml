@@ -7,7 +7,7 @@
 <h2>Create/Edit</h2>
 
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Edit", "VehicleAdvertisementsMVC", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
 
@@ -146,6 +146,19 @@ new SelectListItem{ Text="Automatic", Value = "A" }
                 </div>
             </div>
 
+
+            <div class="form-group">
+                @Html.Label("Select File", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-2">
+                    <input type="file" id="postedFile" name="postedFile" accept="image/*" onchange="loadFile(event)" />
+                    <a onclick="clearfile()" id="removefile" style="cursor:pointer;display:none">Clear File</a>
+                </div>
+                <div class="col-md-8">
+                    <img id="output"/
+                </div>
+            </div>
+
+            <span style="color:green">@ViewBag.Message</span>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" id="Create" />
@@ -153,97 +166,110 @@ new SelectListItem{ Text="Automatic", Value = "A" }
             </div>
         </div>
     </div>
-        
-        }
 
-        <div>
-            @Html.ActionLink("Back to List", "Index")
-        </div>
+}
 
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
-        <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-                crossorigin="anonymous"></script>
-        <script type="text/javascript">
-            // Shorthand for $( document ).ready()
-            $(function () {
-                $(".form-control").each(function () {
-                    console.log($(this));
-                    $(this).prop('readonly', true);
-                    if ($(this).attr('id') != "Reference_No") {
-                        if (IsValidControls() == false) {
-                            $('#Create').attr("disabled", true);
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
 
-                        }
-                        else {
-                            $('#Create').removeAttr("disabled");
-                        }
-                        $(this).focus(function () {
-                            $(this).prop('readonly', false);
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script type="text/javascript">
+    // Shorthand for $( document ).ready()
+    $(function () {
+        $(".form-control").each(function () {
+            console.log($(this));
+            $(this).prop('readonly', true);
+            if ($(this).attr('id') != "Reference_No") {
+                if (IsValidControls() == false) {
+                    $('#Create').attr("disabled", true);
 
-                        });
-                        $(this).click(function () {
-                            $(this).prop('readonly', false);
-                        });
-                    }
-                });
-
-                $('#Title').blur(function () {
-                    $(this).prop('readonly', true);
-                    if (IsValidControls() == false) {
-                        $('#Create').attr("disabled", true);
-                    }
-                    else {
-                        $('#Create').removeAttr("disabled");
-                    }
-                });
-
-                $('#Transmission').blur(function () {
-                    $(this).prop('readonly', true);
-                    if (IsValidControls() == false) {
-                        $('#Create').attr("disabled", true);
-
-                    }
-                    else {
-                        $('#Create').removeAttr("disabled");
-                    }
-                });
-                $("#Price").on("keypress keyup blur", function (event) {
-                    //this.value = this.value.replace(/[^0-9\.]/g,'');
-                    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
-                    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
-                        event.preventDefault();
-                    }
-                });
-
-                $("#AudoMeter").on("keypress keyup blur", function (event) {
-                    $(this).val($(this).val().replace(/[^\d].+/, ""));
-                    if ((event.which < 48 || event.which > 57)) {
-                        event.preventDefault();
-                    }
-                });
-                $("#EngineCapacity").on("keypress keyup blur", function (event) {
-                    $(this).val($(this).val().replace(/[^\d].+/, ""));
-                    if ((event.which < 48 || event.which > 57)) {
-                        event.preventDefault();
-                    }
-                });
-
-            });
-
-
-            function IsValidControls() {
-                var IsValid = true;
-                if ($('#Title').val() == "") {
-                    return false;
                 }
-                if ($('#Transmission').val() == "") {
-                    return false;
+                else {
+                    $('#Create').removeAttr("disabled");
                 }
+                $(this).focus(function () {
+                    $(this).prop('readonly', false);
 
-
-                return true;
+                });
+                $(this).click(function () {
+                    $(this).prop('readonly', false);
+                });
             }
-        </script>
+        });
+
+        $('#Title').blur(function () {
+            $(this).prop('readonly', true);
+            if (IsValidControls() == false) {
+                $('#Create').attr("disabled", true);
+            }
+            else {
+                $('#Create').removeAttr("disabled");
+            }
+        });
+
+        $('#Transmission').blur(function () {
+            $(this).prop('readonly', true);
+            if (IsValidControls() == false) {
+                $('#Create').attr("disabled", true);
+
+            }
+            else {
+                $('#Create').removeAttr("disabled");
+            }
+        });
+        $("#Price").on("keypress keyup blur", function (event) {
+            //this.value = this.value.replace(/[^0-9\.]/g,'');
+            $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+        $("#AudoMeter").on("keypress keyup blur", function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+        $("#EngineCapacity").on("keypress keyup blur", function (event) {
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+        });
+
+    });
+
+
+    function IsValidControls() {
+        var IsValid = true;
+        if ($('#Title').val() == "") {
+            return false;
+        }
+        if ($('#Transmission').val() == "") {
+            return false;
+        }
+
+
+        return true;
+    }
+
+    var loadFile = function (event) {
+        var output = document.getElementById('output');
+        output.src = URL.createObjectURL(event.target.files[0]);
+        $('#removefile').show();
+
+    };
+    function clearfile() {
+        $('#postedFile').val('');
+        var output = document.getElementById('output');
+        output.src = '';
+        $('#removefile').hide();
+    }
+</script>

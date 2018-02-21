@@ -21,7 +21,7 @@
                                         <span style="margin: 10px 15px 0 0"> @Html.TextBoxFor(model => model.SearchText)</span>
                                         @Html.ActionLink("Create", "Edit", "VehicleAdvertisementsMVC")
                                     </div>
-                                   
+
                                 </div>
 
                                 <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
@@ -43,104 +43,118 @@
                         <div class="clearfix"></div>
                         <div class="row">
                             @foreach (var a in Model.Advertisement)
-    {
-                             
+                            {
 
-                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInUp delay-03s" style="visibility: visible; animation-name: fadeInUp;">
-                            <!-- Car box start-->
-                            <div class="thumbnail car-box clearfix">
-                                <div class="car-box-thumbnail">
-                                    <img src="https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg" alt="bmw_emw_m3_diski_serie">
-                                    <div class="is-featured">
 
-                                        @if (a.IsFeatured)
-                                        {                                         
-                                        <span>
-                                            "Featured";
-                                        </span>
-                                        }
-                                   
-                                    </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 wow fadeInUp delay-03s" style="visibility: visible; animation-name: fadeInUp;">
+                                    <!-- Car box start-->
+                                    <div class="thumbnail car-box clearfix">
+                                        <div class="car-box-thumbnail">
 
-                                    <div class="listing-for">
-                                        <span class="for">      
-                                           
-                                            @Html.ActionLink("Edit", "Edit", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
-                                           
-                                        </span>
-                                    </div>
+                                            <img src=@(" /Uploads/" + a.Reference_No+".jpg") alt="bmw_emw_m3_diski_serie"
+                                                 onerror="this.onerror=null; this.src='https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg';">
+                                            <div class="is-featured">
 
-                                    <div class="listing-price">
-                                        <span class="del"><del>$1250.00</del></span>
-                                        <br>
-                                        <span>$1000.00</span>
-                                    </div>
-                                </div>
-                                <!-- detail -->
-                                <div class="caption detail">
-                                    <!-- Header -->
-                                    <header class="clearfix">
-                                        <h5 class="title">
-                                            @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
-                                        </h5>
+                                                @if (a.IsFeatured)
+                                                {
+                                                    <span>
+                                                        "Featured";
+                                                    </span>
+                                                }
 
-                                    </header>
-                                    <!-- paragraph -->
-                                    <p>@a.Description</p>
-                                    <!-- Facilities List -->
-                                    <div class="facilities-area">
-                                        <ul class="facilities-list clearfix">
-                                            <li>
-                                                <i class="fa fa-compass"></i>
-                                                <span>@a.VehicleFuel.Where(e => e.ID == a.Fuel).FirstOrDefault().FuelType</span>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-car"></i>
-                                                <span>@(a.Transmission == "A" ? "Automatic" : "Manuel")</span>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-tachometer"></i>
-                                                <span>@string.Format(a.AudoMeter.ToString() + "km")</span>
-                                            </li>
-                                            @if (a.BodyType != null)
-                                            {
-                                            <li>
-                                                <i class="fa fa-flag-checkered"></i>
-                                                <span>@a.VehicleBody.Where(e => e.ID == a.BodyType.Value).FirstOrDefault().BodyDescription</span>
-                                            </li>
-                                            }
-                                            <li>
-                                                <i class="fa fa-cog"></i>
-                                                <span>@a.EngineCapacity</span>
-                                            </li>
-                                            <li>
-                                                <i class="fa fa-calendar"></i>
-                                                <span>2017</span>
-                                            </li>
-                                        </ul>
-                                    </div>
+                                            </div>
 
-                                    <div class="carbox-overlap-wrapper">
-                                        <h2>
-                                            @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
+                                            <div class="listing-for">
+                                                <span class="for">
 
-                                        </h2>
-                                        <h4>$49,000</h4>
-                                        <div class="overlap-btns-area">
+                                                    @Html.ActionLink("Edit", "Edit", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
 
-                                            <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
-                                            <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
-                                            <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>
+                                                </span>
+                                            </div>
+
+                                            <div class="listing-price">
+                                                <span class="del"><del>$1250.00</del></span>
+                                                <br>
+                                                <span>$1000.00</span>
+                                            </div>
+                                        </div>
+                                        <!-- detail -->
+                                        <div class="caption detail">
+                                            <!-- Header -->
+                                            <header class="clearfix">
+                                                <h5 class="title">
+                                                    @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
+                                                </h5>
+
+                                            </header>
+                                            <!-- paragraph -->
+                                            <p>@a.Description</p>
+                                            <!-- Facilities List -->
+                                            <div class="facilities-area">
+                                                <ul class="facilities-list clearfix">
+                                                    @if (a.Fuel != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-compass"></i>
+                                                            <span>@a.VehicleFuel.Where(e => e.ID == a.Fuel.Value).FirstOrDefault().FuelType</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.Transmission != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-car"></i>
+                                                            <span>@(a.Transmission == "A" ? "Automatic" : "Manuel")</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.AudoMeter != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-tachometer"></i>
+                                                            <span>@string.Format(a.AudoMeter.ToString() + "km")</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.BodyType != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-flag-checkered"></i>
+                                                            <span>@a.VehicleBody.Where(e => e.ID == a.BodyType.Value).FirstOrDefault().BodyDescription</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.EngineCapacity != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-cog"></i>
+                                                            <span>@a.EngineCapacity</span>
+                                                        </li>
+                                                    }
+                                                    <li>
+                                                        <i class="fa fa-calendar"></i>
+                                                        <span>2017</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="carbox-overlap-wrapper">
+                                                <h2>
+                                                    @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
+
+                                                </h2>
+                                                <h4>$49,000</h4>
+                                                <div class="overlap-btns-area">
+
+                                                    <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
+                                                    <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
+                                                    <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <!-- Car box end-->
                                 </div>
-                            </div>
-                            <!-- Car box end-->
-                        </div>
 
 
 
-}
+                            }
                             <!-- Repeat -->
                             <!-- End Repeat -->
 
@@ -158,17 +172,17 @@
 
 
                                         @Html.ActionLink(
-                               linkText: (i + 1).ToString(),
-                               actionName: "GetAdvertisements",
-                               controllerName: "VehicleAdvertisementsMVC",
-                               routeValues: new
-                               {
-                                   PageSize = 10,
-                                   SearchText = Model.SearchText,
-                                   PageNo = (i + 1)
-                               },
-                               htmlAttributes: null
-                               )
+                                    linkText: (i + 1).ToString(),
+                                    actionName: "GetAdvertisements",
+                                    controllerName: "VehicleAdvertisementsMVC",
+                                    routeValues: new
+                                    {
+                                        PageSize = 10,
+                                        SearchText = Model.SearchText,
+                                        PageNo = (i + 1)
+                                    },
+                                    htmlAttributes: null
+                                    )
 
                                     </li>
 
@@ -211,9 +225,9 @@
                                     <span>Post Code</span>@Model.PostCode
                                 </li>
                             </ul>
-                               
-</div>
-                      
+
+                        </div>
+
                         <!-- Sidebar End-->
                     </div>
                 </div>
