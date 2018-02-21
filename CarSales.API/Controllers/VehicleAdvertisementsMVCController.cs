@@ -32,7 +32,7 @@ namespace CarSales.API.Controllers
             int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
 
             int SkipCount = (PageIndex-1) * PageNos;
-            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            var vehicleAdd = vehicleAdvertisements.OrderByDescending(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
             CarSaleSearch CarSaleSearch = new CarSaleSearch();
             CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement() {
                 AudoMeter = e.AudoMeter,
@@ -68,7 +68,7 @@ namespace CarSales.API.Controllers
             int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
 
             int SkipCount = (PageIndex - 1) * PageNos;
-            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            var vehicleAdd = vehicleAdvertisements.OrderByDescending(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
             CarSaleSearch CarSaleSearch = new CarSaleSearch();
             CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement()
             {
