@@ -338,3 +338,7 @@ ul li {
     margin-bottom: 30px;
 }
 /*car details*/
+
+.contact-details .media .media-left i {
+    background: #f24b0a;
+}
