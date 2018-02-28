@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -31,7 +32,7 @@ namespace CarSales.API.Controllers
             int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
 
             int SkipCount = (PageIndex-1) * PageNos;
-            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            var vehicleAdd = vehicleAdvertisements.OrderByDescending(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
             CarSaleSearch CarSaleSearch = new CarSaleSearch();
             CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement() {
                 AudoMeter = e.AudoMeter,
@@ -67,7 +68,7 @@ namespace CarSales.API.Controllers
             int PageCount = (vehicleAdvertisements.Count() + PageNos - 1) / PageNos;
 
             int SkipCount = (PageIndex - 1) * PageNos;
-            var vehicleAdd = vehicleAdvertisements.OrderBy(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
+            var vehicleAdd = vehicleAdvertisements.OrderByDescending(p => p.Reference_ID).Skip(SkipCount).Take(PageNos);
             CarSaleSearch CarSaleSearch = new CarSaleSearch();
             CarSaleSearch.Advertisement = vehicleAdd.Select(e => new CarSalesVehicleAdvertisement()
             {
@@ -132,6 +133,8 @@ namespace CarSales.API.Controllers
         // GET: VehicleAdvertisementsMVC/Create
         public ActionResult Edit(int? Reference_ID=0)
         {
+            ViewBag.Src = "";
+            ViewBag.Message = "";
             CarSalesVehicleAdvertisement CarSalesVehicleAdvertisement;
             CarSalesDBEntities db = new CarSalesDBEntities();
             VehicleAdvertisement vehicleAdvertisement = db.VehicleAdvertisements.Find(Reference_ID);
@@ -174,7 +177,7 @@ namespace CarSales.API.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CarSalesVehicleAdvertisement CarSalesVehicleAdvertisement)
+        public ActionResult Edit(CarSalesVehicleAdvertisement CarSalesVehicleAdvertisement, HttpPostedFileBase postedFile)
         {
             CarSalesDBEntities db = new CarSalesDBEntities();
 
@@ -183,6 +186,11 @@ namespace CarSales.API.Controllers
                 int SellerID = CarSales.API.Helper.HelperClass.GetSeller(System.Web.HttpContext.Current.User.Identity.Name).ID;
 
                 VehicleAdvertisement VehicleAdvertisement = db.VehicleAdvertisements.Find(CarSalesVehicleAdvertisement.Reference_ID);
+                if (VehicleAdvertisement == null)
+                {
+                    VehicleAdvertisement = new VehicleAdvertisement();
+                }
+
                 VehicleAdvertisement.Archived = CarSalesVehicleAdvertisement.Archived;
                 VehicleAdvertisement.AudoMeter = CarSalesVehicleAdvertisement.AudoMeter;
                     VehicleAdvertisement.BodyType = CarSalesVehicleAdvertisement.BodyType;
@@ -221,6 +229,19 @@ namespace CarSales.API.Controllers
                 {
                       db.SaveChanges();
                 }
+
+                if (postedFile != null)
+                {
+                    string path = Server.MapPath("~/Uploads/");
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+
+                    postedFile.SaveAs(path + CarSalesVehicleAdvertisement.Reference_No+".jpg");
+                    
+                }
+
 
                 return RedirectToAction("SellerRegisterDetail", "Account", new { ID = SellerID });
             }

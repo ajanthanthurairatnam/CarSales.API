@@ -7,7 +7,7 @@
 @using (Html.BeginForm("GetAdvertisements", "VehicleAdvertisementsMVC", FormMethod.Post))
 {
     <div>
-        
+
         <div class="car-grid content-area">
             <div class="container">
                 <div class="row">
@@ -20,20 +20,20 @@
                                         <span style="margin: 10px 15px 0 0"> @Html.TextBoxFor(model => model.SearchText)</span>
                                     </div>
 
-                                    </div>
-                                    <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
-                                        <div class="sorting-options">
-                                            <select class="sorting">
-                                                <option>Price: High to low</option>
-                                                <option>Price: Low to high</option>
-                                                <option>Sells: High to low</option>
-                                                <option>Sells: Low to high</option>
-                                            </select>
-                                            <a href="car-list-2.html" class="change-view-btn"><i class="fa fa-th-list"></i></a>
-                                            <a href="car-grid-2.html" class="change-view-btn active-view-btn"><i class="fa fa-th-large"></i></a>
-                                        </div>
+                                </div>
+                                <div class="col-lg-6 col-md-7 col-sm-7 col-xs-10">
+                                    <div class="sorting-options">
+                                        <select class="sorting">
+                                            <option>Price: High to low</option>
+                                            <option>Price: Low to high</option>
+                                            <option>Sells: High to low</option>
+                                            <option>Sells: Low to high</option>
+                                        </select>
+                                        <a href="car-list-2.html" class="change-view-btn"><i class="fa fa-th-list"></i></a>
+                                        <a href="car-grid-2.html" class="change-view-btn active-view-btn"><i class="fa fa-th-large"></i></a>
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <!-- Block heading end -->
                         <!-- Car grid start -->
@@ -45,12 +45,13 @@
                                     <!-- Car box start-->
                                     <div class="thumbnail car-box clearfix">
                                         <div class="car-box-thumbnail">
-                                            <img src="https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg" alt="bmw_emw_m3_diski_serie">                                           
+                                            <img src=@(" /Uploads/" + a.Reference_No+".jpg") alt="bmw_emw_m3_diski_serie"
+                                                 onerror="this.onerror=null; this.src='https://storage.googleapis.com/themeforest-auto-car/img/grid/bmw_emw_m3_diski_serie.jpg';">
                                             <div class="listing-for">
                                                 <span class="for">For Sale</span>
                                             </div>
 
-                                            <div class="listing-price">                                               
+                                            <div class="listing-price">
                                                 <span>@a.Price</span>
                                             </div>
                                         </div>
@@ -59,36 +60,52 @@
                                             <!-- Header -->
                                             <header class="clearfix">
                                                 <h5 class="title">
-                                                   
+
                                                     @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
 
                                                 </h5>
 
                                             </header>
-                                            <!-- paragraph -->                                            
+                                            <!-- paragraph -->
                                             <!-- Facilities List -->
                                             <div class="facilities-area">
                                                 <ul class="facilities-list clearfix">
-                                                    <li>
-                                                        <i class="fa fa-compass"></i>
-                                                        <span>@a.VehicleFuel.Where(e=>e.ID==a.Fuel).FirstOrDefault().FuelType</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-car"></i>
-                                                        <span>@(a.Transmission=="A"?"Automatic":"Manuel")</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-tachometer"></i>
-                                                        <span>@string.Format(a.AudoMeter.ToString()+"km")</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-flag-checkered"></i>
-                                                        <span>@a.VehicleBody.Where(e => e.ID == a.BodyType).FirstOrDefault().BodyDescription</span>
-                                                    </li>
-                                                    <li>
-                                                        <i class="fa fa-cog"></i>
-                                                        <span>@a.EngineCapacity</span>
-                                                    </li>
+                                                    @if (a.Fuel != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-compass"></i>
+                                                            <span>@a.VehicleFuel.Where(e => e.ID == a.Fuel).FirstOrDefault().FuelType</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.Transmission != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-car"></i>
+                                                            <span>@(a.Transmission == "A" ? "Automatic" : "Manuel")</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.AudoMeter != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-tachometer"></i>
+                                                            <span>@string.Format(a.AudoMeter.ToString() + "km")</span>
+                                                        </li>
+                                                    }
+                                                    @if (a.BodyType != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-flag-checkered"></i>
+                                                            <span>@a.VehicleBody.Where(e => e.ID == a.BodyType).FirstOrDefault().BodyDescription</span>
+                                                        </li>
+                                                    }
+
+                                                    @if (a.EngineCapacity != null)
+                                                    {
+                                                        <li>
+                                                            <i class="fa fa-cog"></i>
+                                                            <span>@a.EngineCapacity</span>
+                                                        </li>
+                                                    }
                                                     <li>
                                                         <i class="fa fa-calendar"></i>
                                                         <span>2017</span>
@@ -98,13 +115,13 @@
 
                                             <div class="carbox-overlap-wrapper">
                                                 <h2>
-                                                  
+
                                                     @Html.ActionLink(a.Title, "Details", "VehicleAdvertisementsMVC", new { Reference_ID = a.Reference_ID }, null)
 
                                                 </h2>
                                                 <h4>@a.Price</h4>
                                                 <div class="overlap-btns-area">
-                                                  
+
                                                     <a href="car-details.html" class="overlap-btn"><i class="fa fa-link"></i></a>
                                                     <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carVideo"><i class="fa fa-youtube-play"></i></a>
                                                     <a href="#" class="overlap-btn" data-toggle="modal" data-target="#carGallary"><i class="fa fa-image"></i></a>
@@ -135,17 +152,17 @@
 
 
                                         @Html.ActionLink(
-                     linkText: (i + 1).ToString(),
-                     actionName: "GetAdvertisements",
-                     controllerName: "VehicleAdvertisementsMVC",
-                     routeValues: new
-                     {
-                         PageSize = 10,
-                         SearchText = Model.SearchText,
-                         PageIndex = (i + 1)
-                     },
-                     htmlAttributes: null
-                     )
+                          linkText: (i + 1).ToString(),
+                          actionName: "GetAdvertisements",
+                          controllerName: "VehicleAdvertisementsMVC",
+                          routeValues: new
+                          {
+                              PageSize = 10,
+                              SearchText = Model.SearchText,
+                              PageIndex = (i + 1)
+                          },
+                          htmlAttributes: null
+                          )
 
                                     </li>
 
@@ -166,7 +183,7 @@
                 </div>
             </div>
         </div>
-       
+
     </div>
 }
 
